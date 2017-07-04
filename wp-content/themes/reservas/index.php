@@ -12,6 +12,7 @@
  * @package Reservas
 
  ESTE É UM TESTE DO GIT
+ PELO BRACKETS
  */
 
 get_header(); ?>
