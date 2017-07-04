@@ -10,6 +10,8 @@
  *
  * Please browse readme.txt for credits and forking information
  * @package Reservas
+
+ ESTE É UM TESTE DO GIT
  */
 
 get_header(); ?>
