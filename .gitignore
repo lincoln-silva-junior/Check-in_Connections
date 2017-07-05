@@ -8,7 +8,6 @@
 *.png
 *.zip
 *.log
-*.txt
 
 wp-config.php
 wp-content/advanced-cache.php
@@ -21,7 +20,7 @@ wp-content/uploads/
 wp-content/wp-cache-config.php
 wp-content/plugins/hello.php
 
-.htaccess
+/.htaccess
 /readme.html
 /sitemap.xml
 /sitemap.xml.gz
