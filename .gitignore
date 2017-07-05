@@ -8,6 +8,7 @@
 *.png
 *.zip
 *.log
+*.txt
 
 wp-config.php
 wp-content/advanced-cache.php
