@@ -26,6 +26,10 @@ class TPDirectFlightsRouteShortcodeController extends \app\includes\controllers\
     {
         $data = $this->model->getDataTable($args);
         //if(!$data) return false;
+        if ($data['return_url'] == true){
+            return print_r($data['rows'], true);
+        }
+        //error_log(print_r($data, true));
         return $this->view->renderTable($data);
     }
 

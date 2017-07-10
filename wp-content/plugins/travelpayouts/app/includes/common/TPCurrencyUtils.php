@@ -8,6 +8,7 @@
 
 namespace app\includes\common;
 
+use \app\includes\TPPlugin;
 
 class TPCurrencyUtils
 {
@@ -53,15 +54,40 @@ class TPCurrencyUtils
     const TP_CURRENCY_KRW = 'KRW';
     const TP_CURRENCY_RSD = 'RSD';
 
+    const TP_CURRENCY_AZN = 'AZN';
+    const TP_CURRENCY_BYN = 'BYN';
+    const TP_CURRENCY_CNY = 'CNY';
+    const TP_CURRENCY_EGP = 'EGP';
+    const TP_CURRENCY_JPY = 'JPY';
+    const TP_CURRENCY_MYR = 'MYR';
+    const TP_CURRENCY_NOK = 'NOK';
+    const TP_CURRENCY_PKR = 'PKR';
+
+    const TP_CURRENCY_BHD = 'BHD';
+    const TP_CURRENCY_CZK = 'CZK';
+    const TP_CURRENCY_IQD = 'IQD';
+    const TP_CURRENCY_ISK = 'ISK';
+    const TP_CURRENCY_JOD = 'JOD';
+    const TP_CURRENCY_KWD = 'KWD';
+    const TP_CURRENCY_LKR = 'LKR';
+    const TP_CURRENCY_LYD = 'LYD';
+    const TP_CURRENCY_MUR = 'MUR';
+    const TP_CURRENCY_NGN = 'NGN';
+    const TP_CURRENCY_NPR = 'NPR';
+    const TP_CURRENCY_OMR = 'OMR';
+    const TP_CURRENCY_QAR = 'QAR';
+    const TP_CURRENCY_TJS = 'TJS';
+
 
     /**
      * @return mixed
      */
     public static function getCurrencyAll(){
-        return array(
-            self::TP_CURRENCY_RUB,
-            self::TP_CURRENCY_USD,
-            self::TP_CURRENCY_EUR,
+        $currency = array();
+        $currency = array(
+            //self::TP_CURRENCY_RUB,
+            //self::TP_CURRENCY_USD,
+            //self::TP_CURRENCY_EUR,
             self::TP_CURRENCY_BRL,
             self::TP_CURRENCY_CAD,
             self::TP_CURRENCY_CHF,
@@ -99,8 +125,36 @@ class TPCurrencyUtils
             self::TP_CURRENCY_DKK,
             self::TP_CURRENCY_BDT,
             self::TP_CURRENCY_KRW,
-            self::TP_CURRENCY_RSD
+            self::TP_CURRENCY_RSD,
+
+            self::TP_CURRENCY_AZN,
+            self::TP_CURRENCY_BYN,
+            self::TP_CURRENCY_CNY,
+            self::TP_CURRENCY_EGP,
+            self::TP_CURRENCY_JPY,
+            self::TP_CURRENCY_MYR,
+            self::TP_CURRENCY_NOK,
+            self::TP_CURRENCY_PKR,
+            self::TP_CURRENCY_BHD,
+            self::TP_CURRENCY_CZK,
+            self::TP_CURRENCY_IQD,
+            self::TP_CURRENCY_ISK,
+            self::TP_CURRENCY_JOD,
+            self::TP_CURRENCY_KWD,
+            self::TP_CURRENCY_LKR,
+            self::TP_CURRENCY_LYD,
+            self::TP_CURRENCY_MUR,
+            self::TP_CURRENCY_NGN,
+            self::TP_CURRENCY_NPR,
+            self::TP_CURRENCY_OMR,
+            self::TP_CURRENCY_QAR,
+            self::TP_CURRENCY_TJS,
         );
+        sort($currency);
+        array_unshift($currency, self::TP_CURRENCY_RUB, self::TP_CURRENCY_USD, self::TP_CURRENCY_EUR);
+        //error_log(print_r($currency, true));
+        //error_log(count($currency));
+        return $currency;
     }
 
     public static function getDefaultCurrency(){
@@ -121,28 +175,18 @@ class TPCurrencyUtils
     }
 
 
-    /*public static function getCurrencyRUB()
-   {
-       return self::TP_CURRENCY_RUB;
-   }
-   public static function getCurrencyUSD()
-   {
-       return self::TP_CURRENCY_USD;
-   }
-   public static function getCurrencyEUR()
-   {
-       return self::TP_CURRENCY_EUR;
-   }*
+    public static function currencyValid(){
+        if ( ! TPPlugin::$options['local']['currency'] ||
+            ! in_array( TPPlugin::$options['local']['currency'], self::getCurrencyAll() ) ) {
+            TPPlugin::$options['local']['currency'] = self::getDefaultCurrency();
+            update_option( TPOPlUGIN_OPTION_NAME,  TPPlugin::$options);
+        }
+    }
 
-
-   private static $currency = array(
-       'RUB', 'USD','EUR', 'BRL', 'CAD', 'CHF',
-       'HKD', 'IDR', 'INR', 'NZD', 'PHP', 'PLN',
-       'SGD', 'THB', 'GBP', 'ZAR', 'UAH', 'KZT',
-       'AUD', 'TRY', 'ILS', /*'ARS', 'COP', 'PEN',
-       'CLP', 'AED', 'SAR', 'SEK', 'HUF', 'KGS',
-       'MXN', 'AMD', 'XOF', 'VND', 'BGN', 'GEL',
-       'RON', 'DKK', 'BDT', 'KRW', 'RSD'*
-   );*/
+    public static function isCurrency($currency){
+        if (! $currency || ! in_array( $currency, self::getCurrencyAll() ))
+            return false;
+        return true;
+    }
 
 }

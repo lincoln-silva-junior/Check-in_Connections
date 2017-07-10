@@ -95,9 +95,6 @@ jQuery(function($){
         return false;
     }
 
-
-
-
     /** **/
 
 
@@ -206,6 +203,8 @@ jQuery(function($){
 
 
     });
+
+
     doc.ready(function(){
 
         selectLocalizationFields();
@@ -222,6 +221,29 @@ jQuery(function($){
                 sessionStorage.setItem("selectedTabFlights", selectedTabFlightsId);
             }
         });
+        var selectedTabHotelsId = sessionStorage.getItem("selectedTabHotels");
+        selectedTabHotelsId = selectedTabHotelsId === null ? 0 : selectedTabHotelsId;
+
+
+        $( "#tabs-hotels" ).tabs({
+            active: selectedTabHotelsId,
+            activate : function( event, ui ) {
+                selectedTabHotelsId = $(this).tabs("option", "active");
+                sessionStorage.setItem("selectedTabHotels", selectedTabHotelsId);
+            }
+        });
+
+        var selectedTabRailwayId = sessionStorage.getItem("selectedTabRailway");
+        selectedTabRailwayId = selectedTabRailwayId === null ? 0 : selectedTabRailwayId;
+        $( "#tabs-railway" ).tabs({
+            active: selectedTabRailwayId,
+            activate : function( event, ui ) {
+                selectedTabRailwayId = $(this).tabs("option", "active");
+                sessionStorage.setItem("selectedTabRailway", selectedTabRailwayId);
+            }
+        });
+
+
         var selectedTabSettingsId = sessionStorage.getItem("selectedTabSettings");
         selectedTabSettingsId = selectedTabSettingsId === null ? 0 : selectedTabSettingsId;
         $( "#tabs-settings" ).tabs({
@@ -231,6 +253,19 @@ jQuery(function($){
                 sessionStorage.setItem("selectedTabSettings", selectedTabSettingsId);
             }
         });
+
+
+        var selectedTabLocalFieldId = sessionStorage.getItem("selectedTabLocalField");
+        selectedTabLocalFieldId = selectedTabLocalFieldId === null ? 0 : selectedTabLocalFieldId;
+        $( "#tabs-local_field" ).tabs({
+            active: selectedTabLocalFieldId,
+            activate : function( event, ui ) {
+                selectedTabLocalFieldId = $(this).tabs("option", "active");
+                sessionStorage.setItem("selectedTabLocalField", selectedTabLocalFieldId);
+            }
+        });
+
+
         var selectedTabStatisticId = sessionStorage.getItem("selectedTabStatistic");
         selectedTabStatisticId = selectedTabStatisticId === null ? 0 : selectedTabStatisticId;
         $( "#tabs-statistic" ).tabs({
@@ -1031,6 +1066,12 @@ jQuery(function($){
                 doc.find("#TPEmptyTableShowSearchForm").show();
                 break;
         }
+    });
+
+    doc.find('.tp-help-railway-active').click(function () {
+        doc.find('#tabs-railway-help').hide();
+        doc.find('#tabs-railway_config').show();
+        doc.find('.TPActiveRailwayHidden').val(1);
     });
 
 });

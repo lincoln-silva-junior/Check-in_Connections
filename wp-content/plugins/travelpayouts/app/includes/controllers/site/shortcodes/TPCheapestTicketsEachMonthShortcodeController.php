@@ -4,6 +4,7 @@
  * User: freeman
  * Date: 13.08.15
  * Time: 12:17
+ * 5. Цены на билеты по месяцам
  */
 namespace app\includes\controllers\site\shortcodes;
 class TPCheapestTicketsEachMonthShortcodeController extends \app\includes\controllers\site\TPShortcodesController{
@@ -29,7 +30,11 @@ class TPCheapestTicketsEachMonthShortcodeController extends \app\includes\contro
 
         //if(!$data) return false;
         //error_log(print_r($data, true));
+        if ($data['return_url'] == true){
 
+            //return $data['rows'][0];
+            return print_r($data['rows'], true);
+        }
         return $this->view->renderTable($data);
     }
 

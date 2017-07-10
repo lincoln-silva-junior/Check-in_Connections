@@ -31,11 +31,11 @@ class TPHotelWidgetController extends \app\includes\controllers\site\TPWigetsSho
         $output = '';
         $output = '
             <div class="TPWidget TPHotelWidget">
-            <script async src="//www.travelpayouts.com/chansey/iframe.js'.$width.'&hotel_id='.$hotel_id
-            .'&locale='.\app\includes\common\TPLang::getLang().'&host='.$white_label.'%2Fsearch&marker='.$this->view->getMarker($widgets, $subid)
-            .'&currency='.mb_strtolower($currency).'">
+            <script data-cfasync="false" async src="//www.travelpayouts.com/chansey/iframe.js'.$width.'&hotel_id='.$hotel_id
+            .'&locale='.\app\includes\common\TPLang::getLang().'&host='.$white_label.'&marker='.$this->view->getMarker($widgets, $subid)
+            .'&currency='.mb_strtolower($currency).'" data-wpfc-render="false">
                    </script></div>';
-
+        //%2Fsearch
         return $output;
     }
 }

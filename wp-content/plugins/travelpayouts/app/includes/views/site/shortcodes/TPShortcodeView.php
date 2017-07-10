@@ -8,6 +8,8 @@
 
 namespace app\includes\views\site\shortcodes;
 
+use app\includes\common\TPCurrencyUtils;
+use app\includes\common\TPOption;
 use app\includes\common\TPSearchFormEmptyTable;
 
 use \app\includes\TPPlugin;
@@ -19,9 +21,7 @@ class TPShortcodeView {
         add_action('wp', array(&$this, 'redirect_plugins'));
     }
 
-    public function renderPrice($price, $currency){
-        return '<span class="TPPriceSpan">'.number_format($price, 0, '.', ' ').$this->currencyView($currency).'</span>';
-    }
+
     /**
      * @param array $args
      * @return bool|string
@@ -257,7 +257,8 @@ class TPShortcodeView {
                             //'return_at' => $row['return_date'],
                             'price' => number_format($row["value"], 0, '.', ' '),
                             'type' => $type,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ) );
                         break;
                     case 2:
@@ -268,7 +269,8 @@ class TPShortcodeView {
                             'return_at' => $row['return_date'],
                             'price' => number_format($row["value"], 0, '.', ' '),
                             'type' => $type,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ));
                         break;
                     case 8:
@@ -280,7 +282,8 @@ class TPShortcodeView {
                             'return_at' => $row['return_at'],
                             'price' => number_format($row["price"], 0, '.', ' '),
                             'type' => $type,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ) );
                         break;
                     case 9:
@@ -291,7 +294,8 @@ class TPShortcodeView {
                             'return_at' => $row['return_at'],
                             'price' => number_format($row["price"], 0, '.', ' '),
                             'type' => $type,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ));
                         break;
                     case 10:
@@ -302,7 +306,8 @@ class TPShortcodeView {
                             'departure_at' => date('Y-m-d', time() + DAY_IN_SECONDS),
                             'price' => '',//[tp_popular_destinations_airlines_shortcodes airline=SU title="" limit=6]
                             'type' => $type,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ));
                         break;
                     case 12:
@@ -316,7 +321,8 @@ class TPShortcodeView {
                             'price' => number_format($row["value"], 0, '.', ' '),
                             'type' => $type,
                             'one_way' =>  '&one_way='.$one_way,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ));
                         break;
                     default:
@@ -327,7 +333,8 @@ class TPShortcodeView {
                             'return_at' => $row['return_at'],
                             'price' => number_format($row["price"], 0, '.', ' '),
                             'type' => $type,
-                            'subid' => $subid
+                            'subid' => $subid,
+                            'currency' => $currency
                         ));
                 }
                 // get Price
@@ -468,7 +475,11 @@ class TPShortcodeView {
                             '.$this->getTextTdTable(
                                 $urlLink,
                                 $number_of_changes,
-                                $type, $count, $price, 0, $currency).'
+                                $type,
+                                $count,
+                                $price,
+                                0,
+                                $currency).'
                             </p>
                             </td>';
                         break;
@@ -478,9 +489,14 @@ class TPShortcodeView {
                             class="TP'.$selected_field.'Td '.$this->tdClassHidden($type, $selected_field).'">
                                 <p data-price="'.$price.'" class="TP-tdContent">
                                 '.$this->getTextTdTable(
-                                $urlLink,
-                                number_format($price, 0, '.', ' '),
-                                $type, $count, $price, 0, $currency).$this->currencyView($currency).'
+                                    $urlLink,
+                                    $this->renderPrice(number_format($price, 0, '.', ' '), $currency),
+                                    $type,
+                                    $count,
+                                    $price,
+                                    0,
+                                    $currency
+                                ).'
                                 </p>
                             </td>';
                         break;
@@ -650,10 +666,13 @@ class TPShortcodeView {
                             <p data-price="'.$row["value"]/$row['distance'].'" class="TP-tdContent">
                             '.$this->getTextTdTable(
                                 $urlLink,
-                                number_format($row["value"]/$row['distance'], 0, '.', ' ').$this->currencyView($currency),
+                                $this->renderPrice(number_format($row["value"]/$row['distance'], 0, '.', ' '), $currency),
                                 $type,
                                 $count,
-                                $price, 0, $currency).'
+                                $price,
+                                0,
+                                $currency
+                            ).'
                             </p>
                             </td>';
                         break;
@@ -706,7 +725,9 @@ class TPShortcodeView {
             'link_text' => '',
             'price' => '',
             'one_way' => '',
-            'subid' => '');
+            'subid' => '',
+            'currency' => TPCurrencyUtils::getDefaultCurrency(),
+            );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
         //error_log("getUrlTable subid = ".$subid);
         $isWhiteLabel = false;
@@ -723,8 +744,7 @@ class TPShortcodeView {
         }
         $marker = \app\includes\TPPlugin::$options['account']['marker'];
         $marker = '&marker='.$marker;
-        if(!empty(\app\includes\TPPlugin::$options['account']['extra_marker']))
-            $marker = $marker .'.'.\app\includes\TPPlugin::$options['account']['extra_marker'];
+        $marker .= TPOption::getExtraMarker();
         if(!empty(\app\includes\TPPlugin::$options['shortcodes'][$type]['extra_table_marker']))
             $marker = $marker.'_'.\app\includes\TPPlugin::$options['shortcodes'][$type]['extra_table_marker'];
         if(!empty($subid))
@@ -740,13 +760,17 @@ class TPShortcodeView {
         $destination = ( false !== $destination ) ? "&destination_iata={$destination}" : "&destination_iata=";
         $departure_at = (!empty($departure_at) && false !== $departure_at) ? '&depart_date='.date('Y-m-d', strtotime( $departure_at ))  : "";
         $return_at = ( !empty($return_at) && false !== $return_at) ? '&return_date='.date('Y-m-d', strtotime( $return_at ) )  : "";
-        $url = '/searches/new'.$origin.$destination.$departure_at.$return_at.$marker;
-        if ($isWhiteLabel == true){
+        $currency = '&currency='.$currency;
+
+        $url = 'new'.$origin.$destination.$departure_at.$return_at.$currency.$marker;
+
+        /*if ($isWhiteLabel == true){
             if (\app\includes\common\TPLang::getLang() == \app\includes\common\TPLang::getLangEN()){
                 //$url .= '&locale=en';
                 $url .= '&currency='.\app\includes\TPPlugin::$options['local']['currency'];
             }
-        }
+        }*/
+
         switch($type){
             case 1:
             case 10:
@@ -762,9 +786,16 @@ class TPShortcodeView {
         if($redirect){
             $home = '';
             $home = get_option('home');
-            $url = substr($url, 10);
+            //$url = substr($url, 10);
             return $home.'/?searches='.rawurlencode($url);
         }else{
+            if ($isWhiteLabel == true) {
+                $url = '/flights/'.$url;
+            } else {
+                $url = '/searches/'.$url;
+
+            }
+
             return $white_label.$url;
         }
     }
@@ -786,13 +817,49 @@ class TPShortcodeView {
             if(strpos($button_text, 'price') !== false){
                 if (!is_string($price)) {
                     $price = number_format($price, 0, '.', ' ');
+                    $price = $this->renderPrice($price, $currency);
                 }
                 $button_text = str_replace('price', $price, $button_text);
-                $button_text .= $this->currencyView($currency);
+
             }
         }
         return $button_text;
     }
+
+
+    /**
+     * @param $price
+     * @param $currency
+     *
+     * @return string
+     */
+    public function renderPrice($price, $currency){
+        $currencyView = '';
+        switch (TPPlugin::$options['local']['currency_symbol_display']){
+            case 0:
+                $currency = mb_strtolower($currency);
+                $currencyView = $price.'<i class="TP-currency-icons tp-currency-after"><i class="tp-plugin-icon-'
+                                .$currency.'"></i></i>';
+                break;
+            case 1:
+                $currency = mb_strtolower($currency);
+                $currencyView = '<i class="TP-currency-icons tp-currency-before"><i class="tp-plugin-icon-'
+                                .$currency.'"></i></i>'.$price;
+                break;
+            case 2:
+                $currencyView = $price;
+                break;
+            case 3:
+                $currencyView = $price.'<span class="tp-currency">'.$currency.'</span>';
+                break;
+	        case 4:
+		        $currencyView = '<span class="tp-currency">'.$currency.'</span>'.$price;
+		        break;
+        }
+
+        return $currencyView;
+    }
+
     /**
      * @param $url
      * @param $text
@@ -831,29 +898,15 @@ class TPShortcodeView {
                     break;
             }
         }else{
-            //error_log("button");
-            //pop-up button
-            /*$buttonOnOff = in_array('button', \app\includes\TPPlugin::$options['shortcodes'][$typeShortcode]['selected']);
-            if(!$buttonOnOff){
 
-                if($count == count(\app\includes\TPPlugin::$options['shortcodes'][$typeShortcode]['selected'])){
-                    //pop-up button
-                    $textTd = $text.' <a href="'.$url.'" class="TPPopUpButtonTable">'.$button_text.'</a>';
-                    //error_log($textTd);
-                }else{
-                    $textTd = $text;
-                }
-
-            }else{       */
             switch($type){
-                //text When hyperlinks are disabled
+
                 case 0:
                     $textTd = $text;
                     break;
                 //button
                 case 1:
-                    //error_log($this->getButtonText($typeShortcode, $price));
-                    //error_log($price);
+
                     $textTd = '<a href="'.$url.'" class="TP-Plugin-Tables_link TPButtonTable " '.$target_url.' '.$rel.'>'
                         .$this->getButtonText($typeShortcode, $price, $currency).'</a>';
                     break;
@@ -882,15 +935,7 @@ class TPShortcodeView {
         return $distance;
     }
 
-    /**
-     * @return string
-     */
-    public function currencyView($currency){
-        //$currency = mb_strtolower(\app\includes\TPPlugin::$options['local']['currency']);
-        //return '<i class="TP-currency-icons"><i class="demo-icon icon-'.$currency.'"></i></i>';
-        $currency = mb_strtolower($currency);
-        return '<i class="TP-currency-icons"><i class="tp-plugin-icon-'.$currency.'"></i></i>';
-    }
+
 
     /**
      * return Trip Class
@@ -924,13 +969,13 @@ class TPShortcodeView {
             '1' => array(
                 'trip_class',
                 'distance',
-                'price'
+                //'price'
             ),
             '2' => array(
                 'return_at',
                 'trip_class',
                 'distance',
-                'price'
+                //'price'
             ),
             '4' => array(
                 'number_of_changes',
@@ -938,7 +983,7 @@ class TPShortcodeView {
                 'flight_number',
                 'flight',
                 'airline',
-                'price'
+                //'price'
             ),
             '5' => array(
                 'number_of_changes',
@@ -946,7 +991,7 @@ class TPShortcodeView {
                 'flight_number',
                 'flight',
                 'airline',
-                'price'
+                //'price'
             ),
             '6' => array(
                 'number_of_changes',
@@ -954,14 +999,14 @@ class TPShortcodeView {
                 'flight_number',
                 'flight',
                 'airline',
-                'price'
+                //'price'
             ),
             '7' => array(
                 'airline_logo',
                 'flight_number',
                 'flight',
                 'airline',
-                'price'
+                //'price'
             ),
             '8' => array(
                 'airline_logo',
@@ -970,7 +1015,7 @@ class TPShortcodeView {
                 'flight',
                 'airline',
                 'origin_destination',
-                'price'
+                //'price'
             ),
             '9' => array(
                 'airline_logo',
@@ -979,7 +1024,7 @@ class TPShortcodeView {
                 'flight',
                 'airline',
                 'origin_destination',
-                'price'
+                //'price'
             ),
             '10' => array(),
             '12' => array(
@@ -989,7 +1034,7 @@ class TPShortcodeView {
                 'distance',
                 'price_distance',
                 'origin_destination',
-                'price',
+                //'price',
                 'departure_at',
                 'return_at',
             ),
@@ -1001,7 +1046,7 @@ class TPShortcodeView {
                 'distance',
                 'price_distance',
                 'origin_destination',
-                'price',
+                //'price',
                 'return_at',
             ),
             '14' => array(
@@ -1012,9 +1057,10 @@ class TPShortcodeView {
                 'distance',
                 'price_distance',
                 'origin_destination',
-                'price'
+                //'price'
             ),
         );
+
         if(in_array($field, $fields[$type])) return 'TP-unessential';
         return '';
     }
@@ -1132,16 +1178,21 @@ class TPShortcodeView {
                     if(strpos($white_label, 'http') === false){
                         $white_label = 'http://'.$white_label;
                     }
+                    $white_label = "{$white_label}/flights/".urldecode($_GET['searches']);
                 }else{
 
                     $white_label = \app\includes\common\TPHostURL::getHostTable();
                     //error_log('0 = '.$white_label);
+                    $white_label = "{$white_label}/searches/".urldecode($_GET['searches']);
 
                 }
+
                 //error_log('1 = '.$_GET['searches']);
                 //error_log('1 = '.urldecode($_GET['searches']));
-                $white_label = "{$white_label}/searches/".urldecode($_GET['searches']);
-                //error_log('2 = '.$white_label);
+
+
+
+                //header("Location: {$white_label}", true, 302);
                 header("Location: {$white_label}", true, 302);
                 die;
                 /*
@@ -1157,13 +1208,15 @@ class TPShortcodeView {
                     if(strpos($white_label, 'http') === false){
                         $white_label = 'http://'.$white_label;
                     }
+                    $white_label = "{$white_label}/flights/".urldecode($_GET['searches_ticket']);
                 }else{
                     $white_label = \app\includes\common\TPHostURL::getHostSearchLinkWhenEmptyWhiteLabel(1);
+                    $white_label = "{$white_label}/searches/".urldecode($_GET['searches_ticket']);
 
                 }
                 //error_log("searches_ticket");
                 //error_log($white_label);
-                $white_label = "{$white_label}/searches/".urldecode($_GET['searches_ticket']);
+
                 header("Location: {$white_label}", true, 302);
                 die;
                 /*
@@ -1231,8 +1284,7 @@ class TPShortcodeView {
         }
         $marker = \app\includes\TPPlugin::$options['account']['marker'];
         $marker = '&marker='.$marker;
-        if(!empty(\app\includes\TPPlugin::$options['account']['extra_marker']))
-            $marker = $marker .'.'.\app\includes\TPPlugin::$options['account']['extra_marker'];
+        $marker .= TPOption::getExtraMarker();
         $marker = $marker.'_link';
         if(!empty($subid))
             $marker = $marker.'_'.$subid;
@@ -1345,7 +1397,7 @@ class TPShortcodeView {
                 $valueShortcodesSettings = $this->replaceOriginDestinationShortcodeEmptyTableMsg($valueShortcodesSettings,
                     $origin, $destination);
                 $valueShortcodesSettings = $this->replaceLinkButtonShortcodeMsgValueEmptyTable($valueShortcodesSettings, $originIata,
-                    $destinationIata, $origin, $destination, $type, $subid);
+                    $destinationIata, $origin, $destination, $type, $subid, $currency);
                 break;
             //search form
             case 1:
@@ -1370,7 +1422,7 @@ class TPShortcodeView {
      * @return mixed
      */
     public function replaceLinkButtonShortcodeMsgValueEmptyTable($msg, $originIata, $destinationIata, $origin, $destination,
-                                                       $type, $subid){
+                                                       $type, $subid, $currency){
         //[link]
         //[button]
         $shortcodesMsg = array(
@@ -1387,7 +1439,8 @@ class TPShortcodeView {
             'departure_at' => date('Y-m-d'),
             'return_at' => '',
             'type' => $type,
-            'subid' => $subid
+            'subid' => $subid,
+            'currency' => $currency,
         ) );
 
         $msg = preg_replace_callback(

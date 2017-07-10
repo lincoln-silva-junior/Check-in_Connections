@@ -12,7 +12,313 @@ namespace app\includes\common;
 class TPFieldsLabelTable
 {
 
+	/**
+	 * @param $wagonType
+	 *
+	 * @return string
+	 */
+	/*
+	 *  plazcard - Плац
+		coupe - Купе
+		sedentary - Сид
+		lux - Люкс
+		soft - Мягк
+		common - Общ
+	 * */
+	public static function getRailwayWagonTypeLabel($wagonType){
+		$wagonTypeLabel = "";
+		$wagonTypeLabelData = array(
+			'plazcard' => array(
+				TPLang::getLangEN() => _x('Plazcard', 'en railway wagon plazcard type label', TPOPlUGIN_TEXTDOMAIN),
+				TPLang::getLangRU() => _x('Plazcard', 'ru railway wagon plazcard type label', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'coupe' => array(
+				TPLang::getLangEN() => _x('Coupe', 'en railway wagon coupe type label', TPOPlUGIN_TEXTDOMAIN),
+				TPLang::getLangRU() => _x('Coupe', 'ru railway wagon coupe type label', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'sedentary' => array(
+				TPLang::getLangEN() => _x('Sedentary', 'en railway wagon sedentary type label', TPOPlUGIN_TEXTDOMAIN),
+				TPLang::getLangRU() => _x('Sedentary', 'ru railway wagon sedentary type label', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'lux' => array(
+				TPLang::getLangEN() => _x('Lux', 'en railway wagon lux type label', TPOPlUGIN_TEXTDOMAIN),
+				TPLang::getLangRU() => _x('Lux', 'ru railway wagon lux type label', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'soft' => array(
+				TPLang::getLangEN() => _x('Soft', 'en railway wagon soft type label', TPOPlUGIN_TEXTDOMAIN),
+				TPLang::getLangRU() => _x('Soft', 'ru railway wagon soft type label', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'common' => array(
+				TPLang::getLangEN() => _x('Common', 'en railway wagon common type label', TPOPlUGIN_TEXTDOMAIN),
+				TPLang::getLangRU() => _x('Common', 'ru railway wagon common type label', TPOPlUGIN_TEXTDOMAIN),
+			),
+		);
 
+		if(isset($wagonTypeLabelData[$wagonType][TPLang::getLang()])){
+
+			$wagonTypeLabel = $wagonTypeLabelData[$wagonType][TPLang::getLang()];
+		}else{
+			$wagonTypeLabel = $wagonTypeLabelData[$wagonType][TPLang::getDefaultLang()];
+		}
+
+		return $wagonTypeLabel;
+	}
+
+	/** Railway */
+	/*
+	 * Номер поезда / Train
+	 * Маршрут, Route
+	 * Отправление / Departure
+	 * Прибытие / Arrival
+	 * В пути, Duration
+	 * Примерные цены / Prices
+	 * Дата поездки/ Dates
+	 *
+	 * Откуда / From
+	 * Куда / To
+	 * Время отправления / Departure Time
+	 * Время прибытия/ Arrival Time
+	 * Начальная станция маршрута / Route's First Station
+	 * Конечная станция маршрута / Route's Last Station
+	 *
+	 */
+	public static function getRailwayFieldsLabelRU(){
+		return  array(
+			'label_default' => array(
+				'train' => _x('Train', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'route' => _x('Route', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'departure' => _x('Departure', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'arrival' => _x('Arrival', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'duration' => _x('Duration', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'prices' => _x('Prices', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'dates' => _x('Dates', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'origin' => _x('From', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'destination' => _x('To', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'departure_time' => _x('Departure Time', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'arrival_time' => _x('Arrival Time', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'route_first_station' => _x('Route\'s First Station', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'route_last_station' => _x('Route\'s Last Station', 'local ru railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'label' => array(
+				'train' => _x('Train', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'route' => _x('Route', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'departure' => _x('Departure', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'arrival' => _x('Arrival', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'duration' => _x('Duration', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'prices' => _x('Prices', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'dates' => _x('Dates', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'origin' => _x('From', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'destination' => _x('To', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'departure_time' => _x('Departure Time', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'arrival_time' => _x('Arrival Time', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'route_first_station' => _x('Route\'s First Station', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'route_last_station' => _x('Route\'s Last Station', 'local ru railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+			),
+		);
+	}
+	public static function getRailwayFieldsLabelEN(){
+		return  array(
+			'label_default' => array(
+				'train' => _x('Train', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'route' => _x('Route', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'departure' => _x('Departure', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'arrival' => _x('Arrival', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'duration' => _x('Duration', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'prices' => _x('Prices', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'dates' => _x('Dates', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'origin' => _x('From', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'destination' => _x('To', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'departure_time' => _x('Departure Time', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'arrival_time' => _x('Arrival Time', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'route_first_station' => _x('Route\'s First Station', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+				'route_last_station' => _x('Route\'s Last Station', 'local en railway fields table label default', TPOPlUGIN_TEXTDOMAIN),
+			),
+			'label' => array(
+				'train' => _x('Train', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'route' => _x('Route', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'departure' => _x('Departure', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'arrival' => _x('Arrival', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'duration' => _x('Duration', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'prices' => _x('Prices', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'dates' => _x('Dates', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'origin' => _x('From', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'destination' => _x('To', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'departure_time' => _x('Departure Time', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'arrival_time' => _x('Arrival Time', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'route_first_station' => _x('Route\'s First Station', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+				'route_last_station' => _x('Route\'s Last Station', 'local en railway fields table label', TPOPlUGIN_TEXTDOMAIN),
+			),
+		);
+	}
+	/** Railway END **/
+    /*
+     * Отель | Hotel | name
+     * Звездность | Stars | stars
+     * Рейтинг | Rating | rating
+     * Расстояние до центра (км) | Distance to the center (km) | distance
+     * Цена за ночь | Price per night | price_pn
+     * Цена до скидки | Price before discount | old_price_pn
+     * Скидка | Discount | discount
+     *
+     * Цена до скидки | Price before discount | (в настройках ` Старая цена и скидка` `Price before and discount`)
+     * Цена за ночь | Price per night (в настройках Старая и новая цена Old and new price)
+     *
+     *  Цена за ночь | Price per night (в настройках Кнопка Button)
+     *
+     */
+
+    public static function getHotelsFieldsLabelRU(){
+        return  array(
+            'label_default' => array(
+                'name' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_name',
+                    '(Отель)', TPOPlUGIN_TEXTDOMAIN),
+                'stars' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_stars',
+                    '(Звездность)', TPOPlUGIN_TEXTDOMAIN),
+                'rating' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_rating',
+                    '(Рейтинг)', TPOPlUGIN_TEXTDOMAIN),
+                'distance' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_distance',
+                    '(До центра)', TPOPlUGIN_TEXTDOMAIN),
+                'price_pn' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_price_pn',
+                    '(Цена за ночь, от)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_pn' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_old_price_pn',
+                    '(Цена до скидки)', TPOPlUGIN_TEXTDOMAIN),
+                'discount' =>_x('tp_plugin_local_ru_hotels_fields_table_label_default_discount',
+                    '(Скидка)', TPOPlUGIN_TEXTDOMAIN),
+
+                'old_price_and_discount' =>_x('tp_plugin_local_ru_hotels_fields_table_label_default_old_price_and_discount',
+                    '(Старая цена и скидка)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_and_new_price' =>_x('tp_plugin_local_ru_hotels_fields_table_label_default_old_price_and_new_price',
+                    '(Старая и новая цена)', TPOPlUGIN_TEXTDOMAIN),
+
+                'button' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_button',
+                    '(Кнопка)', TPOPlUGIN_TEXTDOMAIN),
+                //'address' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_address',
+                //    '(Адрес)', TPOPlUGIN_TEXTDOMAIN),
+                /*'property_type' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_property_type',
+                    '(Тип)', TPOPlUGIN_TEXTDOMAIN),
+                'popularity' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_popularity',
+                    '(Популярность)', TPOPlUGIN_TEXTDOMAIN),
+                'price_from' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_price_from',
+                    '(Цена от)', TPOPlUGIN_TEXTDOMAIN),
+                'price_avg' => _x('tp_plugin_local_ru_hotels_fields_table_label_default_price_avg',
+                    '(Средняя цена)', TPOPlUGIN_TEXTDOMAIN),*/
+
+            ),
+            'label' => array(
+                'name' => _x('tp_plugin_local_ru_hotels_fields_table_label_name',
+                    '(Отель)',TPOPlUGIN_TEXTDOMAIN),
+                'stars' => _x('tp_plugin_local_ru_hotels_fields_table_label_stars',
+                    '(Звездность)', TPOPlUGIN_TEXTDOMAIN),
+                'rating' => _x('tp_plugin_local_ru_hotels_fields_table_label_rating',
+                    '(Рейтинг)', TPOPlUGIN_TEXTDOMAIN),
+                'distance' => _x('tp_plugin_local_ru_hotels_fields_table_label_distance',
+                    '(До центра)', TPOPlUGIN_TEXTDOMAIN),
+                'price_pn' => _x('tp_plugin_local_ru_hotels_fields_table_label_price_pn',
+                    '(Цена за ночь, от)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_pn' => _x('tp_plugin_local_ru_hotels_fields_table_label_old_price_pn',
+                    '(Цена до скидки)', TPOPlUGIN_TEXTDOMAIN),
+                'discount' =>_x('tp_plugin_local_ru_hotels_fields_table_label_discount',
+                    '(Скидка)', TPOPlUGIN_TEXTDOMAIN),
+
+                //Цена до скидки  Старая цена и скидка
+                'old_price_and_discount' =>_x('tp_plugin_local_ru_hotels_fields_table_label_old_price_and_discount',
+                    '(Цена до скидки)', TPOPlUGIN_TEXTDOMAIN),
+                //Старая и новая цена
+                'old_price_and_new_price' =>_x('tp_plugin_local_ru_hotels_fields_table_label_old_price_and_new_price',
+                    '(Цена за ночь, от)', TPOPlUGIN_TEXTDOMAIN),
+
+                'button' => _x('tp_plugin_local_ru_hotels_fields_table_label_button',
+                    '(Выбрать даты)', TPOPlUGIN_TEXTDOMAIN),
+                //'address' => _x('tp_plugin_local_ru_hotels_fields_table_label_address',
+                //    '(Адрес)', TPOPlUGIN_TEXTDOMAIN),
+                /*'property_type' => _x('tp_plugin_local_ru_hotels_fields_table_label_property_type',
+                    '(Тип)', TPOPlUGIN_TEXTDOMAIN),
+                'popularity' => _x('tp_plugin_local_ru_hotels_fields_table_label_popularity',
+                    '(Популярность)', TPOPlUGIN_TEXTDOMAIN),
+                'price_from' => _x('tp_plugin_local_ru_hotels_fields_table_label_price_from',
+                    '(Цена от)', TPOPlUGIN_TEXTDOMAIN),
+                'price_avg' => _x('tp_plugin_local_ru_hotels_fields_table_label_price_avg',
+                    '(Средняя цена)', TPOPlUGIN_TEXTDOMAIN),*/
+
+            ),
+        );
+    }
+    public static function getHotelsFieldsLabelEN(){
+        return  array(
+            'label_default' => array(
+                'name' => _x('tp_plugin_local_en_hotels_fields_table_label_default_name',
+                    '(Hotel)', TPOPlUGIN_TEXTDOMAIN),
+                'stars' => _x('tp_plugin_local_en_hotels_fields_table_label_default_stars',
+                    '(Stars)', TPOPlUGIN_TEXTDOMAIN),
+                'rating' => _x('tp_plugin_local_en_hotels_fields_table_label_default_rating',
+                    '(Rating)', TPOPlUGIN_TEXTDOMAIN),
+                'distance' => _x('tp_plugin_local_en_hotels_fields_table_label_default_distance',
+                    '(To the center)', TPOPlUGIN_TEXTDOMAIN),
+                'price_pn' => _x('tp_plugin_local_en_hotels_fields_table_label_default_price_pn',
+                    '(Price per night, from)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_pn' => _x('tp_plugin_local_en_hotels_fields_table_label_default_old_price_pn',
+                    '(Price before discount)', TPOPlUGIN_TEXTDOMAIN),
+                'discount' =>_x('tp_plugin_local_en_hotels_fields_table_label_default_discount',
+                    '(Discount)', TPOPlUGIN_TEXTDOMAIN),
+
+                'old_price_and_discount' =>_x('tp_plugin_local_en_hotels_fields_table_label_default_old_price_and_discount',
+                    '(Price before and discount)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_and_new_price' =>_x('tp_plugin_local_en_hotels_fields_table_label_default_old_price_and_new_price',
+                    '(Old and new price)', TPOPlUGIN_TEXTDOMAIN),
+
+                'button' => _x('tp_plugin_local_en_hotels_fields_table_label_default_button',
+                    '(Button)', TPOPlUGIN_TEXTDOMAIN),
+                //'address' => _x('tp_plugin_local_en_hotels_fields_table_label_default_address',
+                //    '(Address)', TPOPlUGIN_TEXTDOMAIN),
+                /*'property_type' => _x('tp_plugin_local_en_hotels_fields_table_label_default_property_type',
+                    '(Type)', TPOPlUGIN_TEXTDOMAIN),
+                'popularity' => _x('tp_plugin_local_en_hotels_fields_table_label_default_popularity',
+                    '(Popularity)', TPOPlUGIN_TEXTDOMAIN),
+                'price_from' => _x('tp_plugin_local_en_hotels_fields_table_label_default_price_from',
+                    '(Price from)', TPOPlUGIN_TEXTDOMAIN),
+                'price_avg' => _x('tp_plugin_local_en_hotels_fields_table_label_default_price_avg',
+                    '(Average price)', TPOPlUGIN_TEXTDOMAIN),*/
+
+
+
+            ),
+            'label' => array(
+                'name' => _x('tp_plugin_local_en_hotels_fields_table_label_name',
+                    '(Hotel)',TPOPlUGIN_TEXTDOMAIN),
+                'stars' => _x('tp_plugin_local_en_hotels_fields_table_label_stars',
+                    '(Stars)', TPOPlUGIN_TEXTDOMAIN),
+                'rating' => _x('tp_plugin_local_en_hotels_fields_table_label_rating',
+                    '(Rating)', TPOPlUGIN_TEXTDOMAIN),
+                'distance' => _x('tp_plugin_local_en_hotels_fields_table_label_distance',
+                    '(To the center)', TPOPlUGIN_TEXTDOMAIN),
+                'price_pn' => _x('tp_plugin_local_en_hotels_fields_table_label_price_pn',
+                    '(Price per night, from)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_pn' => _x('tp_plugin_local_en_hotels_fields_table_label_old_price_pn',
+                    '(Price before discount)', TPOPlUGIN_TEXTDOMAIN),
+                'discount' =>_x('tp_plugin_local_en_hotels_fields_table_label_discount',
+                    '(Discount)', TPOPlUGIN_TEXTDOMAIN),
+
+                'old_price_and_discount' =>_x('tp_plugin_local_en_hotels_fields_table_label_old_price_and_discount',
+                    '(Price before discount)', TPOPlUGIN_TEXTDOMAIN),
+                'old_price_and_new_price' =>_x('tp_plugin_local_en_hotels_fields_table_label_old_price_and_new_price',
+                    '(Price per night, from)', TPOPlUGIN_TEXTDOMAIN),
+
+                'button' => _x('tp_plugin_local_en_hotels_fields_table_label_button',
+                    '(Choose dates)', TPOPlUGIN_TEXTDOMAIN),
+                //'address' => _x('tp_plugin_local_en_hotels_fields_table_label_address',
+                //    '(Address)', TPOPlUGIN_TEXTDOMAIN),
+                /*'property_type' => _x('tp_plugin_local_en_hotels_fields_table_label_property_type',
+                    '(Type)', TPOPlUGIN_TEXTDOMAIN),
+                'popularity' => _x('tp_plugin_local_en_hotels_fields_table_label_popularity',
+                    '(Popularity)', TPOPlUGIN_TEXTDOMAIN),
+                'price_from' => _x('tp_plugin_local_en_hotels_fields_table_label_price_from',
+                    '(Price from)', TPOPlUGIN_TEXTDOMAIN),
+                'price_avg' => _x('tp_plugin_local_en_hotels_fields_table_label_price_avg',
+                    '(Average price)', TPOPlUGIN_TEXTDOMAIN),*/
+
+            ),
+        );
+    }
     /**
      * @return array
      */
@@ -361,5 +667,62 @@ class TPFieldsLabelTable
         }
 
         return $numberChangesLabel;
+    }
+
+	/**
+	 * @param $dateType
+	 *
+	 * @return string
+	 */
+    public static function getDateLabel($dateType){
+	    $dateLabel = "";
+    	$dateLabelData = array(
+    	    'day' => array(
+                TPLang::getLangEN() => _x('d', 'local en date label day', TPOPlUGIN_TEXTDOMAIN),
+                TPLang::getLangRU() => _x('д', 'local ru date label day', TPOPlUGIN_TEXTDOMAIN),
+            ),
+    		'hour' => array(
+			    TPLang::getLangEN() => _x('h', 'local en date label hour', TPOPlUGIN_TEXTDOMAIN),
+			    TPLang::getLangRU() => _x('ч', 'local ru date label hour', TPOPlUGIN_TEXTDOMAIN),
+		    ),
+    		'minute' => array(
+			    TPLang::getLangEN() => _x('m', 'local en date label minute', TPOPlUGIN_TEXTDOMAIN),
+			    TPLang::getLangRU() => _x('м', 'local ru date label minute', TPOPlUGIN_TEXTDOMAIN),
+		    ),
+	    );
+	    if(isset($dateLabelData[$dateType][TPLang::getLang()])){
+		    $dateLabel = $dateLabelData[$dateType][TPLang::getLang()];
+	    }else{
+		    $dateLabel = $dateLabelData[$dateType][TPLang::getDefaultLang()];
+	    }
+
+	    return $dateLabel;
+    }
+
+    /**
+     * @param $number
+     * @return string
+     */
+    public static function getDurationDayLabel($number){
+        $dayLabel = "";
+        $dayLabelData = array(
+            TPLang::getLangEN() => array(
+                _x('day', 'local en duration label day', TPOPlUGIN_TEXTDOMAIN),
+                _x('days', 'local en duration label day', TPOPlUGIN_TEXTDOMAIN),
+            ),
+            TPLang::getLangRU() => array(
+                _x('день', 'local ru duration label день', TPOPlUGIN_TEXTDOMAIN),
+                _x('дня', 'local ru duration label дня', TPOPlUGIN_TEXTDOMAIN),
+                _x('дней', 'local ru duration label дней', TPOPlUGIN_TEXTDOMAIN),
+            )
+        );
+
+        if (array_key_exists(TPLang::getLang(), $dayLabelData)) {
+            $dayLabel = $dayLabelData[TPLang::getLang()][$number];
+        } else {
+            $dayLabel = $dayLabelData[TPLang::getDefaultLang()][$number];
+        }
+
+        return $dayLabel;
     }
 }

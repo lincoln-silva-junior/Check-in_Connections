@@ -7,8 +7,13 @@
  */
 namespace app\includes\models\admin\menu;
 use app\includes\common\TPHostURL;
+use app\includes\common\TPLang;
+use app\includes\TPPlugin;
+
 
 class TPFieldSettings {
+
+
 
     public function __construct(){
 
@@ -30,12 +35,21 @@ class TPFieldSettings {
                                value="<?php echo esc_attr(\app\includes\TPPlugin::$options['account']['token']) ?>"/>
                     </label>
                 </div>
-                <div class="ItemSub">
-                    <span><?php _ex('tp_admin_page_settings_tab_account_field_extra_marker_label',
-                            '(Extra marker)', TPOPlUGIN_TEXTDOMAIN ); ?></span>
+                <!--<div class="ItemSub">
+                    <span><?php //_ex('tp_admin_page_settings_tab_account_field_extra_marker_label',
+                            //'(Extra marker)', TPOPlUGIN_TEXTDOMAIN ); ?></span>
                     <label>
-                        <input type="text" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[account][extra_marker]"
-                               value="<?php echo esc_attr(\app\includes\TPPlugin::$options['account']['extra_marker']) ?>"/>
+                        <input type="text" name="<?php //echo TPOPlUGIN_OPTION_NAME;?>[account][extra_marker]"
+                               value="<?php //echo esc_attr(\app\includes\TPPlugin::$options['account']['extra_marker']) ?>"/>
+                    </label>
+                </div>-->
+
+                <div class="ItemSub">
+                    <span><?php _ex('White Label (Flights)',
+                            'admin settings', TPOPlUGIN_TEXTDOMAIN ); ?></span>
+                    <label>
+                        <input type="text" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[account][white_label]"
+                               value="<?php echo esc_attr(\app\includes\TPPlugin::$options['account']['white_label']) ?>"/>
                     </label>
                 </div>
             </div>
@@ -51,13 +65,15 @@ class TPFieldSettings {
                     </label>
                 </div>
                 <div class="ItemSub">
-                    <span><?php _ex('tp_admin_page_settings_tab_account_field_white_label_label',
-                            'White Label', TPOPlUGIN_TEXTDOMAIN ); ?></span>
+                    <span><?php _ex('tp_admin_page_settings_tab_account_field_white_label_hotel_label',
+                            'White Label (Hotels)', TPOPlUGIN_TEXTDOMAIN ); ?></span>
                     <label>
-                        <input type="text" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[account][white_label]"
-                               value="<?php echo esc_attr(\app\includes\TPPlugin::$options['account']['white_label']) ?>"/>
+                        <input type="text" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[account][white_label_hotel]"
+                               value="<?php echo esc_attr(\app\includes\TPPlugin::$options['account']['white_label_hotel']) ?>"/>
                     </label>
                 </div>
+
+
             </div>
         </div>
     <?php
@@ -102,7 +118,7 @@ class TPFieldSettings {
                 </div>
                 <div class="ItemSub">
                     <span><?php _ex('tp_admin_page_settings_tab_config_field_after_url_label',
-                            'Action after click', TPOPlUGIN_TEXTDOMAIN); ?></span>
+                            'Action after click (Flights)', TPOPlUGIN_TEXTDOMAIN); ?></span>
                     <ul class="TP-listSet">
                         <li>
                             <input id="rchek1" type="radio" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][after_url]"
@@ -118,6 +134,28 @@ class TPFieldSettings {
                             <label for="rchek2">
                                 <?php _ex('tp_admin_page_settings_tab_config_field_after_url_value_1_label',
                                     '(Show Search Results)', TPOPlUGIN_TEXTDOMAIN); ?>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ItemSub">
+                    <span><?php _ex('tp_admin_page_settings_tab_config_field_hotel_after_url_label',
+                            ' Action after click (Hotels)', TPOPlUGIN_TEXTDOMAIN); ?></span>
+                    <ul class="TP-listSet">
+                        <li>
+                            <input id="rchek11" type="radio" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][hotel_after_url]"
+                                <?php checked(\app\includes\TPPlugin::$options['config']['hotel_after_url'], 0) ?> hidden value="0" />
+                            <label for="rchek11">
+                                <?php _ex('tp_admin_page_settings_tab_config_field_hotel_after_url_value_0_label',
+                                    '(Show city page)', TPOPlUGIN_TEXTDOMAIN); ?>
+                            </label>
+                        </li>
+                        <li>
+                            <input id="rchek22" type="radio" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][hotel_after_url]"
+                                <?php checked(\app\includes\TPPlugin::$options['config']['hotel_after_url'], 1) ?> hidden value="1" />
+                            <label for="rchek22">
+                                <?php _ex('tp_admin_page_settings_tab_config_field_hotel_after_url_value_1_label',
+                                    '(Show hotel page)', TPOPlUGIN_TEXTDOMAIN); ?>
                             </label>
                         </li>
                     </ul>
@@ -270,11 +308,56 @@ class TPFieldSettings {
                         <?php _ex('tp_admin_page_settings_tab_config_field_cache_value_label',
                             '(Cache Timeout)', TPOPlUGIN_TEXTDOMAIN);?>
                     </span>
+
                     <div class="TP-childF">
-                        <div class="spinnerW clearfix" data-trigger="spinner">
+
+
+                        <div class="TP-colCacheFlight">
+                            <span>
+                            <?php _ex('tp_admin_page_settings_tab_config_field_cache_value_label_flights',
+                                '(Flights)', TPOPlUGIN_TEXTDOMAIN);?>
+                            </span>
+
+                            <div class="spinnerW clearfix" data-trigger="spinner">
+                                <label>
+                                    <input name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][cache_value][flight]"
+                                           type="text" value="<?php echo \app\includes\TPPlugin::$options['config']['cache_value']['flight']; ?>"
+                                           data-rule="cache_value">
+                                </label>
+                                <div class="navSpinner">
+                                    <a class="navDown" href="javascript:void(0);" data-spin="down"></a>
+                                    <a class="navUp" href="javascript:void(0);" data-spin="up"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="TP-colCacheHotel">
+                             <span>
+                            <?php _ex('tp_admin_page_settings_tab_config_field_cache_value_label_hotels',
+                                '(Hotels)', TPOPlUGIN_TEXTDOMAIN);?>
+                            </span>
+
+                            <div class="spinnerW clearfix" data-trigger="spinner">
+                                <label>
+                                    <input name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][cache_value][hotel]"
+                                           type="text" value="<?php echo \app\includes\TPPlugin::$options['config']['cache_value']['hotel']; ?>"
+                                           data-rule="cache_hotel">
+                                </label>
+                                <div class="navSpinner">
+                                    <a class="navDown" href="javascript:void(0);" data-spin="down"></a>
+                                    <a class="navUp" href="javascript:void(0);" data-spin="up"></a>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <!--<div class="spinnerW clearfix" data-trigger="spinner">
                             <label>
-                                <input name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][cache_value]"
-                                       type="text" value="<?php echo \app\includes\TPPlugin::$options['config']['cache_value']; ?>"
+                                <input name="<?php //echo TPOPlUGIN_OPTION_NAME;?>[config][cache_value]"
+                                       type="text" value="<?php //echo \app\includes\TPPlugin::$options['config']['cache_value']; ?>"
                                        data-rule="cache_value">
                             </label>
                             <div class="navSpinner">
@@ -285,23 +368,27 @@ class TPFieldSettings {
                         <ul class="TP-listSet TP-listSet--row">
                             <li>
                                 <input  id="rchek3" type="radio" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][cache]"
-                                    <?php checked(\app\includes\TPPlugin::$options['config']['cache'], 0) ?> value="0" hidden/>
+                                    <?php //checked(\app\includes\TPPlugin::$options['config']['cache'], 0) ?> value="0" hidden/>
                                 <label for="rchek3">
-                                    <?php  _ex('tp_admin_page_settings_tab_config_field_cache_value_0_label',
-                                        '(Day)', TPOPlUGIN_TEXTDOMAIN); ?>
+                                    <?php  //_ex('tp_admin_page_settings_tab_config_field_cache_value_0_label',
+                                        //'(Day)', TPOPlUGIN_TEXTDOMAIN); ?>
                                 </label>
                             </li>
                             <li>
                                 <input id="rchek4" type="radio" name="<?php echo TPOPlUGIN_OPTION_NAME;?>[config][cache]"
-                                    <?php checked(\app\includes\TPPlugin::$options['config']['cache'], 1) ?> value="1" hidden/>
+                                    <?php //checked(\app\includes\TPPlugin::$options['config']['cache'], 1) ?> value="1" hidden/>
                                 <label for="rchek4">
-                                    <?php _ex('tp_admin_page_settings_tab_config_field_cache_value_1_label',
-                                        '(Hour)', TPOPlUGIN_TEXTDOMAIN); ?>
+                                    <?php //_ex('tp_admin_page_settings_tab_config_field_cache_value_1_label',
+                                        //'(Hour)', TPOPlUGIN_TEXTDOMAIN); ?>
                                 </label>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                 </div>
+
+
+
+
                 <div class="ItemSub">
                     <span class="clearfix">
                         <div class="box-span-1">
@@ -492,25 +579,74 @@ class TPFieldSettings {
                 </select>
             </label>
             <label>
-                <span><?php _ex('tp_admin_page_settings_tab_localization_field_currency_label',
-                        '(Currency)', TPOPlUGIN_TEXTDOMAIN); ?></span>
+
+            </label>
+
+        </div>
+        <div class="TP-LocalHead">
+            <label>
+                 <span><?php _ex('tp_admin_page_settings_tab_localization_field_currency_label',
+                         '(Currency)', TPOPlUGIN_TEXTDOMAIN); ?></span>
                 <select name="<?php echo TPOPlUGIN_OPTION_NAME;?>[local][currency]" class="TP-Zelect">
                     <?php foreach(\app\includes\common\TPCurrencyUtils::getCurrencyAll() as $currency){ ?>
                         <option
                             <?php selected( \app\includes\TPPlugin::$options['local']['currency'], $currency ); ?>
-                            value="<?php echo $currency ?>">
+                                value="<?php echo $currency ?>">
                             <?php echo $currency; ?>
                         </option>
                     <?php } ?>
 
                 </select>
             </label>
+            <label>
 
+                <span>
+                    <?php _ex('Show the currency',
+                        'Admin page settings tab localization field currency_symbol_display label', TPOPlUGIN_TEXTDOMAIN); ?>
+                </span>
+                <select name="<?php echo TPOPlUGIN_OPTION_NAME;?>[local][currency_symbol_display]" class="TP-Zelect">
+                    <option value="0">
+                        <?php
+                        _ex('After the price',
+                            'Admin page settings tab localization field currency_symbol_display option 0 label',
+                            TPOPlUGIN_TEXTDOMAIN);
+                        ?>
+                    </option>
+                    <option value="1">
+                        <?php
+                        _ex('Before the price',
+                            'Admin page settings tab localization field currency_symbol_display option 1 label',
+                            TPOPlUGIN_TEXTDOMAIN);
+                        ?>
+                    </option>
+                    <option value="2">
+                        <?php
+                        _ex('Hide',
+                            'Admin page settings tab localization field currency_symbol_display option 2 label',
+                            TPOPlUGIN_TEXTDOMAIN);
+                        ?>
+                    </option>
+                    <option value="3">
+                        <?php
+                        _ex('Сurrency code (after the price)',
+                            'Admin page settings tab localization field currency_symbol_display option 3 label',
+                            TPOPlUGIN_TEXTDOMAIN);
+                        ?>
+                    </option>
+                    <option value="4">
+                        <?php
+                        _ex('Currency code (before the price)',
+                            'Admin page settings tab localization field currency_symbol_display option 4 label',
+                            TPOPlUGIN_TEXTDOMAIN);
+                        ?>
+                    </option>
+                </select>
+            </label>
         </div>
          <div class="TP-LocalHead">
              <?php $this->TPFieldHost(); ?>
-            <label>
-            </label>
+             <?php $this->tpFieldHostHotel(); ?>
+
          </div>
         <div class="TP-LocalHead TPFieldTitleCaseDiv">
             <?php $this->TPFieldTitleCase(); ?>
@@ -518,40 +654,166 @@ class TPFieldSettings {
         <div class="TP-listColum">
             <span><?php _ex('tp_admin_page_settings_tab_localization_field_table_td_label',
                     '(Fields (you can edit values on your own, e.g. for your own language))', TPOPlUGIN_TEXTDOMAIN); ?></span>
-            <?php
-            $local_table_fields = '<ul class="titleHeadTable">
-                           <li class="TPLangFieldsLi">'.\app\includes\common\TPLang::getLang().'</li>
-                      </ul>';
-            foreach(\app\includes\TPPlugin::$options['local']['fields'] as $key_local => $fields){
-                $showFields = (\app\includes\common\TPLang::getLang() != $key_local)?'TP-ListRowColumNot':'';
-                $local_table_fields .= '<div class="'.$showFields.' TPFields_'.$key_local.'" >';
-                $i = 0;
+            <div id="tabs-local_field">
+                <nav class="TPNavigation TPNavigationLocal">
+                    <ul class="TPMainMenu TPMainMenuLocal">
+                        <li>
+                            <a href="#tabs-local_field_flight" class="TPMainMenuA">
+                            <span>
+                            <?php _ex('tp_admin_page_settings_tab_menu_local_tab_field_local_flight',
+                                '(Flight Tickets)', TPOPlUGIN_TEXTDOMAIN); ?>
+                        </span>
+                            </a>
+                        </li>
 
-                foreach(array_chunk($fields['label'], 2, true) as $value){
-                    $local_table_fields .= '<div class="TP-ListRowColum">';
-                    foreach( $value as $key_label => $label ){
-                        $local_table_fields .= '<div class="infoRow" title="'.$fields['label_default'][$key_label].'"></div>
-                                                    <div>
-                                                        <label>
-                                                            <input name="'.TPOPlUGIN_OPTION_NAME.'[local][fields]['.$key_local.'][label]['.$key_label.']" type="text" value="'.$label.'"/>
-                                                            <input name="'.TPOPlUGIN_OPTION_NAME.'[local][fields]['.$key_local.'][label_default]['.$key_label.']" type="hidden" value="'.$fields['label_default'][$key_label].'"/>
-                                                        </label>
-                                                    </div>';
-                    }
-                    $local_table_fields .= '</div>';
-                }
-                //error_log(print_r(array_chunk($fields['label'], 2, true), TRUE));
+                        <li>
+                            <a href="#tabs-local_field_hotel" class="TPMainMenuA">
+                            <span>
+                            <?php _ex('tp_admin_page_settings_tab_menu_local_tab_field_local_hotel',
+                                '(Hotels)', TPOPlUGIN_TEXTDOMAIN); ?>
+                        </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#tabs-local_field_railway" class="TPMainMenuA">
+                            <span>
+                            <?php _ex('Railway tables',
+                                'admin page settings tab menu local tab field local railway',
+                                TPOPlUGIN_TEXTDOMAIN); ?>
+                        </span>
+                            </a>
+                        </li>
 
-                $local_table_fields .= '</div>';
-            }
-            //error_log($local_table_fields);
-            echo $local_table_fields;
-            ?>
+
+                    </ul>
+                </nav>
+                <div id="tabs-local_field_flight">
+                    <?php $this->tabLocalFieldFlight(); ?>
+                </div>
+                <div id="tabs-local_field_hotel">
+                    <?php $this->tabLocalFieldHotel(); ?>
+                </div>
+                <div id="tabs-local_field_railway">
+	                <?php $this->tabLocalFieldRailway(); ?>
+                </div>
+            </div>
+
+
 
 
         </div>
     <?php
     }
+
+
+    public function tabLocalFieldFlight(){
+        $local_table_fields = '<ul class="titleHeadTable">
+               <li class="TPLangFieldsLi">'.\app\includes\common\TPLang::getLang().'</li>
+          </ul>';
+        foreach(\app\includes\TPPlugin::$options['local']['fields'] as $key_local => $fields){
+            $showFields = (\app\includes\common\TPLang::getLang() != $key_local)?'TP-ListRowColumNot':'';
+            $local_table_fields .= '<div class="'.$showFields.' TPFields_'.$key_local.'" >';
+            $i = 0;
+
+            foreach(array_chunk($fields['label'], 2, true) as $value){
+                $local_table_fields .= '<div class="TP-ListRowColum">';
+                foreach( $value as $key_label => $label ){
+                    $local_table_fields .= '<div class="infoRow" title="'.$fields['label_default'][$key_label].'"></div>
+                                        <div>
+                                            <label>
+                                                <input name="'.TPOPlUGIN_OPTION_NAME.'[local][fields]['.$key_local.'][label]['.$key_label.']" type="text" value="'.$label.'"/>
+                                                <input name="'.TPOPlUGIN_OPTION_NAME.'[local][fields]['.$key_local.'][label_default]['.$key_label.']" type="hidden" value="'.$fields['label_default'][$key_label].'"/>
+                                            </label>
+                                        </div>';
+                }
+                $local_table_fields .= '</div>';
+            }
+            //error_log(print_r(array_chunk($fields['label'], 2, true), TRUE));
+
+            $local_table_fields .= '</div>';
+        }
+        //error_log($local_table_fields);
+        echo $local_table_fields;
+    }
+
+    public function tabLocalFieldHotel(){
+        $localFields = '';
+        $localFields = '<ul class="titleHeadTable">
+               <li class="TPLangFieldsLi">'.\app\includes\common\TPLang::getLang().'</li>
+          </ul>';
+        foreach(TPPlugin::$options['local']['hotels_fields'] as $key_local => $fields){
+            $showFields = (TPLang::getLang() != $key_local)?'TP-ListRowColumNot':'';
+            $localFields .= '<div class="'.$showFields.' TPFields_'.$key_local.'" >';
+
+            foreach(array_chunk($fields['label'], 2, true) as $value){
+                $localFields .= '<div class="TP-ListRowColum">';
+                foreach( $value as $key_label => $label ){
+                    $localFields .= '<div class="infoRow" title="'.$fields['label_default'][$key_label].'"></div>
+                                        <div>
+                                            <label>
+                                                <input name="'.TPOPlUGIN_OPTION_NAME.'[local][hotels_fields]['.$key_local.'][label]['.$key_label.']" type="text" value="'.$label.'"/>
+                                                <input name="'.TPOPlUGIN_OPTION_NAME.'[local][hotels_fields]['.$key_local.'][label_default]['.$key_label.']" type="hidden" value="'.$fields['label_default'][$key_label].'"/>
+                                            </label>
+                                        </div>';
+                }
+                $localFields .= '</div>';
+            }
+
+            $localFields .= '</div>';
+        }
+        echo $localFields;
+    }
+
+	public function tabLocalFieldRailway(){
+		$localFields = '';
+		$localFields = '<ul class="titleHeadTable">
+               <li class="TPLangFieldsLi">'.\app\includes\common\TPLang::getLang().'</li>
+          </ul>';
+		foreach(TPPlugin::$options['local']['railway_fields'] as $key_local => $fields){
+			$showFields = (TPLang::getLang() != $key_local)?'TP-ListRowColumNot':'';
+			$localFields .= '<div class="'.$showFields.' TPFields_'.$key_local.'" >';
+
+			foreach(array_chunk($fields['label'], 2, true) as $value){
+				$localFields .= '<div class="TP-ListRowColum">';
+				foreach( $value as $key_label => $label ){
+					$localFields .= '<div class="infoRow" title="'.$fields['label_default'][$key_label].'"></div>
+                                        <div>
+                                            <label>
+                                                <input name="'.TPOPlUGIN_OPTION_NAME.'[local][railway_fields]['.$key_local.'][label]['.$key_label.']" type="text" value="'.$label.'"/>
+                                                <input name="'.TPOPlUGIN_OPTION_NAME.'[local][railway_fields]['.$key_local.'][label_default]['.$key_label.']" type="hidden" value="'.$fields['label_default'][$key_label].'"/>
+                                            </label>
+                                        </div>';
+				}
+				$localFields .= '</div>';
+			}
+
+			$localFields .= '</div>';
+		}
+		echo $localFields;
+	}
+
+    public function tpFieldHostHotel(){
+        $hosts = TPHostURL::getHostsHotel();
+        $host_option = \app\includes\TPPlugin::$options['local']['host_hotel'];
+        ?>
+        <label>
+            <span>
+                <?php _ex('tp_admin_page_settings_tab_localization_field_host_hotel_label',
+                    '(Host(Hotels))', TPOPlUGIN_TEXTDOMAIN); ?>
+            </span>
+            <select name="<?php echo TPOPlUGIN_OPTION_NAME;?>[local][host_hotel]"
+                    class="TP-Zelect TPFieldHostHotel">
+                <?php foreach($hosts as $key => $host){ ?>
+                    <option <?php selected($host_option, $key ); ?>
+                        value="<?php echo $key; ?>">
+                        <?php echo $host['label']; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </label>
+        <?php
+    }
+
     public function TPFieldHost(){
         $hosts = \app\includes\common\TPHostURL::getHost();
         $host_option = \app\includes\TPPlugin::$options['local']['host'];
@@ -574,7 +836,7 @@ class TPFieldSettings {
         <label class="TPFieldHostLabel">
             <span>
                 <?php _ex('tp_admin_page_settings_tab_localization_field_host_label',
-                    '(Host)', TPOPlUGIN_TEXTDOMAIN); ?>
+                    '(Host(Flights))', TPOPlUGIN_TEXTDOMAIN); ?>
             </span>
             <select name="<?php echo TPOPlUGIN_OPTION_NAME;?>[local][host]"
                     class="TP-Zelect TPFieldHost"

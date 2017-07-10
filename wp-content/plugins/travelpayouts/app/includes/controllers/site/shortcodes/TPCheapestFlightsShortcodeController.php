@@ -4,6 +4,7 @@
  * User: freeman
  * Date: 13.08.15
  * Time: 10:28
+ * 3. Самые дешевые билеты по направлению
  */
 namespace app\includes\controllers\site\shortcodes;
 class TPCheapestFlightsShortcodeController extends \app\includes\controllers\site\TPShortcodesController{
@@ -25,6 +26,9 @@ class TPCheapestFlightsShortcodeController extends \app\includes\controllers\sit
     {
         $data = $this->model->getDataTable($args);
         //if(!$data) return false;
+        if ($data['return_url'] == true){
+            return print_r($data['rows'], true);
+        }
         return $this->view->renderTable($data);
     }
 

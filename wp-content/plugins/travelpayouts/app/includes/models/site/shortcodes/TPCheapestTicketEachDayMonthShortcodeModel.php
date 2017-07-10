@@ -4,9 +4,13 @@
  * User: freeman
  * Date: 13.08.15
  * Time: 12:27
+ *
+ *  4. Самые дешевые билеты по направлению в этом месяце
  */
 namespace app\includes\models\site\shortcodes;
-class TPCheapestTicketEachDayMonthShortcodeModel extends \app\includes\models\site\TPShortcodesChacheModel{
+use \app\includes\models\site\TPFlightShortcodeModel;
+
+class TPCheapestTicketEachDayMonthShortcodeModel extends TPFlightShortcodeModel{
 
     public function get_data($args = array())
     {
@@ -15,7 +19,8 @@ class TPCheapestTicketEachDayMonthShortcodeModel extends \app\includes\models\si
         $attr = array(
             'origin' => $origin,
             'destination' => $destination,
-            'currency' => $currency
+            'currency' => $currency,
+            'return_url' => $return_url
         );
         $name_method = "***************".__METHOD__."***************";
         if(TPOPlUGIN_ERROR_LOG)
@@ -24,14 +29,18 @@ class TPCheapestTicketEachDayMonthShortcodeModel extends \app\includes\models\si
             ." 4. Самые дешевые билеты по направлению в этом месяце ";
         if(TPOPlUGIN_ERROR_LOG)
             error_log($method);
-        if($this->cacheSecund()) {
+        if($this->cacheSecund() && $return_url == false) {
+
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} cache");
             if (false === ($rows = get_transient($this->cacheKey('5'.$currency,
                     $origin.$destination)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache -> false");
-                $return = (array) \app\includes\TPPlugin::$TPRequestApi->get_calendar($attr);
+                $return = (array) self::$TPRequestApi->get_calendar($attr);
+
+                //error_log(print_r($return, true));
+
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false ".print_r($return, true));
                 if( ! $return )
@@ -52,11 +61,17 @@ class TPCheapestTicketEachDayMonthShortcodeModel extends \app\includes\models\si
                     $origin.$destination) , $rows, $cacheSecund);
             }
         }else{
-            $return = (array) \app\includes\TPPlugin::$TPRequestApi->get_calendar($attr);
+            $return = (array) self::$TPRequestApi->get_calendar($attr);
             if( ! $return )
                 return false;
-            $rows = array();
-            $rows = $this->iataAutocomplete($this->tpSortCheapestTicketEachDayMonth($return, date('Y-m')), 5);
+
+            if ($return_url == false){
+                $rows = array();
+                $rows = $this->iataAutocomplete($this->tpSortCheapestTicketEachDayMonth($return, date('Y-m')), 5);
+            } else {
+                $rows = $return;
+            }
+
         }
         return $rows;
 
@@ -76,42 +91,33 @@ class TPCheapestTicketEachDayMonthShortcodeModel extends \app\includes\models\si
             'off_title' => '',
             'subid' => '',
             'filter_flight_number' => false,
-            'filter_airline' => false
+            'filter_airline' => false,
+            'return_url' => false
             );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
+        if ($return_url == 1){
+            $return_url = true;
+        }
+
         $rows = $this->get_data(array(
             'origin' => $origin,
             'destination' => $destination,
             'currency' => $currency,
+            'return_url' => $return_url
         ));
         //if( ! $rows )
         //    return false;
 
-        $rows_sort = array();
-        if($rows){
-            switch($stops){
-                case 0:
-                    $rows_sort = $rows;
-                    break;
-                case 1:
-                    foreach($rows as $value){
-                        if($value['transfers'] <= 1){
-                            $rows_sort[] = $value;
-                        }
-                    }
-                    break;
-                case 2:
-                    foreach($rows as $value){
-                        if($value['transfers'] == 0){
-                            $rows_sort[] = $value;
-                        }
-                    }
-                    break;
-            }
+
+
+        if ($return_url == false) {
+            $rows = $this->sortTransfers(5, $rows, $stops);
+            $rows = $this->getDataFilter($filter_flight_number, $filter_airline, $rows);
         }
-        $rows_sort = $this->getDataFilter($filter_flight_number, $filter_airline, $rows_sort);
+
         return array(
-            'rows' => $rows_sort,
+            'rows' => $rows,
             'origin' => $this->iataAutocomplete($origin, 0),
             'destination' => $this->iataAutocomplete($destination, 0, 'destination'),
             'type' => 5,
@@ -121,7 +127,9 @@ class TPCheapestTicketEachDayMonthShortcodeModel extends \app\includes\models\si
             'paginate' => $paginate,
             'off_title' => $off_title,
             'subid' => $subid,
-            'currency' => $currency);
+            'currency' => $currency,
+            'return_url' => $return_url
+            );
 
 
     }

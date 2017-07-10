@@ -8,22 +8,52 @@
 namespace app\includes;
 class TPLoaderScripts extends \core\TPOLoaderScripts{
 
+    public function __construct(){
+        parent::__construct();
+        if ( ! is_admin() ) {
+            add_filter('script_loader_tag', array(&$this, 'addAttrScript'), 200, 3);
+        }
+
+
+    }
+
+    public function addAttrScript($tag, $handle, $src){
+
+        //error_log(print_r($handle, true));
+        //$tags = explode(' ', $tag);
+        //error_log(print_r($tags, true));
+        //<script type='text/javascript' src='http://localhost/tp/wp-content/plugins/travelpayouts/app/public/js/site/TPPlugin.js'></script>
+        //error_log(print_r($tag, true));
+        if (strpos($handle, TPOPlUGIN_SLUG) !== false) {
+            $tag = str_replace('<script type=\'text/javascript\'',
+                '<script type=\'text/javascript\' data-cfasync="false"', $tag);
+            $tag = str_replace('></script>', ' data-wpfc-render="false"></script>', $tag);
+        }
+
+        //error_log(print_r($tag, true));
+        //error_log(print_r($src, true));
+        return $tag;
+
+    }
+
     public function loadScriptAdmin($hook)
     {
         // TODO: Implement loadScriptAdmin() method.
         /** Register styles */
+        //$version = TPOPlUGIN_VERSION;
+        $version = null;
 
         wp_register_style(
             TPOPlUGIN_SLUG.'-InsertWidgets', //$handle
             TPOPlUGIN_URL.'app/public/css/admin/TPInsertWidgets.css', // $src
             array(), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         wp_register_style(
             TPOPlUGIN_SLUG.'-InsertShortcodes', //$handle
             TPOPlUGIN_URL.'app/public/css/admin/TPInsertShortcodes.css', // $src
             array(), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         wp_register_style(
             TPOPlUGIN_SLUG.'-TPAdminNormalize', //$handle
@@ -35,14 +65,14 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG.'-bellows',
             TPOPlUGIN_URL.'app/public/css/lib/bellows.css',
             array(),
-            TPOPlUGIN_VERSION
+            $version
         );
 
         wp_register_style(
             TPOPlUGIN_SLUG.'-jquery-ui',
             TPOPlUGIN_URL.'app/public/css/lib/jquery-ui/jquery-ui.min.css',
             array(),
-            TPOPlUGIN_VERSION
+            $version
         );
 
         wp_register_style(
@@ -52,7 +82,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
                 TPOPlUGIN_SLUG.'-bellows',
                 //TPOPlUGIN_SLUG.'-jquery-ui'
             ), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         /** End register styles */
         /** Register scripts */
@@ -67,51 +97,67 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG.'-AutocompleteCountries', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/autocomplete/autocomplete_countries.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-AutocompleteScript', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/TPAdminAutocomplete.js', //$src
             array('jquery', 'jquery-ui-autocomplete'), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
+
+        wp_register_script(
+            TPOPlUGIN_SLUG.'-HotelsSelectionsType', //$handle
+            TPOPlUGIN_URL.'app/public/js/lib/TPHotelsSelectionsType.js', //$src
+            array('jquery', 'jquery-ui-autocomplete'), //$deps
+            $version, //$ver
+            true //$$in_footer
+        );
+
         wp_register_script(
             TPOPlUGIN_SLUG.'-InsertShortcodes', //$handle
             TPOPlUGIN_URL.'app/public/js/admin/TPInsertShortcodes.js', //$src
-            array('jquery', 'jquery-ui-autocomplete','jquery-ui-dialog',
-                'jquery-ui-core', 'jquery-ui-datepicker','jquery-form',
-                'jquery-ui-progressbar'), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            array(
+                'jquery',
+                'jquery-ui-autocomplete',
+                'jquery-ui-dialog',
+                'jquery-ui-core',
+                'jquery-ui-datepicker',
+                'jquery-form',
+                'jquery-ui-progressbar',
+                TPOPlUGIN_SLUG.'-HotelsSelectionsType', //$handle
+            ), //$deps
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-fileDownload', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/download.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-jqColorPicker', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/jqColorPicker.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-excellentexport', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/excellentexport.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-dataTables', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/jquery.dataTables.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_enqueue_script(
@@ -124,57 +170,64 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG. '-FileSaver', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/FileSaver.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG. '-jquery-csv', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/jquery.csv.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
 
         wp_register_script(
             TPOPlUGIN_SLUG.'-TPAdminPluginPage', //$handle
             TPOPlUGIN_URL.'app/public/js/admin/TPAdminPluginPage.js', //$src
-            array('jquery', 'wp-color-picker','jquery-ui-autocomplete',
-                'jquery-ui-accordion','jquery-ui-sortable', 'jquery-ui-dialog',
-                'jquery-ui-button','jquery-form', 'jquery-ui-tabs',
+            array(
+                'jquery',
+                'wp-color-picker',
+                'jquery-ui-autocomplete',
+                'jquery-ui-accordion',
+                'jquery-ui-sortable',
+                'jquery-ui-dialog',
+                'jquery-ui-button',
+                'jquery-form',
+                'jquery-ui-tabs',
                 TPOPlUGIN_SLUG.'-fileDownload', TPOPlUGIN_SLUG.'-jqColorPicker',
                 TPOPlUGIN_SLUG.'-excellentexport', TPOPlUGIN_SLUG.'-dataTables',
                 TPOPlUGIN_SLUG.'-jquery-cookie', TPOPlUGIN_SLUG. '-FileSaver',
                 'jquery-ui-progressbar', TPOPlUGIN_SLUG. '-jquery-csv'
             ), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-velocity', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/velocity.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-bellows', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/bellows.min.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-zelect', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/zelect.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG. '-jquery-spinner', //$handle
             TPOPlUGIN_URL.'app/public/js/lib/jquery.spinner.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
 
@@ -187,7 +240,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
                 TPOPlUGIN_SLUG.'-jquery-spinner',
                 'jquery', 'jquery-ui-core', 'jquery-ui-tooltip',
                 'jquery-ui-datepicker'), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
 
@@ -201,7 +254,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG.'-InsertWidgets', //$handle
             TPOPlUGIN_URL.'app/public/js/admin/TPInsertWidgets.js', //$src
             array('jquery', 'jquery-ui-autocomplete', 'jquery-ui-core'), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_enqueue_style('wp-jquery-ui-dialog');
@@ -211,7 +264,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_URL.'app/public/js/admin/TPAdminEditPage.js', //$src
             array('jquery', 'jquery-ui-core', 'jquery-ui-progressbar',
                 'jquery-ui-dialog'), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_style(
@@ -220,27 +273,27 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             array(
 
             ), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-TPPostAddNew', //$handle
             TPOPlUGIN_URL.'app/public/js/admin/post/TPPostAddNew.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-TPPostUpdate', //$handle
             TPOPlUGIN_URL.'app/public/js/admin/post/TPPostUpdate.js', //$src
             array(), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         wp_register_script(
             TPOPlUGIN_SLUG.'-TPPost', //$handle
             TPOPlUGIN_URL.'app/public/js/admin/post/TPPost.js', //$src
             array('jquery', 'jquery-ui-core','jquery-form'), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             true //$$in_footer
         );
         switch($hook) {
@@ -281,7 +334,9 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             wp_enqueue_style(TPOPlUGIN_SLUG.'-InsertWidgets');
 
         }
+
         if(strripos($hook, 'travelpayouts') !== false || strripos($hook, 'tp_control') !== false){
+
             wp_enqueue_style(TPOPlUGIN_SLUG.'-TPAdminNormalize');
             wp_enqueue_style(TPOPlUGIN_SLUG.'-TPAdminMain');
             wp_enqueue_script(TPOPlUGIN_SLUG.'-TPAdminPluginPage');
@@ -296,6 +351,8 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
     public function headScriptAdmin()
     {
         // TODO: Implement headScriptAdmin() method.
+        $blogName = get_bloginfo('name');
+        $blogName = preg_replace ("/[^a-zA-ZА-Яа-я0-9]/i","", $blogName);
         ?>
         <script type="text/javascript">
             var ajaxurl, tpLocale, button_ok, button_cancel, TPdatepicker, wpLocale, TPStatsTotal, TPStatsTotalTrText,
@@ -311,7 +368,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOriginTitle = '<?php _ex('tp_head_script_admin_var_origin_title_label', 'Origin', TPOPlUGIN_TEXTDOMAIN ); ?>';
             TPLocationTitlt = '<?php _ex('tp_head_script_admin_var_location_title_label', '(Location)', TPOPlUGIN_TEXTDOMAIN ); ?>';
             TPFileNameExport = '<?php echo TPOPlUGIN_NAME."Settings_v"
-            .TPOPlUGIN_VERSION."_".get_bloginfo('name')."_".date('Ymd').".txt"; ?>';
+            .TPOPlUGIN_VERSION."_".$blogName."_".date('Ymd').".txt"; ?>';
             TPFileNameCsvExport = '<?php echo TPOPlUGIN_NAME."Links.csv"; ?>';
             TPPluginName = '<?php echo TPOPlUGIN_NAME; ?>';
             TPMesgUpdateSettings = '<?php  _ex('tp_head_script_admin_var_mesg_update_settings_label', '(Settings saved.)', TPOPlUGIN_TEXTDOMAIN ); ?>';
@@ -520,6 +577,10 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
         }
         return $result;
     }
+
+    /**
+     *
+     */
     public function loadScriptSiteFontStyle(){
         if(\app\includes\TPPlugin::$options['themes_table']['name'] == 'default-theme'){
             if(\app\includes\TPPlugin::$options['style_table']['title_style']['font_family'] == 'Roboto' ||
@@ -556,7 +617,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
                 //TPFontsIntro
                 wp_register_style(
                     TPOPlUGIN_SLUG . '-TPFontsIntro',
-                    TPOPlUGIN_URL.'app/public/themes/css/TPFontsIntro.css', // $src
+                    TPOPlUGIN_URL.'app/public/themes/flight/css/TPFontsIntro.css', // $src
                     array(), //$deps,
                     TPOPlUGIN_VERSION // $ver
                 );
@@ -575,13 +636,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
 
             }
         } else {
-            wp_register_style(
-                TPOPlUGIN_SLUG . '-TPFontAwesome',
-                'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
-                array(),
-                TPOPlUGIN_VERSION // $ver
-            );
-            wp_enqueue_style(TPOPlUGIN_SLUG. '-TPFontAwesome');
+
             switch (\app\includes\TPPlugin::$options['themes_table']['name']){
                 //1
                 case 'default-theme':
@@ -622,7 +677,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
                 case 'light-yellow-and-darkgray':
                     wp_register_style(
                         TPOPlUGIN_SLUG . '-TPFontsIntro',
-                        TPOPlUGIN_URL.'app/public/themes/css/TPFontsIntro.css', // $src
+                        TPOPlUGIN_URL.'app/public/themes/flight/css/TPFontsIntro.css', // $src
                         array(), //$deps,
                         TPOPlUGIN_VERSION // $ver
                     );
@@ -633,106 +688,299 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             }
         }
     }
+
+    /**
+     *
+     */
     public function loadScriptSiteThemeTables(){
-        switch (\app\includes\TPPlugin::$options['themes_table']['name']){
-            case 'default-theme':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    //TPOPlUGIN_URL.'app/public/css/site/TPMain.css', // $src
-                    TPOPlUGIN_URL.'app/public/themes/css/main.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'red-button-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-8.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'blue-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-7.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'grey-salad-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-6.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'purple-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-5.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'black-and-yellow-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-4.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'dark-and-rainbow':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-2.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'light-and-plum-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-3.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'light-yellow-and-darkgray':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-1.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            case 'mint-table':
-                wp_register_style(
-                    TPOPlUGIN_SLUG.'-TPMain', //$handle
-                    TPOPlUGIN_URL.'app/public/themes/css/table-9.css', // $src
-                    array(), //$deps,
-                    TPOPlUGIN_VERSION // $ver
-                );
-                break;
-            default:
-
-        }
-
-
-
-
-         wp_enqueue_style(TPOPlUGIN_SLUG. '-TPMain');
-
-
+        $this->loadScriptSiteThemeFlight();
+        $this->loadScriptSiteThemeHotel();
+        $this->loadScriptSiteThemeRailway();
     }
+
+    public function loadScriptSiteThemeFlight(){
+	    switch (\app\includes\TPPlugin::$options['themes_table']['name']){
+		    case 'default-theme':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    //TPOPlUGIN_URL.'app/public/css/site/TPMain.css', // $src
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/main.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'red-button-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-8.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'blue-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-7.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'grey-salad-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-6.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'purple-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-5.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'black-and-yellow-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-4.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'dark-and-rainbow':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-2.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'light-and-plum-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-3.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'light-yellow-and-darkgray':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-1.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'mint-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainFlight', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/flight/css/table-9.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    default:
+
+	    }
+	    wp_enqueue_style(TPOPlUGIN_SLUG. '-TPMainFlight');
+    }
+
+	public function loadScriptSiteThemeHotel(){
+		switch (\app\includes\TPPlugin::$options['themes_table_hotels']['name']){
+			case 'default-theme':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					//TPOPlUGIN_URL.'app/public/css/site/TPMain.css', // $src
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/main.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'red-button-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-8.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'blue-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-7.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'grey-salad-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-6.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'purple-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-5.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'black-and-yellow-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-4.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'dark-and-rainbow':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-2.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'light-and-plum-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-3.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'light-yellow-and-darkgray':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-1.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			case 'mint-table':
+				wp_register_style(
+					TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+					TPOPlUGIN_URL.'app/public/themes/hotel/css/table-9.css', // $src
+					array(), //$deps,
+					TPOPlUGIN_VERSION // $ver
+				);
+				break;
+			default:
+
+		}
+        wp_enqueue_style(TPOPlUGIN_SLUG. '-TPMainHotel');
+    }
+
+    public function loadScriptSiteThemeRailway(){
+	    /*switch (\app\includes\TPPlugin::$options['themes_table_hotels']['name']){
+		    case 'default-theme':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    //TPOPlUGIN_URL.'app/public/css/site/TPMain.css', // $src
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/main.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'red-button-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-8.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'blue-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-7.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'grey-salad-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-6.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'purple-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-5.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'black-and-yellow-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-4.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'dark-and-rainbow':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-2.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'light-and-plum-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-3.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'light-yellow-and-darkgray':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-1.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    case 'mint-table':
+			    wp_register_style(
+				    TPOPlUGIN_SLUG.'-TPMainHotel', //$handle
+				    TPOPlUGIN_URL.'app/public/themes/hotel/css/table-9.css', // $src
+				    array(), //$deps,
+				    TPOPlUGIN_VERSION // $ver
+			    );
+			    break;
+		    default:
+
+	    }*/
+	    wp_register_style(
+		    TPOPlUGIN_SLUG.'-TPMainRailway', //$handle
+		    //TPOPlUGIN_URL.'app/public/css/site/TPMain.css', // $src
+		    TPOPlUGIN_URL.'app/public/themes/railway/css/main.css', // $src
+		    array(), //$deps,
+		    TPOPlUGIN_VERSION // $ver
+	    );
+	    wp_enqueue_style(TPOPlUGIN_SLUG. '-TPMainRailway');
+    }
+
+
 
     /**
      * @param $hook
      */
     public function loadScriptSite($hook)
     {
+        //$version = TPOPlUGIN_VERSION;
+        $version = null;
         //add_filter( 'widget_text', array(&$this, 'widget_content_wrap') );
 
         //global $widgets;
@@ -762,33 +1010,40 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG.'-TPNormilize', //$handle
             TPOPlUGIN_URL.'app/public/css/site/TPNormalize.css', // $src
             array(), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
 
         wp_register_style(
             TPOPlUGIN_SLUG.'-fontello', //$handle
             TPOPlUGIN_URL.'app/public/css/lib/currency_fonts_new/css/fontello.css', // $src
             array(), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         wp_register_style(
             TPOPlUGIN_SLUG.'-animation', //$handle
             TPOPlUGIN_URL.'app/public/css/lib/currency_fonts_new/css/animation.css', // $src
             array(), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         wp_enqueue_style(
             TPOPlUGIN_SLUG.'-fontello-ie7', //$handle
             TPOPlUGIN_URL.'app/public/css/lib/currency_fonts_new/css/fontello-ie7.css', // $src
             array(), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
         );
         $wp_styles->add_data(  TPOPlUGIN_SLUG.'-fontello-ie7', 'conditional', 'IE 7' );
         wp_register_style(
             TPOPlUGIN_SLUG.'-TPCurrencyMain', //$handle
             TPOPlUGIN_URL.'app/public/css/lib/currency_fonts_new/css/TPCurrencyMainNew.css', // $src
             array(TPOPlUGIN_SLUG.'-fontello', TPOPlUGIN_SLUG.'-animation'), //$deps,
-            TPOPlUGIN_VERSION // $ver
+            $version // $ver
+        );
+
+        wp_register_style(
+            TPOPlUGIN_SLUG.'-pikaday', //$handle
+            TPOPlUGIN_URL.'app/public/css/lib/pikaday.css', // $src
+            array(), //$deps,
+            $version // $ver
         );
 
 
@@ -797,7 +1052,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG.'-jquery-ui',
             TPOPlUGIN_URL.'app/public/css/lib/jquery-ui/jquery-ui.min.css',
             array(),
-            TPOPlUGIN_VERSION
+            $version
         );
 
 
@@ -809,9 +1064,38 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             TPOPlUGIN_SLUG. '-dataTables',
             TPOPlUGIN_URL.'app/public/js/lib/jquery.dataTables.min.js',
             array(),
-            TPOPlUGIN_VERSION,
+            $version,
             $in_footer
         );
+
+        wp_register_script(
+            TPOPlUGIN_SLUG. '-date-format',
+            TPOPlUGIN_URL.'app/public/js/lib/date.format.js',
+            array(),
+            $version,
+            $in_footer
+        );
+
+        wp_register_script(
+            TPOPlUGIN_SLUG. '-pikaday',
+            TPOPlUGIN_URL.'app/public/js/lib/pikaday.js',
+            array(),
+            $version,
+            $in_footer
+        );
+
+        wp_register_script(
+            TPOPlUGIN_SLUG. '-pikaday-jquery',
+            TPOPlUGIN_URL.'app/public/js/lib/pikaday.jquery.js',
+            array(
+                TPOPlUGIN_SLUG. '-date-format',
+                TPOPlUGIN_SLUG. '-pikaday',
+            ),
+            $version,
+            $in_footer
+        );
+
+
 
         wp_register_script(
             TPOPlUGIN_SLUG.'-TPPlugin', //$handle
@@ -820,8 +1104,9 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
                 'jquery',
                 'jquery-ui-tabs',
                 TPOPlUGIN_SLUG.'-dataTables',
+                TPOPlUGIN_SLUG. '-pikaday-jquery',
                 ), //$deps
-            TPOPlUGIN_VERSION, //$ver
+            $version, //$ver
             $in_footer //$$in_footer
         );
         /** End register scripts */
@@ -829,6 +1114,7 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
         /** Call scripts and style **/
         $this->loadScriptSiteThemeTables();
         wp_enqueue_style(TPOPlUGIN_SLUG. '-TPNormalize');
+        wp_enqueue_style( TPOPlUGIN_SLUG.'-pikaday');
         wp_enqueue_style(TPOPlUGIN_SLUG. '-jquery-ui');
         wp_enqueue_style(TPOPlUGIN_SLUG.'-TPCurrencyMain');
         wp_enqueue_script(TPOPlUGIN_SLUG. '-TPPlugin');
@@ -901,6 +1187,25 @@ class TPLoaderScripts extends \core\TPOLoaderScripts{
             tpLocale = '<?php echo \app\includes\common\TPLang::getLang();?>';
         </script>
         <style type="text/css">
+            .TPHotelStar{
+                color: #fdb931;
+            }
+            .TPHotelPriceStrike{
+                white-space: nowrap;
+            }
+            .TP-old-price-and {
+                display: block;
+                white-space: nowrap;
+            }
+            .TP-old-price-discount {
+                margin-left: 5px;
+            }
+            .TPprice_pnTd p{
+                white-space: nowrap;
+            }
+            .TPold_price_pnTd p{
+                white-space: nowrap;
+            }
             <?php
                 if(isset(\app\includes\TPPlugin::$options['style_table']['table']['responsive'])){
                     ?>

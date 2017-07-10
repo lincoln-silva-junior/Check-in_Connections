@@ -27,6 +27,7 @@ function TPCityAutocomplete(){
             lake_view: "С видом на озеро",
             river_view: "С видом на реку",
             panoramic_view: "С панорамным видом",
+            popularity: "Популярные"
         },
         "en":{
             tophotels: "Popular",
@@ -51,6 +52,7 @@ function TPCityAutocomplete(){
             lake_view: "Lake view",
             river_view: "River view",
             panoramic_view: "Panoramic view",
+            popularity: "Popularity"
         }
     };
     /**
@@ -199,6 +201,7 @@ function TPCityAutocomplete(){
                         //console.log(request.term, AppendTo);
                         console.log(tpLocale);
                         $.get("https://yasen.hotellook.com/autocomplete?term=" + request.term + "&lang=" + tpLocale, function(data) {
+
                             if($(selector).hasClass('TPCoordinatesAutocomplete')){
                                 var locations=[];
                                 /*$.map(data, function(items, keys){
@@ -223,6 +226,7 @@ function TPCityAutocomplete(){
                                 })*/
                                 $.map(data.cities, function(city, key_city){
                                     var location = new Object();
+
                                     location.label = city.fullname+" ["+city.hotelsCount+" "+TPLabelAutocomplete+"]";
                                     location.val = '{'+city.location.lat+', '+city.location.lon+'}';
                                     locations.push(location);
@@ -285,7 +289,34 @@ function TPCityAutocomplete(){
 
                                     })
                                 )
-                            }else{
+                            } else if($(selector).hasClass('HotelCityAutocomplete')) {
+                                var records =[];
+
+                                $.map(data.cities, function(city, key_city){
+                                    //console.log(city);
+                                    var record = new Object();
+                                   // record.label = city.fullname+" ["+city.id+"]{"+city.city+"}";
+                                    record.label = city.fullname+" ["+city.id+"]";
+                                    record.val = city.fullname+" ["+city.id+"]";
+                                    record.id = city.id;
+                                    //record.city = "{"+city.city+"}";
+                                    record.city = city.city;
+                                    records.push(record);
+
+                                })
+                                response(
+                                    $.map(records, function(item, key){
+                                        //console.log(item)
+                                        return {
+                                            label: item.label,
+                                            value: item.val,
+                                            val: item.id,
+                                            city: item.city,
+                                        }
+                                    })
+                                )
+                            } else{
+
                                 response(
                                     $.map(data.hotels, function(item){
                                         return {
@@ -324,6 +355,8 @@ function TPCityAutocomplete(){
 
 
                                 $.map(data, function(item){
+                                    //console.log(item)
+                                    //console.log(catHotelSelec[tpLocale][item])
                                     if (typeof catHotelSelec[tpLocale][item] != "undefined"){
                                         select_option += '<option value="'+item+'">'
                                             +catHotelSelec[tpLocale][item]+'</option>';
@@ -332,6 +365,30 @@ function TPCityAutocomplete(){
                                     }
 
                                 })
+
+                                //console.log(data);
+                                // console.log(select_option);
+                                // console.log(TPHotelSelectWidgetCat1);
+                                //console.log(TPHotelSelectWidgetCat2);
+                                //console.log(TPHotelSelectWidgetCat3);
+
+
+                                tbodyModal.children('#tr_cat_widget-1')
+                                    .children('#td_cat_widget-1')
+                                    .children('#cat_widget-1')
+                                    .find("option").remove();
+
+                                tbodyModal.children('#tr_cat_widget-2')
+                                    .children('#td_cat_widget-2')
+                                    .children('#cat_widget-2')
+                                    .find("option").remove();
+                                tbodyModal.children('#tr_cat_widget-3')
+                                    .children('#td_cat_widget-3')
+                                    .children('#cat_widget-3')
+                                    .find("option").remove();
+
+
+                                /***/
 
                                 tbodyModal.children('#tr_cat_widget-1')
                                     .children('#td_cat_widget-1')
@@ -374,6 +431,33 @@ function TPCityAutocomplete(){
                                     .on('change', '#cat_widget-2', function(e) {
                                         tbodyModal.children('#tr_cat_widget-3').show();
                                     });
+
+
+                            })
+                        }
+                        if($(selector).hasClass('HotelCityAutocomplete')){
+                            //console.log(ui.item);
+                            //console.log( $(selector));
+                            input.attr('data-city', ui.item.city);
+                            //$(selector).data( "city", ui.item.city );
+                            $('#select_hotels_selections_type').find("option:gt(0)").remove();
+                            $.get("https://yasen.hotellook.com/tp/v1/available_selections.json?id=" + ui.item.val, function(data) {
+
+                                data.sort();
+
+                                //console.log(hotelsSelectionsType);
+                                $.map(data, function(item){
+                                    if (typeof hotelsSelectionsType[tpLocale][item] != "undefined"){
+                                        $('#select_hotels_selections_type')
+                                            .append($("<option></option>")
+                                                .attr("value",item)
+                                                .attr("data-selections-title", hotelsSelectionsType[tpLocale][item]['title'])
+                                                .attr("data-selections-title-ru",hotelsSelectionsType['ru'][item]['title'])
+                                                .attr("data-selections-title-en",hotelsSelectionsType['en'][item]['title'])
+                                                .text(hotelsSelectionsType[tpLocale][item]['label']));
+                                    }
+
+                                });
 
 
                             })
@@ -578,6 +662,60 @@ function TPCityAutocomplete(){
                             input.attr('value','').val('');
                     },
                     minLength: 2,
+                    delay: 500,
+                    autoFocus: true,
+                    appendTo: AppendTo
+                });
+            });
+        });
+    }
+
+    /**
+     * Railway
+     * @param selector
+     * @param AppendTo
+     * @constructor
+     */
+    this.TPRailwayAutocompleteInit = function(selector, AppendTo){
+        if (typeof(AppendTo)==='undefined') AppendTo = null;
+        jQuery(function($) {
+            var doc, win;
+            doc = $(document);
+            win = $(window);
+            doc.find(selector).each(function () {
+                var input = $(this);
+                $(this).val(function(index, value){
+                    return value;
+                }).autocomplete({
+                    source: function(request, response){
+                        console.log(request.term)
+                        console.log(tpLocale)
+
+                        $.get("https://www.tutu.ru/suggest/railway_simple/?name=" + request.term, function(data) {
+                            var data = $.parseJSON( data);
+                            //console.log(data);
+                            response(
+                                $.map(data, function(item){
+                                    //console.log(item);
+                                    return {
+                                        label: item.value+" ["+item.id +"]",
+                                        value: item.value+" ["+item.id +"]",
+                                        val: item.id
+                                    }
+
+                                })
+                            )
+
+                        })
+                    },
+                    select: function( event, ui ) {
+                        input.attr('value',ui.item.val).val(ui.item.val);
+                    },
+                    change: function( event, ui ) {
+                        if( ! ui.item )
+                            input.attr('value','').val('');
+                    },
+                    minLength: 1,
                     delay: 500,
                     autoFocus: true,
                     appendTo: AppendTo

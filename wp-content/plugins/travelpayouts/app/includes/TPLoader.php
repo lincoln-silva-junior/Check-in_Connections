@@ -1,10 +1,25 @@
 <?php
 namespace app\includes;
+
+use app\includes\common\TPLang;
+use app\includes\controllers\admin\media_buttons\TPHotelsButtonsController;
+use app\includes\controllers\admin\media_buttons\TPRailwayButtonsController;
+use app\includes\controllers\admin\menu\TPHotelsController;
+use app\includes\controllers\admin\menu\TPRailwayController;
+use app\includes\controllers\site\shortcodes\hotels\TPCostLivingCityWeekendShortcodeController;
+use app\includes\common\TPRequestApiStatistic;
+use app\includes\controllers\site\shortcodes\hotels\TPCostLivingCityDaysShortcodeController;
+use app\includes\controllers\site\shortcodes\hotels\TPHotelsCityPriceFromToShortcodeController;
+use app\includes\controllers\site\shortcodes\hotels\TPHotelsCityStarFilterShortcodeController;
+use app\includes\controllers\site\shortcodes\hotels\TPHotelsSelectionsDateShortcodeController;
+use app\includes\controllers\site\shortcodes\hotels\TPHotelsSelectionsDiscountShortcodeController;
+use app\includes\controllers\site\shortcodes\hotels\TPHotelsSelectionsShortcodeController;
+use app\includes\controllers\site\shortcodes\railway\TPTutuShortcodeController;
+use app\includes\models\admin\TPHotelsTypeModel;
+
 class TPLoader extends \core\TPOLoader{
     public function __construct(){
         parent::__construct();
-        TPPlugin::$TPRequestApi = TPRequestApi::getInstance();
-
 
     }
 
@@ -17,23 +32,32 @@ class TPLoader extends \core\TPOLoader{
         new controllers\admin\menu\TPDashboardController();
         new controllers\admin\menu\TPAutoReplacLinksController();
         new controllers\admin\menu\TPFlightTicketsController();
+        new TPHotelsController();
+        new TPRailwayController();
         new controllers\admin\menu\TPWidgetsController();
         new controllers\admin\menu\TPSearchFormsController();
-        new controllers\admin\menu\TPStatisticController();
+        //new controllers\admin\menu\TPStatisticController();
         new controllers\admin\menu\TPSettingsController();
         new controllers\admin\menu\TPWizardController();
         new controllers\admin\menu\TPWhatNewsController();
         // Media buttons
         new models\admin\TPPostsModel();
         new controllers\admin\TPModalAdminNoticeController();
-        if( \app\includes\TPPlugin::$options['config']['media_button']['view'] != 2){
+        if( TPPlugin::$options['config']['media_button']['view'] != 2){
             new controllers\admin\media_buttons\TPShortcodeButtonsController();
+            new TPHotelsButtonsController();
+
+            if (TPLang::getLang() == TPLang::getLangRU()){
+                new TPRailwayButtonsController();
+            }
+
             new controllers\admin\media_buttons\TPWidgetButtonsController();
             new controllers\admin\media_buttons\TPSearchFormButtonsController();
             new controllers\admin\media_buttons\TPLinkButtonsController();
         }
 
         new \app\includes\common\TPTinyMCE();
+        new TPHotelsTypeModel();
 
 
 
@@ -43,7 +67,7 @@ class TPLoader extends \core\TPOLoader{
     protected function site()
     {
         // TODO: Implement site() method.
-        //Shortcodes
+        //Shortcodes Flight
         new \app\includes\controllers\site\shortcodes\TPSearchFormShortcodeController();
         new \app\includes\controllers\site\shortcodes\TPCheapestFlightsShortcodeController();
         new \app\includes\controllers\site\shortcodes\TPDirectFlightsRouteShortcodeController();
@@ -60,6 +84,18 @@ class TPLoader extends \core\TPOLoader{
         new \app\includes\controllers\site\shortcodes\TPLinkShortcodeController();
         new \app\includes\controllers\site\shortcodes\TPSpecialOfferShortcodeController();
         new \app\includes\controllers\site\shortcodes\TPCaseCityShortcodeController();
+
+        //hotel
+        new TPCostLivingCityWeekendShortcodeController();
+        new TPCostLivingCityDaysShortcodeController();
+        new TPHotelsCityPriceFromToShortcodeController();
+        new TPHotelsCityStarFilterShortcodeController();
+        //new TPHotelsSelectionsShortcodeController();
+        new TPHotelsSelectionsDiscountShortcodeController();
+        new TPHotelsSelectionsDateShortcodeController();
+
+        //Railway
+	    new TPTutuShortcodeController();
 
         //Widgets
         new \app\includes\controllers\site\widgets\TPMapWidgetController();
@@ -83,15 +119,16 @@ class TPLoader extends \core\TPOLoader{
 
         new \app\includes\TPLoaderScripts();
         //new controllers\admin\menu\TPAdminBarMenuController();
-        \app\includes\models\site\shortcodes\TPSpecialOfferShortcodeModel::modelHooks();
+        //Загрузка спецпредложения
+        //\app\includes\models\site\shortcodes\TPSpecialOfferShortcodeModel::modelHooks();
 
     }
 
     public function pluginsLoaded()
     {
         // TODO: Implement pluginsLoaded() method.
-
-        if(!TPPlugin::$TPRequestApi->get_status()){
+        $TPRequestApi = TPRequestApiStatistic::getInstance();
+        if(!$TPRequestApi->isStatus()){
             if(strripos($_SERVER['REQUEST_URI'], 'tp_control_wizard') === false){
                 TPPlugin::$adminNotice->adminNoticePushCustom(
                     get_class($this),

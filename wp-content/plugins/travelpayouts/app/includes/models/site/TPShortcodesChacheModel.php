@@ -6,6 +6,9 @@
  * Time: 10:37
  */
 namespace app\includes\models\site;
+
+use \app\includes\TPPlugin;
+
 abstract class TPShortcodesChacheModel extends \core\models\TPOShortcodesCacheModel{
     public function __construct(){
         parent::__construct();
@@ -19,9 +22,46 @@ abstract class TPShortcodesChacheModel extends \core\models\TPOShortcodesCacheMo
     }
 
     /**
+     * @param string $type
+     * @return bool
+     */
+    public function cacheSecund($type = 'flight'){
+        $cacheSecund = false;
+        switch ($type){
+            case 'flight':
+                if(TPPlugin::$options['config']['cache_value']['flight'] != 0 ) {
+                    //time
+                    if (!empty(TPPlugin::$options['config']['cache_value']['flight'])){
+                        $cacheSecund =  HOUR_IN_SECONDS * TPPlugin::$options['config']['cache_value']['flight'];
+                    } else {//default
+                        $cacheSecund =  DAY_IN_SECONDS;
+                    }
+                } else {
+                    $cacheSecund = false;
+                }
+                break;
+            case 'hotel':
+                if(TPPlugin::$options['config']['cache_value']['hotel'] != 0 ) {
+                    if (!empty(TPPlugin::$options['config']['cache_value']['hotel'])){
+                        $cacheSecund =  HOUR_IN_SECONDS * TPPlugin::$options['config']['cache_value']['hotel'];
+                    } else {//default
+                        $cacheSecund =  DAY_IN_SECONDS;
+                    }
+                } else {
+                    $cacheSecund = false;
+                }
+                break;
+        }
+        //error_log($type);
+        //error_log($cacheSecund);
+        //error_log(__CLASS__);
+        return $cacheSecund;
+    }
+
+    /**
      * @return bool|int
      */
-    public function cacheSecund(){
+    /*public function cacheSecund(){
         if(\app\includes\TPPlugin::$options['config']['cache_value'] != 0 ) {
             switch (\app\includes\TPPlugin::$options['config']['cache']) {
                 case 1:
@@ -46,7 +86,7 @@ abstract class TPShortcodesChacheModel extends \core\models\TPOShortcodesCacheMo
         }else{
             return false;
         }
-    }
+    }*/
 
     /**
      * @return string
@@ -195,5 +235,83 @@ abstract class TPShortcodesChacheModel extends \core\models\TPOShortcodesCacheMo
 
         return $data;
 
+    }
+
+    public function sortTransfers($type, $rows, $stops){
+        $rows_sort = array();
+        switch ($type){
+            case 1:
+
+                if($rows){
+                    switch($stops){
+                        case 0:
+                            $rows_sort = $rows;
+                            break;
+                        case 1:
+                            foreach($rows as $value){
+                                if($value['number_of_changes'] <= 1){
+                                    $rows_sort[] = $value;
+                                }
+                            }
+                            break;
+                        case 2:
+                            foreach($rows as $value){
+                                if($value['number_of_changes'] == 0){
+                                    $rows_sort[] = $value;
+                                }
+                            }
+                            break;
+                    }
+                }
+                break;
+            case 5:
+                if($rows){
+                    switch($stops){
+                        case 0:
+                            $rows_sort = $rows;
+                            break;
+                        case 1:
+                            foreach($rows as $value){
+                                if($value['transfers'] <= 1){
+                                    $rows_sort[] = $value;
+                                }
+                            }
+                            break;
+                        case 2:
+                            foreach($rows as $value){
+                                if($value['transfers'] == 0){
+                                    $rows_sort[] = $value;
+                                }
+                            }
+                            break;
+                    }
+                }
+                break;
+            case 13:
+
+                if($rows){
+                    switch($stops){
+                        case 0:
+                            $rows_sort = $rows;
+                            break;
+                        case 1:
+                            foreach($rows as $value){
+                                if($value['number_of_changes'] <= 1){
+                                    $rows_sort[] = $value;
+                                }
+                            }
+                            break;
+                        case 2:
+                            foreach($rows as $value){
+                                if($value['number_of_changes'] == 0){
+                                    $rows_sort[] = $value;
+                                }
+                            }
+                            break;
+                    }
+                }
+                break;
+        }
+        return $rows_sort;
     }
 }

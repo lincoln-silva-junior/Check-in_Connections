@@ -4,9 +4,14 @@
  * User: freeman
  * Date: 13.08.15
  * Time: 10:33
+ * 3. Самые дешевые билеты по направлению
  */
 namespace app\includes\models\site\shortcodes;
-class TPCheapestFlightsShortcodeModel extends \app\includes\models\site\TPShortcodesChacheModel{
+
+use \app\includes\models\site\TPFlightShortcodeModel;
+
+class TPCheapestFlightsShortcodeModel extends TPFlightShortcodeModel{
+
     /**
      * @param array $args
      * @return array|bool
@@ -21,6 +26,7 @@ class TPCheapestFlightsShortcodeModel extends \app\includes\models\site\TPShortc
             'departure_at' => $departure_at,
             'return_at' => $return_at,
             'currency' => $currency,
+            'return_url' => $return_url
         );
         $name_method = "***************".__METHOD__."***************";
         $method = __CLASS__." -> ". __METHOD__." -> ".__LINE__
@@ -29,13 +35,13 @@ class TPCheapestFlightsShortcodeModel extends \app\includes\models\site\TPShortc
             error_log($name_method);
         if(TPOPlUGIN_ERROR_LOG)
             error_log($method);
-        if($this->cacheSecund()) {
+        if($this->cacheSecund() && $return_url == false) {
             if(TPOPlUGIN_ERROR_LOG)
                 error_log("{$method} -> cache");
             if (false === ($rows = get_transient($this->cacheKey('4'.$currency, $origin . $destination)))) {
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} -> cache false");
-                $return = \app\includes\TPPlugin::$TPRequestApi->get_cheapest($attr);
+                $return = self::$TPRequestApi->get_cheapest($attr);
                 if(TPOPlUGIN_ERROR_LOG)
                     error_log("{$method} cache false ".print_r($return, true));
 
@@ -53,10 +59,16 @@ class TPCheapestFlightsShortcodeModel extends \app\includes\models\site\TPShortc
                 set_transient( $this->cacheKey('4'.$currency, $origin.$destination) , $rows, $cacheSecund);
             }
         }else{
-            $return = \app\includes\TPPlugin::$TPRequestApi->get_cheapest($attr);
+            $return = self::$TPRequestApi->get_cheapest($attr);
             if( ! $return )
                 return false;
-            $rows = $this->iataAutocomplete($this->tpSortCheapestFlightsShortcodes($return), 4);
+            if ($return_url == false){
+                $rows = array();
+                $rows = $this->iataAutocomplete($this->tpSortCheapestFlightsShortcodes($return), 4);
+            } else {
+                $rows = $return;
+            }
+
         }
         if(TPOPlUGIN_ERROR_LOG)
             error_log("{$method} rows = ".print_r($rows, true));
@@ -81,20 +93,28 @@ class TPCheapestFlightsShortcodeModel extends \app\includes\models\site\TPShortc
             'off_title' => '',
             'subid' => '',
             'filter_flight_number' => false,
-            'filter_airline' => false
+            'filter_airline' => false,
+            'return_url' => false
             );
         extract( wp_parse_args( $args, $defaults ), EXTR_SKIP );
+
+        if ($return_url == 1){
+            $return_url = true;
+        }
+
         $return = $this->get_data(array(
             'origin' => $origin,
             'destination' => $destination,
             'currency' => $currency,
             'departure_at' => $departure_at,
             'return_at' => $return_at,
+            'return_url' => $return_url
         ));
         //if( ! $return )
         //    return false;
-
-        $return = $this->getDataFilter($filter_flight_number, $filter_airline, $return);
+        if ($return_url == false) {
+            $return = $this->getDataFilter($filter_flight_number, $filter_airline, $return);
+        }
 
         return array(
             'rows' => $return,
@@ -107,7 +127,8 @@ class TPCheapestFlightsShortcodeModel extends \app\includes\models\site\TPShortc
             'paginate' => $paginate,
             'off_title' => $off_title,
             'subid' => $subid,
-            'currency' => $currency
+            'currency' => $currency,
+            'return_url' => $return_url
         );
 
 

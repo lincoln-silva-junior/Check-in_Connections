@@ -74,7 +74,7 @@ class TPSpecialOfferShortcodeModel  extends \core\models\TPOWPTableModel impleme
         // TODO: Implement get_data() method.
         global $wpdb;
         $tableNameOffer = $wpdb->prefix .self::$tableNameOffer;
-        $data = $wpdb->get_results( "SELECT * FROM ".$tableNameOffer." ORDER BY date_add DESC", ARRAY_A);
+        $data = $wpdb->get_results( "SELECT * FROM ".$tableNameOffer, ARRAY_A);
         if(count($data) > 0) return $data;
         return false;
     }
@@ -253,8 +253,27 @@ class TPSpecialOfferShortcodeModel  extends \core\models\TPOWPTableModel impleme
         $wpdb->query("TRUNCATE TABLE `".$tableNameOffer."`");
         $wpdb->query("TRUNCATE TABLE `".$tableNameRoute."`");
     }
+
+    public static function getSpecialOffer(){
+        $data = array();
+        try {
+            $sxml = @simplexml_load_file("http://www.aviasales.ru/latest-offers.xml",
+                'SimpleXMLElement', LIBXML_NOCDATA);
+            $sxml = simplexml_load_file("http://www.aviasales.ru/latest-offers.xml");
+
+            if ($sxml !== false) {
+                $data = $sxml;
+            } else {
+                $data = array();
+            }
+        }   catch (Exception $e) {
+
+        }
+        return $data;
+    }
+
     public static function getSpecialOfferApi(){
-        $data = \app\includes\TPPlugin::$TPRequestApi->getSpecialOffer();
+        $data = self::getSpecialOffer();
         if(count($data) > 0) {
             if($data->offer) {
                 self::truncateTable();

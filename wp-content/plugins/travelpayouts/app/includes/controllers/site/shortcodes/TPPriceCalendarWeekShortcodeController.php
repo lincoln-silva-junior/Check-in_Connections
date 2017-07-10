@@ -4,6 +4,7 @@
  * User: freeman
  * Date: 13.08.15
  * Time: 12:11
+ * 2. Билеты по направлению на ближайшие дни
  */
 namespace app\includes\controllers\site\shortcodes;
 class TPPriceCalendarWeekShortcodeController extends \app\includes\controllers\site\TPShortcodesController {
@@ -26,6 +27,9 @@ class TPPriceCalendarWeekShortcodeController extends \app\includes\controllers\s
     {
         $data = $this->model->getDataTable($args);
         //if(!$data) return false;
+        if ($data['return_url'] == true){
+            return print_r($data['rows'], true);
+        }
         return $this->view->renderTable($data);
     }
 

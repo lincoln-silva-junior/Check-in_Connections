@@ -2,7 +2,7 @@
 Contributors: travelpayouts
 Tags: flights, hotels, search, air tickets, airfare, agency, booking, affiliate, travel, travel widget, travel tools
 Requires at least: 4.0
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: trunk
 Author URI: https://www.travelpayouts.com/?utm_source=wp_org&utm_medium=description
 License: GPLv2 or later
@@ -41,12 +41,13 @@ On average, our Affiliate earns 7$ from each sold air ticket and 20$ from each s
 Plugin allows to get the following tools added to your Wordpress posts:
 
 * 11 customizable tables with flight information
+* 2 customizable tables with hotel prices and info
 * Search Forms
 * Low cost flights and hotels Map
 * Low prices Calendar
 * Hotel Widget
 * Popular flight destinations Widget
-* Send your visitor to your own [flight or hotel search White Label](https://support.travelpayouts.com/hc/en-us/articles/203955753-White-Label?utm_source=wp_org&utm_medium=description&utm_campaign=en) or to our domains in different languages (24 to choose from). 
+* Send your visitor to your own [flight or hotel White Label](www.travelpayouts.com/promo/whitelabel/en/?utm_source=wp_org&utm_medium=description&utm_campaign=en) or to our domains in different languages (45 to choose from). 
 
 Languages supported:
 
@@ -73,11 +74,12 @@ Currencies supported in tables and widgets (some of them aren't available in all
 * British Pound GBP
 * South African Rand ZAR
 * Ukrainian Hryvnia UAH
+* And many more
 
 Other currencies and languages are supported by widgets that can be get directly from [Travelpayouts.com.](http://www.travelpayouts.com/?marker=85103&locale=en&utm_source=wp_org&utm_medium=description&utm_campaign=en)
 
 **Detailed Information**
-We recommend that you get acquainted to the [detailed information on Travelpayouts WP plugin features.](https://support.travelpayouts.com/hc/en-us/articles/207794617/?utm_source=wp_org&utm_medium=description&utm_campaign=en)
+We recommend that you get acquainted to the [detailed information on Travelpayouts WP plugin features.](https://support.travelpayouts.com/hc/en-us/categories/115000474547?utm_source=wp_org&utm_medium=description&utm_campaign=en)
 
 Dozens of useful articles in Travelpayouts Knowledge Base, always available at: [support.travelpayouts.com](https://support.travelpayouts.com/hc/en-us?utm_source=wp_org&utm_medium=description&utm_campaign=en)
 
@@ -173,6 +175,26 @@ Sure. Our Help Desk is always available at [support.travelpayouts.com](https://s
 11. Hotels Selections Widget
 
 == Changelog == 
+
+= 0.7.3 = 
+Release Date: July 5th, 2017
+
+* fixed: jetradar link from tables
+* fixed: calendar widget jetradar link
+* fixed: tutu subid fixed
+
+= 0.7.2 = 
+Release Date: June 29th, 2017
+
+* added: 2 hotel tables: selections and selections by dates. Note that selections by dates are displayed if these data are present in the cache. Otherwise, nothing will be displayed
+* improved: Optimized statistics query
+* added: New currencies, now we have 63 of them in tables. We added an option for displaying currency symbol in the price. Now you can hide, or show up to a numerical value, after or just show the currency code instead of the symbol
+* fixed: A bug with the popular destiantion widget
+* added: An exception to the scripts of our plugin from automatic Cloudflare and WP Fastest cache minifing
+* impoved: Removed old redirects, added support everywhere for migrating through https
+* added: railway schedule tables (Russian only)
+* fixed: A bunch of bugs
+
 
 = 0.6.3 = 
 Release Date: December 23rd, 2016

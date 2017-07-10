@@ -13,6 +13,14 @@ use \app\includes\models\site\TPAutocomplete;
 class TPAutocompleteReplace
 {
 
+	public static function replaceNumberRailway($number){
+		if(empty($number) || $number == false) return false;
+		TPAutocomplete::getInstance();
+		$name = '';
+		$name = TPAutocomplete::getRailwayAutocomplete($number);
+		return $name;
+	}
+
 
     public static function replaceIataCase($iata, $case = 'ro'){
         if(empty($iata) || $iata == false) return false;
@@ -190,6 +198,11 @@ class TPAutocompleteReplace
 
         return $title;
     }
+
+   /* public static function getCityById($id){
+       // TPAutocomplete::getInstance();
+        return TPAutocomplete::getLocationsById($id);
+    }*/
 
 
 }
