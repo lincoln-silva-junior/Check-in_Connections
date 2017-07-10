@@ -2,7 +2,7 @@ Theme Name: Lighthouse
 Author: lighthouseseo
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Version: 13.7
+Version: 13.8
 Tested up to: WordPress 4.7
 Tags: one-column, two-columns, left-sidebar, right-sidebar, flexible-header, custom-background, custom-colors, custom-header, custom-menu, custom-logo, featured-image-header, featured-images, footer-widgets, front-page-post-form, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, blog, education, entertainment, food-and-drink, news, photography, portfolio, holiday
 Text Domain: lighthouse
@@ -22,6 +22,7 @@ Lighthouse is based on Nisarg WordPress Theme, Copyright 2015-2016 Falguni Desai
 Nisarg is distributed under the terms of the GNU GPL: https://www.gnu.org/licenses/gpl-3.0.en.html
 
 Change log:
+- Updated: Lighthouse about page, added quick links
 - Updated: Rewrote some of the code to optimize load time
 - Updated: Fixed some minor customization bugs
 - Updated: Improved Theme Documentation

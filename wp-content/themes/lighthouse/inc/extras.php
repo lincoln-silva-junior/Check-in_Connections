@@ -71,15 +71,20 @@ function lighthouse_backend(){ ?>
 <div class="text-centering">
   <div class="backend-css customize-lighthouse">
     <h2><?php echo __( 'Welcome to Lighthouse', 'lighthouse' ); ?></p></h2>
-    <p><?php echo __( 'Get started and customize your awesome new blog theme', 'lighthouse' ); ?></p>
-    <a href="<?php echo admin_url('/customize.php'); ?>" target="_blank" class="backend_btn"><?php echo __('Customize Theme','lighthouse'); ?></a>
+    <p><?php echo __( 'If you have questions or need help with anything theme related please', 'lighthouse' ); ?><br> <a href="https://lighthouseseooptimization.github.io/wordpress/lighthouse/#contact" target="_blank"><?php echo __( 'Email us here', 'lighthouse' ); ?></a> or <?php echo __( 'write to us directly at: Beseenseo@gmail.com', 'lighthouse' ); ?></p>
   </div>
 </div>
 
-<h2 class="headline-second"><?php echo __( 'Got Questions or Need Help?', 'lighthouse' ); ?></h2>
+<h2 class="headline-second"><?php echo __( 'Quick Links', 'lighthouse' ); ?></h2>
 <div class="text-centering">
- <div class="backend-css customize-lighthouse">
-  <p><a href="https://lighthouseseooptimization.github.io/wordpress/lighthouse/#contact" target="_blank"><?php echo __( 'Email us here', 'lighthouse' ); ?></a> or <?php echo __( 'write to us directly at: Beseenseo@gmail.com <br><br><em>You can also read our F.A.Q further down on this page.</em>', 'lighthouse' ); ?></p>
+ <div class="backend-css">
+ <a class="wide-button-lighthouse" href="<?php echo admin_url('/customize.php'); ?>" target="_blank">Customize Theme Design</a><br>
+  <a class="wide-button-lighthouse" href="#demoanchor">Lighthouse F.A.Q</a><br>
+  <a class="wide-button-lighthouse" href="https://lighthouseseooptimization.github.io/wordpress/lighthouse/" target="_blank">Read About Lighthouse Pro</a><br>
+  <a class="wide-button-lighthouse" href="https://lighthouseseooptimization.github.io/wordpress/lighthouse/#newslettersection" target="_blank">Lighthouse Theme Newsletter</a><br>
+  <a class="wide-button-lighthouse" href="https://lighthouseseooptimization.github.io/wordpress/lighthouse/#contact" target="_blank">Contact Us</a>
+
+
 </div>
 </div>
 <div class="text-centering"><br><br>
@@ -88,7 +93,7 @@ function lighthouse_backend(){ ?>
   </a>
 </div>
 
-<h2 class="headline-second"><?php echo __( 'Frequently Asked Questions', 'lighthouse' ); ?></h2>
+<h2 class="headline-second" id="demoanchor"><?php echo __( 'Frequently Asked Questions', 'lighthouse' ); ?></h2>
 <br>
 <section class="ac-container">
 

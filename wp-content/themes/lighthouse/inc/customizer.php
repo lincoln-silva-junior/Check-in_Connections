@@ -53,6 +53,7 @@ function lighthouse_customize_register( $wp_customize ) {
 			<li>Improved Meta Tags</li>
 			<li>The Best SEO Plugins</li>
 			<li>Better SEO</li>
+			<li>Custom Header Height</li>
 			<li>Full Width Layout</li>
 			<li>Only Show Header Image on Front Page</li>
 			<li>Only Show Top Widgets On Front Page</li>
