@@ -271,6 +271,20 @@ function reservas_customize_register( $wp_customize ) {
 
 // Top Widget Section
 // Bottom Widget Section
+    $wp_customize->add_setting( 'inferior_background_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'inferior_background_color', array(
+		'label'       => __( 'Inferior Background Color', 'reservas' ),
+		'description' => __( 'Choose a background color for the inferior section.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'inferior_background_color',
+	) ) );
 
 	$wp_customize->add_setting( 'bottom_widget_background_color', array(
 		'default'           => '#fff',

@@ -198,6 +198,14 @@
 		} );
 	} );
 
+    wp.customize( 'inferior_background_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.inferior' ).css( {
+				'background':to
+			});
+		} );
+	} );
+
 
 			wp.customize( 'bottom_widget_background_color', function( value ) {
 		value.bind( function( to ) {
