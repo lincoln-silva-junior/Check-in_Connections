@@ -343,6 +343,20 @@ add_action( 'widgets_init', 'reservas_top_widget_right_init' );
 *
 **/
 
+function reservas_inferior_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Inferior', 'reservas'),
+		'id' => 'inferior',
+		'description'   => esc_html__( 'Widgets here will appear under the header image', 'reservas' ),
+		'before_widget' => '<div class="inferior">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_inferior_init' );
+
 function reservas_bottom_widget_left_init() {
 
 	register_sidebar( array(
