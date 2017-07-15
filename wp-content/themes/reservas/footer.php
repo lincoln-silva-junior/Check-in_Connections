@@ -10,7 +10,9 @@
 
 ?>
 
-
+    <div class="tituloHotel">
+            <img src="./img/divisor_preto.png" id="hoteis" alt=""><br><br><h3>Hotéis</h3>
+    </div>
 
     <div class="container"> 
     <div class="row">
@@ -24,6 +26,23 @@
            <?php dynamic_sidebar( 'bottom_widget_right' ); ?> 
         </div>
       </div>
+    </div>
+
+    <div class="tituloDicas">
+            <img src="./img/divisor_preto.png" id="dicas" alt=""><br><br><h3>Dicas</h3>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="inferior">
+                        <?php dynamic_sidebar( 'inferior' ); ?>
+                    <div style="width:100%">
+                        <?php echo do_shortcode('[smartslider3 slider=3]');?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
