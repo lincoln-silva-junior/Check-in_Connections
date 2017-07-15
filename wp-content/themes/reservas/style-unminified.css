@@ -146,17 +146,17 @@ thead {
 table,
 td,
 th {
-    border: 1px solid #ddd
+    border: 0px solid #ddd
 }
 
 td,
 th {
     padding: .7em;
-    text-align: left
+    text-align: center
 }
 
 tbody tr:nth-child(odd) {
-    background: #eee
+    background: #fff
 }
 
 button,
@@ -691,11 +691,11 @@ img.wp-post-image {
 .single-post-content {
     background-color: #fff;
     clear: both;
-    margin-bottom: 2em;
+    margin-bottom: 2em /*;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15)
+    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15)*/
 }
 
 .entry-content,
@@ -1681,6 +1681,58 @@ textarea:focus {
     background: #fff;
     width: 100%;
 }
+
+.superior{
+    font-size:16px;
+    text-align:center;
+    background:#000;
+    opacity:0.8;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:35px;
+    padding:0px;
+    box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    -moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    -o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    margin-top:-52px;
+    width:100%}
+
+.tituloHotel{
+    text-align:center;
+    background:#fff;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:35px;
+    padding:0px;
+    margin-top:0;
+    width:100%}
+
+.tituloDicas{
+    text-align:center;
+    background:#fff;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:35px;
+    padding:0px;
+    margin-top:0;
+    width:100%}
+
+.inferior{
+    font-size:16px;
+    text-align:center;
+    background:#fff;
+    opacity:1;
+    margin-left:0;
+    margin-right:0;
+    margin-bottom:35px;
+    padding:0px;
+    box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    -moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    -o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
+    margin-top:0px;
+    width:100%}
 
 .top-widgets {
     font-size: 16px;
