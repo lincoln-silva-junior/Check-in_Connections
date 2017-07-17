@@ -1091,15 +1091,8 @@ class Akismet {
 	}
 
 	public static function load_form_js() {
-		// WP < 3.3 can't enqueue a script this late in the game and still have it appear in the footer.
-		// Once we drop support for everything pre-3.3, this can change back to a single enqueue call.
 		wp_register_script( 'akismet-form', plugin_dir_url( __FILE__ ) . '_inc/form.js', array(), AKISMET_VERSION, true );
-		add_action( 'wp_footer', array( 'Akismet', 'print_form_js' ) );
-		add_action( 'admin_footer', array( 'Akismet', 'print_form_js' ) );
-	}
-	
-	public static function print_form_js() {
-		wp_print_scripts( 'akismet-form' );
+		wp_enqueue_script( 'akismet-form' );
 	}
 
 	public static function inject_ak_js( $fields ) {
@@ -1291,5 +1284,13 @@ p {
 		}
 
 		return $meta_value;
+	}
+
+	public static function predefined_api_key() {
+		if ( defined( 'WPCOM_API_KEY' ) ) {
+			return true;
+		}
+
+		return apply_filters( 'akismet_predefined_api_key', false );
 	}
 }
