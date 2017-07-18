@@ -14,6 +14,48 @@ Please go to readme.txt for information libraries, credits, changes, fork inform
 
 */
 
+@media (min-width:768px) {
+    .navbar-nav>li>ul.dropdown-menu {
+        padding: 0;
+        max-width: 200px;
+        left: auto;
+        right: 0;
+        border-radius: 3px
+    }
+    .navbar-nav>li>ul.dropdown-menu li a {
+        padding: 10px 20px;
+        font-weight: 600;
+        white-space: normal;
+        border-bottom: 1px solid rgba(0, 0, 0, .15)
+    }
+    .navbar-nav>li>ul.dropdown-menu li:last-of-type a {
+        border-bottom: 0 solid #fff
+    }
+    ul.dropdown-menu:after {
+        bottom: 100%;
+        right: 20%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #fff;
+        border-width: 10px;
+        margin-left: -10px
+    }
+}
+
+@media (max-width:768px) {
+    .navbar-default .navbar-collapse {
+        border-top: 1px solid rgba(255, 255, 255, .1)
+    }
+    .navbar-nav>li>ul.dropdown-menu li a {
+        white-space: normal
+    }
+}
+
 body,
 button,
 h1,
@@ -146,7 +188,7 @@ thead {
 table,
 td,
 th {
-    border: 0px solid #ddd
+    border: 0px/*1px solid #ddd*/
 }
 
 td,
@@ -511,12 +553,12 @@ img.wp-post-image {
 }
 
 .navbar-default {
-    background: #fff;
+    background: rgba(0, 0, 0, 0.75)/*#797979*/;
     box-shadow: 0 1px 1px rgba(100, 100, 0, .2)
 }
 
 .lh-nav-bg-transform {
-    background-color: rgba(255, 255, 255, 0.8) !important;
+    background-color: rgba(0, 0, 0, 0.75) !important;
     box-shadow: 0 1px 1px rgba(100, 100, 0, 0) !important
 }
 
@@ -525,7 +567,7 @@ img.wp-post-image {
 }
 
 .navbar-default .navbar-brand {
-    color: #333
+    color: #fff/*#333*/
 }
 
 .navbar-default .navbar-brand:focus,
@@ -535,7 +577,7 @@ img.wp-post-image {
 
 .navbar-default .navbar-nav>li>a,
 .navbar-default .navbar-text {
-    color: #333
+    color: #fff/*#333*/
 }
 
 .lh-nav-bg-transform.navbar-default .navbar-brand {
@@ -621,14 +663,16 @@ img.wp-post-image {
 }
 
 .site-header {
-    background: #1b1b1b;
+    /*background:#1b1b1b*/
+    background: transparent;
     position: relative;
     width: 100%;
-    margin-bottom: 3em;
+    margin-bottom: 3px/*3em*/
+    ;
     overflow: hidden;
-    min-height: 500px;
+    min-height: 400px;
     background-size: cover;
-    padding: 20px
+    padding: 0px/*20px*/
 }
 
 .site-header .site-branding {
@@ -691,11 +735,8 @@ img.wp-post-image {
 .single-post-content {
     background-color: #fff;
     clear: both;
-    margin-bottom: 2em /*;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15)*/
+    margin-bottom: 16px/*2em*/
+    /*;box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15)*/
 }
 
 .entry-content,
@@ -1446,13 +1487,13 @@ input.search-field {
         width: auto
     }
     .navbar-default {
-        background: #fff
+        background: rgba(0, 0, 0, 0.75)/*#fff*/
     }
     td,
     th {
         padding: .2em;
         text-align: left;
-        border: 1px solid #B6B6B6
+        border: 0px/*1px solid #B6B6B6*/
     }
     .navbar.lh-nav-bg-transform {
         font-size: 14px
@@ -1461,7 +1502,7 @@ input.search-field {
         width: 42px
     }
     .site-header {
-        min-height: 350px
+        min-height: 400px/*350px*/
     }
 }
 
@@ -1494,8 +1535,9 @@ input.search-field {
     .site-header {
         position: relative;
         width: 100%;
-        min-height: 300px;
-        margin-bottom: 2em
+        min-height: 400px/*300px*/
+        ;
+        margin-bottom: 3px/*2em*/
     }
     .site-title {
         font-size: 2.1em;
@@ -1527,8 +1569,9 @@ input.search-field {
     .site-header {
         position: relative;
         width: 100%;
-        min-height: 200px;
-        margin-bottom: 1.5em
+        min-height: 400px/*200px*/
+        ;
+        margin-bottom: 3px/*1.5em*/
     }
     .site-title {
         font-size: 2em;
@@ -1629,47 +1672,7 @@ input.search-field {
         color: #333
     }
 }
-@media (min-width:768px) {
-    .navbar-nav>li>ul.dropdown-menu {
-        padding: 0;
-        max-width: 200px;
-        left: auto;
-        right: 0;
-        border-radius: 3px
-    }
-    .navbar-nav>li>ul.dropdown-menu li a {
-        padding: 10px 20px;
-        font-weight: 600;
-        white-space: normal;
-        border-bottom: 1px solid rgba(0, 0, 0, .15)
-    }
-    .navbar-nav>li>ul.dropdown-menu li:last-of-type a {
-        border-bottom: 0 solid #fff
-    }
-    ul.dropdown-menu:after {
-        bottom: 100%;
-        right: 20%;
-        border: solid transparent;
-        content: " ";
-        height: 0;
-        width: 0;
-        position: absolute;
-        pointer-events: none;
-        border-color: rgba(255, 255, 255, 0);
-        border-bottom-color: #fff;
-        border-width: 10px;
-        margin-left: -10px
-    }
-}
 
-@media (max-width:768px) {
-    .navbar-default .navbar-collapse {
-        border-top: 1px solid rgba(255, 255, 255, .1)
-    }
-    .navbar-nav>li>ul.dropdown-menu li a {
-        white-space: normal
-    }
-}
 input[type=email],
 input[type=email]:focus,
 input[type=text],
@@ -1678,74 +1681,80 @@ textarea,
 textarea:focus {
     border: 1px solid #ddd;
     border-bottom: 2px solid #ddd;
-    background: #fff;
+    background: rgb(172, 118, 226, 0.3);
     width: 100%;
 }
 
-.superior{
-    font-size:16px;
-    text-align:center;
-    background:#000;
-    opacity:0.8;
-    margin-left:0;
-    margin-right:0;
-    margin-bottom:35px;
-    padding:0px;
-    box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    -moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    -webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    -o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    margin-top:-52px;
-    width:100%}
-
-.tituloHotel{
-    text-align:center;
-    background:#fff;
-    margin-left:0;
-    margin-right:0;
-    margin-bottom:35px;
-    padding:0px;
-    margin-top:0;
-    width:100%}
-
-.tituloDicas{
-    text-align:center;
-    background:#fff;
-    margin-left:0;
-    margin-right:0;
-    margin-bottom:35px;
-    padding:0px;
-    margin-top:0;
-    width:100%}
-
-.inferior{
-    font-size:16px;
-    text-align:center;
-    background:#fff;
-    opacity:1;
-    margin-left:0;
-    margin-right:0;
-    margin-bottom:35px;
-    padding:0px;
-    box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    -moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    -webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    -o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);
-    margin-top:0px;
-    width:100%}
-
-.top-widgets {
+.superior {
     font-size: 16px;
     text-align: center;
-    background: #fff;
+    background: #000;
+    opacity: 0.8;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: 35px;
-    padding: 30px;
+    padding: 0px;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-    margin-top: -20px
-	opacity:0.3;
+    position: relative;
+    top: 0px;
+    width: 100%
+}
+
+.tituloHotel {
+    text-align: center;
+    background: #fff;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 35px;
+    padding: 0px;
+    margin-top: 0px;
+    width: 100%
+}
+
+.tituloDicas {
+    text-align: center;
+    background: #fff;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 35px;
+    padding: 0px;
+    margin-top: 0px;
+    width: 100%
+}
+
+.inferior {
+    font-size: 16px;
+    text-align: center;
+    background: #fff;
+    opacity: 1;
+    margin-right: 0;
+    margin-bottom: 35px;
+    padding: 0px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    margin-top: 0px;
+    width: 100%;
+}
+
+.top-widgets {
+    font-size: 16px;
+    text-align: center;
+    background: ;
+    opacity: 0.8;
+    margin-bottom: 35px;
+    padding: 0px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    margin-top: -52px;
+    width: 100%
 }
 
 .top-widgets h3 {
@@ -1811,3 +1820,4 @@ form.post-password-form {
 section.no-results.not-found {
     margin-bottom: 50px;
 }
+
