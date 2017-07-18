@@ -17,7 +17,7 @@
 
 get_header(); ?>
 
-	<div class="container">
+	<div class="container-fluid">
             <div class="row">
                 <div id="primary" class="col-md-9 content-area">
 						<main id="main" class="site-main" role="main">
@@ -65,7 +65,7 @@ get_header(); ?>
 						</main><!-- #main -->
 				</div><!-- #primary -->
 
-				<?php get_sidebar('sidebar-1'); ?>
+                <?php get_sidebar('sidebar-1'); ?>
 			    </div><!--row-->      
 
 		</div><!--.container-->
