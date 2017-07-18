@@ -11,7 +11,7 @@
 ?>
 
     <div class="tituloHotel">
-            <img src="./img/divisor_preto.png" id="hoteis" alt=""><br><br><h3>Hotéis</h3>
+            <img src="./img/divisor_preto.png" id="hoteis" alt=""><br><br><img src="./img/Hoteis.png" alt="">
     </div>
 
     <div class="container"> 
@@ -29,7 +29,7 @@
     </div>
 
     <div class="tituloDicas">
-            <img src="./img/divisor_preto.png" id="dicas" alt=""><br><br><h3>Dicas</h3>
+            <img src="./img/divisor_preto.png" id="dicas" alt=""><br><br><img src="./img/Dicas.png" alt="">
     </div>
 
     <div class="container">
