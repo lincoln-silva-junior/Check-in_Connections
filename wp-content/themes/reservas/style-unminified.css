@@ -670,7 +670,7 @@ img.wp-post-image {
     margin-bottom: 3px/*3em*/
     ;
     overflow: hidden;
-    min-height: 400px;
+    min-height: 350px;
     background-size: cover;
     padding: 0px/*20px*/
 }
@@ -1502,7 +1502,7 @@ input.search-field {
         width: 42px
     }
     .site-header {
-        min-height: 400px/*350px*/
+        min-height: 350px
     }
 }
 
@@ -1535,7 +1535,7 @@ input.search-field {
     .site-header {
         position: relative;
         width: 100%;
-        min-height: 400px/*300px*/
+        min-height: 350px/*300px*/
         ;
         margin-bottom: 3px/*2em*/
     }
@@ -1569,7 +1569,7 @@ input.search-field {
     .site-header {
         position: relative;
         width: 100%;
-        min-height: 400px/*200px*/
+        min-height: 350px/*200px*/
         ;
         margin-bottom: 3px/*1.5em*/
     }
@@ -1690,6 +1690,27 @@ textarea:focus {
     text-align: center;
     background: #000;
     opacity: 0.8;
+    border: 0px solid #fab526;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
+    position: relative;
+    top: 0px;
+    width: 100%
+}
+.apresentacao {
+    font-size: 16px;
+    text-align: center;
+    background: #000;
+    opacity: 1;
+    max-height: 105px;
+    border: 0px solid #fab526;
     margin-top: 0;
     margin-left: 0;
     margin-right: 0;
@@ -1700,7 +1721,7 @@ textarea:focus {
     -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     -o-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
     position: relative;
-    top: 0px;
+    top: -25px;
     width: 100%
 }
 
