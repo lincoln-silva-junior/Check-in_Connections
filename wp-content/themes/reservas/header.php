@@ -65,7 +65,11 @@
 
 	  <div class="superior">
             <?php dynamic_sidebar( 'superior' ); ?>
-      </div> 
+      </div>
+
+      <div class="apresentacao">
+          <img src="./img/Check-in_Connections_Inline.png" alt="Check-in Connections">
+      </div>
 
       <div class="container"> 			
         <div class="row">
