@@ -11,7 +11,7 @@ class RPw extends Agp_Module {
      * 
      * @var type 
      */
-    private $version = '2.4.0';
+    private $version = '2.4.1';
     
     /**
      * Api Object

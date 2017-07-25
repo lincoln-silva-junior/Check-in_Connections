@@ -24,6 +24,7 @@ return array(
         'ca_CA' => 'Català (Catalunya)',
         'fa_IR' => 'فارسی',
         'el_GR' => 'Ελληνικά (Ελλάδα)',
+        'da_DK' => 'Dansk (Danmark)',
     ),   
     'wcp_weather_widget_templates' => array(
         'default' => 'Default',

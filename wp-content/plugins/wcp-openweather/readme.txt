@@ -2,7 +2,7 @@
 Contributors: webcodin
 Tags:  weather, forecast, current weather, forecast widget, local weather, openweathermap, shortcode, sidebar, weather forecasts, weather widget, widgets, options, user options, plugin skin, plugin theme, Weather API, conditions, current conditions, weather by city, city name, google autocomplete, autocomplete, location, units, temperature, wind speed, pressure, multilanguage, multi language, language
 Requires at least: 3.5.0
-Tested up to: 4.6
+Tested up to: 4.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: trunk
@@ -100,6 +100,7 @@ Available Languages:
 * Greek (Greece) - great thanks for Antreas;
 * Polish (Poland);
 * French (France);
+* Danish (Denmark) - great thanks for Kim;
 
 Multilanguage functionality has limitation based on [OpenWeatherMap API](http://openweathermap.org/forecast16#multi) languages support, i.e. city name has no translation for city name by default and description of weather conditions have translation only for languages form [OpenWeatherMap](http://openweathermap.org/forecast16#multi) API list.
 
@@ -214,6 +215,10 @@ You can find most popular users question to plugin support devided by groups fro
 13. Admin Panel :: Metro Theme Settings
 
 == Changelog ==
+= 2.4.1 =
+* Added translation to the Danish (Denmark) language
+* Compatibility up to WP 4.8
+
 = 2.4.0 =
 * Fixed issue with Google Map API
 * Added new parameter for required Google API Key in admin panel

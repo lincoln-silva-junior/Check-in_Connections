@@ -62,6 +62,7 @@ return array(
         'ca_CA' => 'Català (Catalunya)',
         'fa_IR' => 'فارسی',
         'el_GR' => 'Ελληνικά (Ελλάδα)',
+        'da_DK' => 'Dansk (Danmark)',
     ),
     'partial_languages' => array(
         //'xx_XX' => 75, 
