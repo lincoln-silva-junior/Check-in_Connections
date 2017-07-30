@@ -735,8 +735,8 @@ img.wp-post-image {
 .single-post-content {
     background-color: #fff;
     clear: both;
-    margin-bottom: 16px/*2em*/
-    /*;box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15)*/
+    margin-bottom: 2em;
+    box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-moz-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-webkit-box-shadow:0 1px 3px 0 rgba(0,0,0,.15);-o-box-shadow:0 1px 3px 0 rgba(0,0,0,.15)
 }
 
 .entry-content,
