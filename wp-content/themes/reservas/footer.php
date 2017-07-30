@@ -14,6 +14,25 @@
             <img src="./img/divisor_amarelo_classico_2.png" id="hoteis" alt=""><br><br><img src="./img/Hoteis.png" alt="">
     </div>
 
+     <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+			<?php dynamic_sidebar( 'top_widget_left' ); ?>
+          </div>
+          <div class="col-md-4">
+			<?php dynamic_sidebar( 'top_widget_middle' ); ?>
+		  </div>
+          <div class="col-md-4">
+			<?php dynamic_sidebar( 'top_widget_right' ); ?>
+          </div>
+
+		</div>
+	</div>
+
+    <div class="tituloServicos">
+            <img src="./img/divisor_amarelo_classico_2.png" id="servicos" alt=""><br><br><img src="./img/Servicos.png" alt="">
+    </div>
+
     <div class="container"> 
     <div class="row">
         <div class="col-md-4">

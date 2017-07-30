@@ -71,19 +71,19 @@
           <img src="./img/Check-in_Connections_Inline.png" alt="Check-in Connections">
       </div>
 
-      <div class="container"> 			
+      <!--div class="container">
         <div class="row">
-          <div class="col-md-4">
-			<?php dynamic_sidebar( 'top_widget_left' ); ?>
-          </div>
-          <div class="col-md-4">
-			<?php dynamic_sidebar( 'top_widget_middle' ); ?>
-		  </div>
-          <div class="col-md-4">
-			<?php dynamic_sidebar( 'top_widget_right' ); ?>
-          </div>
+          <div class="col-md-4"-->
+			<?php /*dynamic_sidebar( 'top_widget_left' );*/ ?>
+          <!--/div>
+          <div class="col-md-4"-->
+			<?php /*dynamic_sidebar( 'top_widget_middle' );*/ ?>
+		  <!--/div>
+          <div class="col-md-4"-->
+			<?php /*dynamic_sidebar( 'top_widget_right' ); */?>
+          <!--/div>
 
 		</div>
-	</div>
+	  </div-->
 
     <div id="content" class="site-content">
