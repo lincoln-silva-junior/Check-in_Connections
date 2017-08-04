@@ -74,6 +74,43 @@ a img.alignleft {
     float: left
 }
 
+.navbarcc-nav{
+    margin: 7.5px -15px;
+}
+
+@media (min-width:768px) {
+    .navbarcc-nav>li>ul.dropdown-menu {
+        padding: 0;
+        max-width: 200px;
+        left: auto;
+        right: 0;
+        border-radius: 3px
+    }
+    .navbarcc-nav>li>ul.dropdown-menu li a {
+        padding: 10px 20px;
+        font-weight: 600;
+        white-space: normal;
+        border-bottom: 1px solid rgba(0, 0, 0, .15)
+    }
+    .navbarcc-nav>li>ul.dropdown-menu li:last-of-type a {
+        border-bottom: 0 solid #fff
+    }
+    ul.dropdown-menu:after {
+        bottom: 100%;
+        right: 20%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #fff;
+        border-width: 10px;
+        margin-left: -10px
+    }
+}
+
 .navbarcc-nav,
 .tags-links {
     float: right
@@ -364,18 +401,9 @@ img.wp-post-image {
     clear: both;
 }
 
-.navbarcc-nav{
-    margin: 7.5px -15px;
-}
-
-.navbarcc-nav>li{
-    float:right;
-}
-
 .navbarcc-nav>li>a {
     padding-top: 25px;
     padding-bottom: 25px
-    display: block;
 }
 
 .navcc .open>a,
@@ -1027,9 +1055,9 @@ h5.entry-date a {
     color: #a2a2a2
 }
 
-.navbar-default .navbar-nav>.open>a,
-.navbar-default .navbar-nav>.open>a:focus,
-.navbar-default .navbar-nav>.open>a:hover {
+.navbarcc-default .navbarcc-nav>.open>a,
+.navbarcc-default .navbarcc-nav>.open>a:focus,
+.navbarcc-default .navbarcc-nav>.open>a:hover {
     background: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0)
 }
@@ -1236,7 +1264,7 @@ input.search-field {
     .navbarcc-default .navbarcc-collapse {
         border-top: 1px solid rgba(255, 255, 255, .1)
     }
-    .navbar-nav>li>ul.dropdown-menu li a {
+    .navbarcc-nav>li>ul.dropdown-menu li a {
         white-space: normal
     }
 }
@@ -1273,11 +1301,11 @@ input.search-field {
         float: left;
         margin: 0
     }
-    .navbar-nav>li>a {
+    .navbarcc-nav>li>a {
         padding-top: 10px;
         padding-bottom: 10px
     }
-    .navbar-nav {
+    .navbarcc-nav {
         float: none
     }
     .navbar-toggle {
@@ -1317,9 +1345,9 @@ input.search-field {
     .site-footer {
         font-size: 14px
     }
-    .navbar-default .navbar-nav>.active>a,
-    .navbar-default .navbar-nav>.active>a:focus,
-    .navbar-default .navbar-nav>.active>a:hover {
+    .navbarcc-default .navbarcc-nav>.active>a,
+    .navbarcc-default .navbarcc-nav>.active>a:focus,
+    .navbarcc-default .navbarcc-nav>.active>a:hover {
         border-top: none
     }
 }
