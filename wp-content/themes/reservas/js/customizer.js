@@ -123,7 +123,7 @@
 	} );
 		wp.customize( 'navigation_background_color', function( value ) {
 		value.bind( function( to ) {
-			$( '.navbar-default' ).css( {
+			$( '.navbarcc-default' ).css( {
 				'background-color':to
 			});
 		} );
@@ -131,7 +131,7 @@
 
 		wp.customize( 'navigation_text_color', function( value ) {
 		value.bind( function( to ) {
-			$( '.navbar-default .navbar-nav>li>a' ).css( {
+			$( '.navbarcc-default .navbarcc-nav>li>a' ).css( {
 				'color':to
 			});
 		} );
@@ -139,7 +139,7 @@
 
 		wp.customize( 'navigation_logo_color', function( value ) {
 		value.bind( function( to ) {
-			$( '.navbar-default .navbar-brand' ).css( {
+			$( '.navbarcc-default .navbarcc-brand' ).css( {
 				'color':to
 			});
 		} );

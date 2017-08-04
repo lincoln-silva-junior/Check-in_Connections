@@ -2,21 +2,21 @@
 ! function(a) {
 "use strict"; 
     a(window).scroll(function() {
-        a(this).scrollTop() > 1 ? a(".navbar").removeClass("lh-nav-bg-transform") : a(".navbar").addClass("lh-nav-bg-transform")
+        a(this).scrollTop() > 1 ? a(".navbarcc").removeClass("lh-nav-bg-transform") : a(".navbarcc").addClass("lh-nav-bg-transform")
     })
 }(jQuery);
 //Menu dropdown functionality
 ! function(a) {
     "use strict"; 
     a(window).scroll(function() {
-        a(this).scrollTop() > 1 ? a(".navbar").removeClass("lh-nav-bg-transform") : a(".navbar").addClass("lh-nav-bg-transform")
+        a(this).scrollTop() > 1 ? a(".navbarcc").removeClass("lh-nav-bg-transform") : a(".navbarcc").addClass("lh-nav-bg-transform")
     })
 }(jQuery),
 function(a) {
     "use strict"; 
-    a(".navbar-nav > li.menu-item > a").click(function() {
+    a(".navbarcc-nav > li.menu-item > a").click(function() {
         "_blank" != a(this).attr("target") && "dropdown-toggle" != a(this).attr("class") && (window.location = a(this).attr("href"))
-    }), a(".navbar-nav > li.menu-item > .dropdown-toggle").click(function() {
+    }), a(".navbarcc-nav > li.menu-item > .dropdown-toggle").click(function() {
         "_blank" == a(this).attr("target") ? window.open(this.href) : window.location = a(this).attr("href")
     }), a(".dropdown").hover(function() {
         a(this).addClass("open")
