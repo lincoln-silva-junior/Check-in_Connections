@@ -23,12 +23,12 @@
 <body <?php body_class(); ?>>
   <div id="page" class="hfeed site">
     <header id="masthead"  role="banner">
-      <nav class="navbarcc lh-nav-bg-transform navbarcc-default navbarcc-fixed-top" role="navigation">
+      <nav id="nav-principal" class="navbar lh-nav-bg-transform navbar-default navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display --> 
         <div class="container" id="navigation_menu">
-          <div class="navbarcc-header">
+          <div class="navbar-header">
             <?php if ( has_nav_menu( 'primary' ) ) { ?>
-            <button type="button" class="navbarcc-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
               <span class="sr-only"><?php echo esc_html('Toggle Navigation', 'reservas') ?></span> 
               <span class="icon-bar"></span> 
               <span class="icon-bar"></span> 
@@ -38,7 +38,7 @@
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
               <?php 
               if (!has_custom_logo()) { 
-                echo '<div class="navbarcc-brand">'; bloginfo('name'); echo '</div>';
+                echo '<div class="navbar-brand">'; bloginfo('name'); echo '</div>';
               } else {
                 the_custom_logo();
               } ?>
@@ -63,9 +63,11 @@
         </div><!--.site-header--> 
       </header> 
 
-	  <div class="superior">
-            <?php dynamic_sidebar( 'superior' ); ?>
-      </div>
+	  <?php if(is_page_template('page_home.php')){ ?>
+          <div class="superior">
+                <?php dynamic_sidebar( 'superior' ); ?>
+          </div>
+      <?php } ?>
 
       <div class="apresentacao">
           <img src="<?php echo (bloginfo("url") . "/img/Check-in_Connections_Inline.png")?>" alt="Check-in Connections">

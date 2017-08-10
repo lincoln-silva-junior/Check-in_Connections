@@ -695,9 +695,9 @@ function reservas_get_color_scheme_css( $colors ) {
 	.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {	    
 		background-color: {$colors['accent_color']};
 	}
-	.btn, .btn-default:visited, .btn-default:active:hover, .btn-default.active:hover, .btn-default:active:focus, .btn-default.active:focus, .btn-default:active.focus, .btn-default.active.focus {
+	/*.btn, .btn-default:visited, .btn-default:active:hover, .btn-default.active:hover, .btn-default:active:focus, .btn-default.active:focus, .btn-default:active.focus, .btn-default.active.focus {
 		background: {$colors['accent_color']};
-	}
+	}*/
 
 	.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 		color: {$colors['accent_color']};
@@ -781,14 +781,14 @@ blockquote {
 	color: {$colors['accent_color']};
 }
 
-.btn-default{
+/*.btn-default{
 	border-bottom: 1px solid {$colors['accent_color']};
-}
+}*/
 
-.btn-default:hover, .btn-default:focus{
+/*.btn-default:hover, .btn-default:focus{
 	border-bottom: 1px solid {$colors['accent_color']};
 	background-color: {$colors['accent_color']};
-}
+}*/
 
 .nav-previous:hover, .nav-next:hover{
 	border: 1px solid {$colors['accent_color']};

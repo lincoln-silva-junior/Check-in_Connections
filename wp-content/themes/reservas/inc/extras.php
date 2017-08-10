@@ -35,8 +35,8 @@ if ( ! function_exists( 'reservas_header_menu' ) ) :
       'theme_location'    => 'primary',
       'depth'             => 2,
       'container'         => 'div',
-      'container_class'   => 'collapse navbarcc-collapse navbar-ex1-collapse',
-      'menu_class'        => 'navcc navbarcc-nav',
+      'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
+      'menu_class'        => 'nav navbar-nav',
       'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
       'walker'            => new wp_bootstrap_navwalker()
       ));
