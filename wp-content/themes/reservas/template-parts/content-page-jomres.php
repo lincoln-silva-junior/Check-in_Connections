@@ -11,7 +11,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class('post-content-jomres'); ?>>
 
-	<?php reservas_featured_image_disaplay(); ?>
+    <?php reservas_featured_image_disaplay(); ?>
 
 	<header class="entry-header">
 		<span class="screen-reader-text"></span>
