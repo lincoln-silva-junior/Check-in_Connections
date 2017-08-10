@@ -418,3 +418,52 @@ add_action( 'admin_enqueue_scripts', 'reservas_load_custom_wp_admin_style' );
 
 
 add_action( 'customize_controls_print_styles', 'reservas_customizer_stylesheet' );
+
+/**
+*
+* Funções customizadas Check-in Connections
+*
+**/
+
+function verifica_usuario_logado() {
+    if (is_user_logged_in()){
+        /*return home_url('/bookings');*/
+        /*wp_redirect(home_url('/bookings'), 301);*/
+        $url= get_site_url() . "/bookings";
+        //echo $url;
+        //redirect_url($url);
+    }
+    else{
+        //echo "cheguei aqui!";
+        /*return home_url('/login');*/
+        /* wp_redirect(home_url('/login'), 301);*/
+        $url= get_site_url() . "/login";
+        //echo $url;
+        redirect_url($url);
+    }
+}
+
+function UrlAtual(){
+     $dominio= $_SERVER['HTTP_HOST'];
+     $url = "http://" . $dominio. $_SERVER['REQUEST_URI'];
+     echo $url;
+     //return $url;
+}
+
+function redirect_url($path)
+{
+  header("location:".$path);
+  exit;
+}
+
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+function add_loginout_link( $items, $args ) {
+    if (is_user_logged_in() && $args->theme_location == 'primary') {
+        $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
+    }
+    elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
+        $items .= '<li><a href="'. site_url('wp-login.php') .'">Área Membros</a></li>';
+    }
+    return $items;
+}
+
