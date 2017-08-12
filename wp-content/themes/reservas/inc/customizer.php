@@ -688,28 +688,32 @@ function reservas_get_color_scheme_css( $colors ) {
 		border-color:{$colors['accent_color']};
 	}
 
+    #nav-principal.navbar-default .navbar-nav>li>a:hover {
+        color: {$colors['accent_color']}  !important;
+    }
+
 	.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 		color: {$colors['accent_color']} !important;			
 	}
 
-	.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {	    
+	/*.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
 		background-color: {$colors['accent_color']};
-	}
+	}*/
 	/*.btn, .btn-default:visited, .btn-default:active:hover, .btn-default.active:hover, .btn-default:active:focus, .btn-default.active:focus, .btn-default:active.focus, .btn-default.active.focus {
 		background: {$colors['accent_color']};
 	}*/
 
-	.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	/*.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 		color: {$colors['accent_color']};
-	}
+	}*/
 	.cat-links a, .tags-links a {
 		color: {$colors['accent_color']};
 	}
-	.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+	/*.navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
 	.navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
 		color: #fff;
 		background-color: {$colors['accent_color']};
-	}
+	}*/
 	h5.entry-date a:hover {
 		color: {$colors['accent_color']};
 	}
@@ -718,8 +722,8 @@ function reservas_get_color_scheme_css( $colors ) {
 	background-color: {$colors['accent_color']};
 	background: {$colors['accent_color']};
 }
-.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
-	background-color: #fff;
+/*.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+	background-color: #fff;*/
 
 }
 .top-widgets h3:after {

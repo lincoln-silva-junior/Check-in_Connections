@@ -1,18 +1,18 @@
 @media (min-width:768px) {
-    #nav-principal.navbar-nav>li>ul.dropdown-menu {
+    #nav-principal .navbar-nav>li>ul.dropdown-menu {
         padding: 0;
         max-width: 200px;
         left: auto;
         right: 0;
         border-radius: 3px
     }
-    #nav-principal.navbar-nav>li>ul.dropdown-menu li a {
+    #nav-principal .navbar-nav>li>ul.dropdown-menu li a {
         padding: 10px 20px;
         font-weight: 600;
         white-space: normal;
         border-bottom: 1px solid rgba(0, 0, 0, .15)
     }
-    #nav-principal.navbar-nav>li>ul.dropdown-menu li:last-of-type a {
+    #nav-principal .navbar-nav>li>ul.dropdown-menu li:last-of-type a {
         border-bottom: 0 solid #fff
     }
     #nav-principal ul.dropdown-menu:after {
@@ -32,10 +32,10 @@
 }
 
 @media (max-width:768px) {
-    #nav-principal.navbar-default .navbar-collapse {
+    #nav-principal navbar-default .navbar-collapse {
         border-top: 1px solid rgba(255, 255, 255, .1)
     }
-    #nav-principal.navbar-nav>li>ul.dropdown-menu li a {
+    #nav-principal navbar-nav>li>ul.dropdown-menu li a {
         white-space: normal
     }
 }
@@ -365,8 +365,8 @@ a img.alignleft {
 }
 
 #nav-principal .navbar-nav,
-.tags-links {
-    float: right
+#nav-principal .tags-links {
+    float: right;
 }
 
 a img.aligncenter {
@@ -473,25 +473,25 @@ img.wp-post-image {
     margin: 0 auto 15px
 }
 
-#nav-principal.nav {
+#nav-principal .nav {
     display: block
 }
 
-#nav-principal.navbar-fixed-bottom,
-#nav-principal.navbar-fixed-top {
+#nav-principal .navbar-fixed-bottom,
+#nav-principal .navbar-fixed-top {
     position: fixed;
     top: 0;
     z-index: 1030
 }
 
 @media (min-width:768px) {
-    #nav-principal.navbar-fixed-bottom,
-    #nav-principal.navbar-fixed-top {
+    #nav-principal .navbar-fixed-bottom,
+    #nav-principal .navbar-fixed-top {
         border-radius: 0
     }
 }
 
-#nav-principal.navbar-fixed-top {
+#nav-principal .navbar-fixed-top {
     top: 0;
     border-width: 0 0 1px
 }
@@ -524,14 +524,14 @@ img.wp-post-image {
     text-transform: uppercase
 }
 
-#nav-principal.navbar-nav>li>a {
+#nav-principal .navbar-nav>li>a {
     padding-top: 25px;
-    padding-bottom: 25px
+    padding-bottom: 25px;
 }
 
-#nav-principal.nav .open>a,
-#nav-principal.nav .open>a:focus,
-#nav-principal.nav .open>a:hover {
+#nav-principal .nav .open>a,
+#nav-principal .nav .open>a:focus,
+#nav-principal .nav .open>a:hover {
     background-color: #fff;
     border-color: #fff
 }
@@ -550,12 +550,13 @@ img.wp-post-image {
     font-size: 16px
 }
 
-#nav-principal.navbar-default .navbar-brand {
+#nav-principal .navbar-default .navbar-brand {
     color: #fff/*#333*/
 }
 
-#nav-principal.navbar-default .navbar-brand:focus,
-#nav-principal.navbar-default .navbar-brand:hover {
+#nav-principal .navbar-default .navbar-brand:focus,
+#nav-principal .navbar-default .navbar-brand:hover
+{
     color: #000
 }
 
@@ -564,12 +565,12 @@ img.wp-post-image {
     color: #fff/*#333*/
 }
 
-#nav-principal.lh-nav-bg-transform.navbar-default .navbar-brand {
-    color: #fff !important
+#nav-principal.lh-nav-bg-transform .navbar-default .navbar-brand {
+    color: #fff ;
 }
 
 #nav-principal.lh-nav-bg-transform .navbar-nav>li>a {
-    color: #fff !important;
+    color: #fff ;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .4)
 }
 
@@ -589,16 +590,16 @@ img.wp-post-image {
     background-color: rgba(231, 231, 231, 0)
 }
 
-#nav-principal.navbar-default .navbar-toggle .icon-bar {
+#nav-principal .navbar-default .navbar-toggle .icon-bar {
     background-color: #333
 }
 
-#nav-principal.navbar-default .navbar-toggle:focus .icon-bar,
-#nav-principal.navbar-default .navbar-toggle:hover .icon-bar {
+#nav-principal .navbar-default .navbar-toggle:focus .icon-bar,
+#nav-principal .navbar-default .navbar-toggle:hover .icon-bar {
     background-color: #fff
 }
 
-#nav-principal.navbar-default .navbar-link {
+#nav-principal .navbar-default .navbar-link {
     color: #333
 }
 
@@ -615,21 +616,21 @@ img.wp-post-image {
 }
 
 @media (max-width:767px) {
-    #nav-principal.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    #nav-principal .navbar-default .navbar-nav .open .dropdown-menu>li>a {
         color: #333
     }
-    #nav-principal.lh-nav-bg-transform button.navbar-toggle {
+    #nav-principal .lh-nav-bg-transform button.navbar-toggle {
         background: #fff
     }
-    #nav-principal.lh-nav-bg-transform .navbar-nav .open .dropdown-menu>li>a {
+    #nav-principal .lh-nav-bg-transform .navbar-nav .open .dropdown-menu>li>a {
         color: #fff!important
     }
-    #nav-principal.lh-nav-bg-transform {
+    #nav-principal .lh-nav-bg-transform {
         background-color: rgba(0, 0, 0, .9)!important;
         box-shadow: 0 1px 1px rgba(100, 100, 0, 0)!important
     }
-    #nav-principal.navbar-fixed-bottom .navbar-collapse,
-    #nav-principal.navbar-fixed-top .navbar-collapse {
+    #nav-principal .navbar-fixed-bottom .navbar-collapse,
+    #nav-principal .navbar-fixed-top .navbar-collapse {
         max-height: 600px
     }
 }
@@ -942,7 +943,7 @@ h5.entry-date a {
     margin-bottom: 2em
 }
 
-#nav-principal.nav-links .fa {
+#nav-principal .nav-links .fa {
     color: #727272
 }
 
@@ -1428,11 +1429,11 @@ input.search-field {
         -ms-word-break: break-all;
         word-break: break-all
     }
-    #nav-principal.lh-nav-bg-transform .navbar-nav>li>a {
+    #nav-principal .lh-nav-bg-transform .navbar-nav>li>a {
         color: #333;
         text-shadow: 1px 1px 2px transparent
     }
-    #nav-principal.lh-nav-bg-transform.navbar-default .navbar-brand {
+    #nav-principal .lh-nav-bg-transform.navbar-default .navbar-brand {
         color: #333
     }
     .sticky-post {
@@ -1489,7 +1490,7 @@ input.search-field {
         border: 0px/*1px solid #B6B6B6*/
     }
     #nav-principal.navbar.lh-nav-bg-transform {
-        font-size: 14px
+        font-size: 14px !important;
     }
     .footer-widgets button.search-submit {
         width: 42px
@@ -1507,14 +1508,14 @@ input.search-field {
         float: left;
         margin: 0
     }
-    #nav-principal.navbar-nav>li>a {
+    #nav-principal .navbar-nav>li>a {
         padding-top: 10px;
         padding-bottom: 10px
     }
-    #nav-principal.navbar-nav {
+    #nav-principal .navbar-nav {
         float: none
     }
-    #nav-principal.navbar-toggle {
+    #nav-principal .navbar-toggle {
         margin-top: 18px
     }
     body {
@@ -1614,7 +1615,7 @@ input.search-field {
     .entry-meta .edit-link,
     .main-navigation,
     .more-link,
-    #nav-principal .navbar,
+    #nav-principal.navbar,
     .page-links,
     .site-content nav,
     .site-footer,

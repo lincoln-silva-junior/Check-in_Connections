@@ -2305,6 +2305,8 @@ a.btn.disabled, fieldset[disabled] a.btn {
     color: #fff;
     background-color: #5bc0de;
     border-color: #46b8da;
+    white-space: normal !important;
+    word-wrap: break-word;
 }
 .btn-info:focus, .btn-info.focus {
     color: #fff;
