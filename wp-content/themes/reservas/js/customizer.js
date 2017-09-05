@@ -100,6 +100,13 @@
 			});
 		} );
 	} );
+        wp.customize( 'sidebar_headline_back_color', function( value ) {
+		value.bind( function( to ) {
+			$( '#secondary h3.widget-title, #secondary h4.widget-title' ).css( {
+				'background-color':to
+			});
+		} );
+	} );
 		wp.customize( 'sidebar_background_color', function( value ) {
 		value.bind( function( to ) {
 			$( '#secondary .widget' ).css( {
@@ -175,7 +182,63 @@
 		} );
 	} );
 
-			wp.customize( 'top_widget_background_color', function( value ) {
+    wp.customize( 'nav_bar_background_color', function( value ) {
+		value.bind( function( to ) {
+			$( '#nav-principal.navbar-default' ).css( {
+				'background':to
+			});
+		} );
+        value.bind( function( to ) {
+			$( '#nav-principal.lh-nav-bg-transform' ).css( {
+				'background':to
+			});
+		} );
+	} );
+
+     wp.customize( 'nav_bar_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '#nav-principal.navbar-default .navbar-nav>li>a' ).css( {
+				'color':to
+			});
+		} );
+        value.bind( function( to ) {
+			$( '#nav-principal.navbar-default .navbar-text' ).css( {
+				'color':to
+			});
+		} );
+        value.bind( function( to ) {
+			$( '#nav-principal.lh-nav-bg-transform .navbar-nav>li>a' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+
+     wp.customize( 'titulos_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.titulo' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+     wp.customize( 'mensagemPrincipal_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.mensagemPrincipal' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+     wp.customize( 'textoPrincipal_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.textoPrincipal' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+    wp.customize( 'top_widget_background_color', function( value ) {
 		value.bind( function( to ) {
 			$( '.top-widgets' ).css( {
 				'background':to
@@ -193,6 +256,78 @@
 			wp.customize( 'top_widget_text_color', function( value ) {
 		value.bind( function( to ) {
 			$( '.top-widgets, .top-widgets p' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+    wp.customize( 'membros_background_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.membros' ).css( {
+				'background':to
+			});
+		} );
+	} );
+
+    wp.customize( 'membros_title_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.membros h3' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+    wp.customize( 'membros_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.membros, .membros p' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+     wp.customize( 'ofertas_background_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.ofertas' ).css( {
+				'background':to
+			});
+		} );
+	} );
+
+    wp.customize( 'ofertas_title_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.ofertas h3' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+    wp.customize( 'ofertas_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.ofertas, .ofertas p' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+    wp.customize( 'servicos_background_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.servicos' ).css( {
+				'background':to
+			});
+		} );
+	} );
+
+    wp.customize( 'servicos_title_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.servicos h3' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+    wp.customize( 'servicos_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.servicos, .servicos p' ).css( {
 				'color':to
 			});
 		} );

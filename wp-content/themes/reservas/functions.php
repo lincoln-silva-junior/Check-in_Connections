@@ -193,7 +193,7 @@ function reservas_new_excerpt_more( $more ) {
 		return $more;
 	}
 
-		$link = sprintf( '<p class="read-more"><a class="btn btn-default" href="'. esc_url(get_permalink( get_the_ID() )) . '' . '">' . __(' Read More', 'reservas') . '<span class="screen-reader-text"> '. __(' Read More', 'reservas').'</span></a></p>',
+		$link = sprintf( '<p class="read-more"><a class="btn btn-default" href="'. esc_url(get_permalink( get_the_ID() )) . '' . '">' . __(' Leia Mais', 'reservas') . '<span class="screen-reader-text"> '. __(' Leia Mais', 'reservas').'</span></a></p>',
 		esc_url( get_permalink( get_the_ID() ) )
 	);
 	return ' &hellip; ' . $link;
@@ -289,6 +289,105 @@ function reservas_superior_init() {
 		) );
 }
 add_action( 'widgets_init', 'reservas_superior_init' );
+
+function reservas_ofertas_widget_left_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Ofertas Widget left', 'reservas'),
+		'id' => 'ofertas_widget_left',
+		'before_widget' => '<div class="ofertas">',
+		'description'   => esc_html__( 'Widgets here will appear inside oferta´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_ofertas_widget_left_init' );
+
+function reservas_ofertas_widget_middle_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Ofertas Widget middle', 'reservas'),
+		'id' => 'ofertas_widget_middle',
+		'before_widget' => '<div class="ofertas">',
+		'description'   => esc_html__( 'Widgets here will appear inside oferta´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_ofertas_widget_middle_init' );
+
+function reservas_ofertas_widget_right_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Ofertas Widget right', 'reservas'),
+		'id' => 'ofertas_widget_right',
+		'before_widget' => '<div class="ofertas">',
+		'description'   => esc_html__( 'Widgets here will appear inside oferta´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_ofertas_widget_right_init' );
+
+function reservas_membros_widget_left_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Membros Widget left', 'reservas'),
+		'id' => 'membros_widget_left',
+		'before_widget' => '<div class="membros">',
+		'description'   => esc_html__( 'Widgets here will appear inside member´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_membros_widget_left_init' );
+
+function reservas_membros_widget_right_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Membros Widget right', 'reservas'),
+		'id' => 'membros_widget_right',
+		'before_widget' => '<div class="membros">',
+		'description'   => esc_html__( 'Widgets here will appear inside member´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_membros_widget_right_init' );
+
+function reservas_servicos_widget_left_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Servicos Widget left', 'reservas'),
+		'id' => 'servicos_widget_left',
+		'before_widget' => '<div class="servicos">',
+		'description'   => esc_html__( 'Widgets here will appear inside servicos´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_servicos_widget_left_init' );
+
+function reservas_servicos_widget_right_init() {
+
+	register_sidebar( array(
+		'name' => esc_html__('Servicos Widget right', 'reservas'),
+		'id' => 'servicos_widget_right',
+		'before_widget' => '<div class="servicos">',
+		'description'   => esc_html__( 'Widgets here will appear inside servicos´s area', 'reservas' ),
+		'after_widget' => '</div>',
+		'before_title' => '<h3>',
+		'after_title' => '</h3>',
+		) );
+}
+add_action( 'widgets_init', 'reservas_servicos_widget_right_init' );
+
 
 function reservas_top_widget_left_init() {
 
@@ -456,14 +555,31 @@ function redirect_url($path)
   exit;
 }
 
-add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+
+function exibe_opcoes_navbar( $items, $args ) {
+    if (is_page_template('page_home.php') && $args->theme_location == 'primary') {
+        return $items;
+    }
+    else {
+        $items = '<li><a href="'. site_url('index.php') .'">Home</a></li>';
+        return $items;
+    }
+
+}
+add_filter( 'wp_nav_menu_items', 'exibe_opcoes_navbar', 10, 2 );
+
+
 function add_loginout_link( $items, $args ) {
+    //echo $items;
     if (is_user_logged_in() && $args->theme_location == 'primary') {
-        $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
+        $items .= '<li><a href="'. wp_logout_url() .'">Sair</a></li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
-        $items .= '<li><a href="'. site_url('wp-login.php') .'">Área Membros</a></li>';
+        $items .= '<li><a href="'. site_url('wp-login.php') .'">Administração</a></li>';
     }
     return $items;
 }
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+
+
 

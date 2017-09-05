@@ -32,7 +32,7 @@ get_header(); ?>
 				</div>			
 
 				<div class="post-navigation">				
-					<?php reservas_post_navigation(); ?>
+					<?php /*reservas_post_navigation();*/ ?>
 				</div>
 
 				<?php endwhile; // End of the loop. ?>

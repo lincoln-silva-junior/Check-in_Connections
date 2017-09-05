@@ -171,7 +171,7 @@ function reservas_entry_footer() {
 			}
 		}
 
-		edit_post_link( esc_html__( 'Edit This Post', 'reservas' ), '<br><span>', '</span>' );
+		edit_post_link( esc_html__( 'Edite este post', 'reservas' ), '<br><span>', '</span>' );
 		
 	}
 	endif;

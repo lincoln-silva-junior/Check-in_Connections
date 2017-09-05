@@ -13,6 +13,9 @@ Please go to readme.txt for information libraries, credits, changes, fork inform
 
 */
 
+/* TODO Colocar o mesmo Height nos divs superiores. */
+
+
 html {
     font-family: sans-serif;
     -webkit-text-size-adjust: 100%;
@@ -770,7 +773,8 @@ html {
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
-    line-height: 1.42857143;
+    /*line-height: 1.42857143;*/
+    line-height: 1.75;
     color: #333;
     background-color: #fff;
 }

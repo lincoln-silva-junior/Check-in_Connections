@@ -9,7 +9,7 @@
 ?>
 
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('post-content'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('post-content-home'); ?>>
 
 	<?php reservas_featured_image_disaplay(); ?>
 

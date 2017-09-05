@@ -191,6 +191,35 @@ function reservas_customize_register( $wp_customize ) {
 
 
 // Post and page Section end
+    $wp_customize->add_setting( 'nav_bar_background_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'nav_bar_background_color', array(
+		'label'       => __( 'Barra Navegação Background Color', 'reservas' ),
+		'description' => __( 'Escolha a cor de background para a barra de navegação.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'nav_bar_background_color',
+	) ) );
+
+    $wp_customize->add_setting( 'nav_bar_text_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'nav_bar_text_color', array(
+		'label'       => __( 'Barra Navegação Text Color', 'reservas' ),
+		'description' => __( 'Escolha a cor do texto da barra de navegação.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'nav_bar_text_color',
+	) ) );
 
 	$wp_customize->add_setting( 'superior_background_color', array(
 		'default'           => '#fff',
@@ -205,6 +234,52 @@ function reservas_customize_register( $wp_customize ) {
 		'section'     => 'colors',
 		'priority'     => '99',
 		'settings'    => 'superior_background_color',
+	) ) );
+
+
+     $wp_customize->add_setting( 'titulos_text_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'titulos_text_color', array(
+		'label'       => __( 'Títulos Text Color', 'reservas' ),
+		'description' => __( 'Choose a text color for the titulo section.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'titulos_text_color',
+	) ) );
+
+     $wp_customize->add_setting( 'mensagemPrincipal_text_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'mensagemPrincipal_text_color', array(
+		'label'       => __( 'Mensagem Principal Text Color', 'reservas' ),
+		'description' => __( 'Escolha a cor do Texto da Mensagem Principal.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'mensagemPrincipal_text_color',
+	) ) );
+
+     $wp_customize->add_setting( 'textoPrincipal_text_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'textoPrincipal_text_color', array(
+		'label'       => __( 'Texto Principal Text Color', 'reservas' ),
+		'description' => __( 'Escolha a cor do Texto da Seção Principal do site.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'textoPrincipal_text_color',
 	) ) );
 
 	$wp_customize->add_setting( 'top_widget_background_color', array(
@@ -252,6 +327,143 @@ function reservas_customize_register( $wp_customize ) {
 		'priority'     => '99',
 		'settings'    => 'top_widget_text_color',
 	) ) );	
+
+    $wp_customize->add_setting( 'membros_background_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'membros_background_color', array(
+		'label'       => __( 'Membros Background Color', 'reservas' ),
+		'description' => __( 'Choose a background color for the two membros widgets.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'membros_background_color',
+	) ) );
+
+	$wp_customize->add_setting( 'membros_title_color', array(
+		'default'           => '#212121',
+		'priority'     => '99',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'membros_title_color', array(
+		'label'       => __( 'Membros Title Color', 'reservas' ),
+		'description' => __( 'Choose a color for the two membros widgets titles.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'membros_title_color',
+	) ) );
+
+	$wp_customize->add_setting( 'membros_text_color', array(
+		'default'           => '#424242',
+		'priority'     => '99',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'membros_text_color', array(
+		'label'       => __( 'Membros Text Color', 'reservas' ),
+		'description' => __( 'Choose a color for the two membros top widgets text.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'membros_text_color',
+	) ) );
+
+       $wp_customize->add_setting( 'ofertas_background_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ofertas_background_color', array(
+		'label'       => __( 'Ofertas Background Color', 'reservas' ),
+		'description' => __( 'Choose a background color for the three ofertas widgets.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'ofertas_background_color',
+	) ) );
+
+	$wp_customize->add_setting( 'ofertas_title_color', array(
+		'default'           => '#212121',
+		'priority'     => '99',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ofertas_title_color', array(
+		'label'       => __( 'Ofertas Title Color', 'reservas' ),
+		'description' => __( 'Choose a color for the three ofertas widgets titles.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'ofertas_title_color',
+	) ) );
+
+
+	$wp_customize->add_setting( 'ofertas_text_color', array(
+		'default'           => '#424242',
+		'priority'     => '99',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'ofertas_text_color', array(
+		'label'       => __( 'Ofertas Text Color', 'reservas' ),
+		'description' => __( 'Choose a color for the three ofertas widgets text.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'ofertas_text_color',
+	) ) );
+
+    $wp_customize->add_setting( 'servicos_background_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'servicos_background_color', array(
+		'label'       => __( 'Serviços Background Color', 'reservas' ),
+		'description' => __( 'Choose a background color for the two servicos widgets.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'servicos_background_color',
+	) ) );
+
+	$wp_customize->add_setting( 'servicos_title_color', array(
+		'default'           => '#212121',
+		'priority'     => '99',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'servicos_title_color', array(
+		'label'       => __( 'Serviços Title Color', 'reservas' ),
+		'description' => __( 'Choose a color for the two servicos widgets titles.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'servicos_title_color',
+	) ) );
+
+
+	$wp_customize->add_setting( 'servicos_text_color', array(
+		'default'           => '#424242',
+		'priority'     => '99',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'servicos_text_color', array(
+		'label'       => __( 'Serviços Text Color', 'reservas' ),
+		'description' => __( 'Choose a color for the two servicos top widgets text.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'servicos_text_color',
+	) ) );
 
 	$wp_customize->add_setting( 'header_color_text_colorino', array(
 		'default'           => '#fff',
@@ -370,6 +582,19 @@ function reservas_customize_register( $wp_customize ) {
 		'settings'    => 'sidebar_headline_colors',
 	) ) );
 
+    $wp_customize->add_setting( 'sidebar_headline_back_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'sidebar_headline_back_color', array(
+		'label'       => __( 'Sidebar Headline Background Color', 'reservas' ),
+		'description' => __( 'Choose the background color of the sidebar titles and headlines', 'reservas' ),
+		'section'     => 'colors',
+		'settings'    => 'sidebar_headline_back_color',
+	) ) );
+
 	$wp_customize->add_setting( 'sidebar_background_color', array(
 		'default'           => '#fff',
 		'sanitize_callback' => 'sanitize_hex_color',
@@ -386,6 +611,12 @@ function reservas_customize_register( $wp_customize ) {
 
 	$wp_customize->add_setting( 'sidebar_headline_colors', array(
 		'default'           => '#212121',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'transport'         => 'postMessage',
+		) );
+
+    $wp_customize->add_setting( 'sidebar_headline_back_color', array(
+		'default'           => '#fff',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'transport'         => 'postMessage',
 		) );
@@ -735,7 +966,7 @@ function reservas_get_color_scheme_css( $colors ) {
 	margin: 0 auto;
 	margin-top: 10px;
 }
-.bottom-widgets h3:after {
+.bottom-widgets h3:after, .membros h3:after,  .servicos h3:after, .ofertas h3:after{
 	display: block;
 	max-width: 60px;
 	background:  {$colors['accent_color']};
@@ -744,6 +975,17 @@ function reservas_get_color_scheme_css( $colors ) {
 	margin: 0 auto;
 	margin-top: 10px;
 }
+
+.titulo:after{
+    display: block;
+    max-width: 60px;
+    background: {$colors['accent_color']};
+    height: 3px;
+    content: ' ';
+    margin: 0 auto;
+    margin-top: -15px;
+}
+
 button:hover, button, button:active, button:focus {
 	border: 1px solid {$colors['accent_color']};
 	background-color:{$colors['accent_color']};
@@ -781,9 +1023,9 @@ blockquote {
 
 }
 
-.fa {
+/*.fa {
 	color: {$colors['accent_color']};
-}
+}*/
 
 /*.btn-default{
 	border-bottom: 1px solid {$colors['accent_color']};
@@ -848,7 +1090,7 @@ function reservas_header_bg_color_css(){
 	.site-footer { background: <?php echo esc_attr(get_theme_mod( 'footer_copyright_background_color')); ?>; }
 	.footer-widget-wrapper { background: <?php echo esc_attr(get_theme_mod( 'footer_colors')); ?>; }
 	.row.site-info { color: <?php echo esc_attr(get_theme_mod( 'footer_copyright_text_color')); ?>; }
-	#secondary h3.widget-title, #secondary h4.widget-title { color: <?php echo esc_attr(get_theme_mod( 'sidebar_headline_colors')); ?>; }
+	#secondary h3.widget-title, #secondary h4.widget-title { color: <?php echo esc_attr(get_theme_mod( 'sidebar_headline_colors')); ?>; background-color: <?php echo esc_attr(get_theme_mod( 'sidebar_headline_back_color')); ?>; }
 	#secondary .widget { background: <?php echo esc_attr(get_theme_mod( 'sidebar_background_color')); ?>; }
 	#secondary .widget a { color: <?php echo esc_attr(get_theme_mod( 'sidebar_link_color')); ?>; }
 	#secondary .widget li { border-color: <?php echo esc_attr(get_theme_mod( 'sidebar_link_border_color')); ?>; }
@@ -862,10 +1104,29 @@ function reservas_header_bg_color_css(){
 	h1.entry-title, .entry-header .entry-title a { color: <?php echo esc_attr(get_theme_mod( 'headline_color')); ?>; }
 	.entry-content, .entry-summary { color: <?php echo esc_attr(get_theme_mod( 'post_content_color')); ?>; }
 	h5.entry-date, h5.entry-date a { color: <?php echo esc_attr(get_theme_mod( 'author_line_color')); ?>; }
+    #nav-principal.navbar-default { background: <?php echo esc_attr(get_theme_mod( 'nav_bar_background_color')); ?>; }
+    #nav-principal.lh-nav-bg-transform { background: <?php echo esc_attr(get_theme_mod( 'nav_bar_background_color')); ?>; }
+    #nav-principal.navbar-default .navbar-nav>li>a { color: <?php echo esc_attr(get_theme_mod( 'nav_bar_text_color')); ?>; }
+    #nav-principal.navbar-default .navbar-text { color: <?php echo esc_attr(get_theme_mod( 'nav_bar_text_color')); ?>; }
+    #nav-principal.lh-nav-bg-transform .navbar-nav>li>a { color: <?php echo esc_attr(get_theme_mod( 'nav_bar_text_color')); ?>; }
 	.superior { background: <?php echo esc_attr(get_theme_mod( 'superior_background_color')); ?>; }
+    .titulo { color: <?php echo esc_attr(get_theme_mod( 'titulos_text_color')); ?>; }
+    .mensagemPrincipal { color: <?php echo esc_attr(get_theme_mod( 'mensagemPrincipal_text_color')); ?>; }
+    .textoPrincipal { color: <?php echo esc_attr(get_theme_mod( 'textoPrincipal_text_color')); ?>; }
 	.top-widgets { background: <?php echo esc_attr(get_theme_mod( 'top_widget_background_color')); ?>; }
 	.top-widgets h3 { color: <?php echo esc_attr(get_theme_mod( 'top_widget_title_color')); ?>; }
 	.top-widgets, .top-widgets p { color: <?php echo esc_attr(get_theme_mod( 'top_widget_text_color')); ?>; }
+    .membros { background: <?php echo esc_attr(get_theme_mod( 'membros_background_color')); ?>; }
+	.membros h3 { color: <?php echo esc_attr(get_theme_mod( 'membros_title_color')); ?>;}
+	.membros, .membros p { color: <?php echo esc_attr(get_theme_mod( 'membros_text_color')); ?>; }
+    .ofertas { background: <?php echo esc_attr(get_theme_mod( 'ofertas_background_color')); ?>; }
+	.ofertas h3 { color: <?php echo esc_attr(get_theme_mod( 'ofertas_title_color')); ?>; }
+	.ofertas, .ofertas p { color: <?php echo esc_attr(get_theme_mod( 'ofertas_text_color')); ?>; }
+    .servicos { background: <?php echo esc_attr(get_theme_mod( 'servicos_background_color')); ?>; }
+	.servicos h3 { color: <?php echo esc_attr(get_theme_mod( 'servicos_title_color')); ?>; }
+	.servicos, .servicos p { color: <?php echo esc_attr(get_theme_mod( 'servicos_text_color')); ?>; }
+	.bottom-widgets { background: <?php echo esc_attr(get_theme_mod( 'bottom_widget_background_color')); ?>; }
+	.bottom-widgets h3 { color: <?php echo esc_attr(get_theme_mod( 'bottom_widget_title_color')); ?>; }
 	.bottom-widgets { background: <?php echo esc_attr(get_theme_mod( 'bottom_widget_background_color')); ?>; }
 	.bottom-widgets h3 { color: <?php echo esc_attr(get_theme_mod( 'bottom_widget_title_color')); ?>; }
 	.bottom-widgets, .bottom-widgets p { color: <?php echo esc_attr(get_theme_mod( 'bottom_widget_text_color')); ?>; }

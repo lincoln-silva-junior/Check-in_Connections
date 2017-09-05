@@ -9,6 +9,12 @@
  */
 
 ?>
+<!-- TODO: [x]Eliminar as opções referentes à página inicial da página Jomres. -->
+<!-- TODO: [x]Adcionar ao menu a opção área de membros. -->
+<!-- TODO: [x]Criar a imagem do label Área de Membros. -->
+<!-- TODO: Criar nova área na tela principal. -->
+<!-- TODO: Mover o formulário de cadastro de e-mail para nova área. -->
+<!-- TODO: Colocar um botão no slideshow dicas apontandando para o link da página do post. -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes(); ?>>
 <head>
@@ -19,6 +25,7 @@
 
   <?php wp_head(); ?>
 </head>
+
 
 <body <?php body_class(); ?>>
   <div id="page" class="hfeed site">
@@ -43,7 +50,8 @@
                 the_custom_logo();
               } ?>
             </a>
-          </div> 
+          </div>
+
           <?php if ( has_nav_menu( 'primary' ) ) {
               reservas_header_menu(); // main navigation 
             }
