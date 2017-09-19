@@ -38,6 +38,197 @@ function reservas_customize_register( $wp_customize ) {
 		'settings'    => 'header_bg_color',
 		) ) );
 
+     $wp_customize->add_section(
+		'config_new',
+		array(
+			'title' => __('Configurações', 'reservas'),
+			'priority' => 992,
+			'description' => __('Configure nesta seção propriedades básicas do tema.
+            ')
+		));
+
+    $wp_customize->add_setting( 'txtApresentacao', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtApres_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'config_new', // // Add a default or your own section
+      'label' => __( 'Texto Apresentação:' ),
+      'description' => __( 'Digite o texto de Apresentação do site.' ),
+      'settings' => 'txtApresentacao'
+    ) );
+
+    $wp_customize->add_setting( 'txtApresentacaoPequeno', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtApresPequeno_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'config_new', // // Add a default or your own section
+      'label' => __( 'Texto Apresentação Inferior:' ),
+      'description' => __( 'Digite o texto inferior de Apresentação do site.' ),
+      'settings' => 'txtApresentacaoPequeno'
+    ) );
+
+    $wp_customize->add_setting( 'txtMensagemPrincipal', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtMensPrincipal_textarea_setting', array(
+      'type' => 'textarea',
+      'section' => 'config_new', // // Add a default or your own section
+      'label' => __( 'Mensagem Principal do site:' ),
+      'description' => __( 'Digite a mensagem principal do site.' ),
+      'settings' => 'txtMensagemPrincipal'
+    ) );
+
+    $caminhoImg = get_bloginfo("url");
+
+    $wp_customize->add_setting('imgDivisorSecao', array(
+        'default-image' => $caminhoImg . "/img/divisor_amarelo_classico_2_v2.png",
+        'transport'     => 'refresh',
+        'height'        => 50,
+        'width'        => 350,
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'imgDivisorSecao_img_setting', array(
+        'label' => __('Imagem que divide as seções:', 'reservas'),
+        'section' => 'config_new',
+        'settings' => 'imgDivisorSecao',
+
+    )));
+
+
+     $wp_customize->add_setting('imgMelhorPreco', array(
+        'default-image' => $caminhoImg . "/img/cartao_preto.png",
+        'transport'     => 'refresh',
+        'height'        => 51,
+        'width'        => 56,
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'imgMelhorPreco_img_setting', array(
+        'label' => __('Imagem Melhor Preço Garantido:', 'reservas'),
+        'section' => 'config_new',
+        'settings' => 'imgMelhorPreco',
+
+    )));
+
+
+     $wp_customize->add_setting('imgDestinosIncriveis', array(
+        'default-image' => $caminhoImg . "/img/mala_preta.png",
+        'transport'     => 'refresh',
+        'height'        => 39,
+        'width'        => 56,
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'imgDestinosIncriveis_img_setting', array(
+        'label' => __('Imagem Destinos Incríveis:', 'reservas'),
+        'section' => 'config_new',
+        'settings' => 'imgDestinosIncriveis',
+
+    )));
+
+
+     $wp_customize->add_setting('imgMelhoresCondicoes', array(
+        'default-image' => $caminhoImg . "/img/dinheiro_preto.png",
+        'transport'     => 'refresh',
+        'height'        => 41,
+        'width'        => 56,
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'imgMelhoresCondicoes_img_setting', array(
+        'label' => __('Imagem Melhores Condições:', 'reservas'),
+        'section' => 'config_new',
+        'settings' => 'imgMelhoresCondicoes',
+
+    )));
+
+
+    $wp_customize->add_section(
+		'titulos_new',
+		array(
+			'title' => __('Títulos', 'reservas'),
+			'priority' => 993,
+			'description' => __('Configure nesta seção os Títulos que irão aparecer em cada sessão do site.
+            ')
+		));
+
+    $wp_customize->add_setting( 'txtTituloHoteis', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtHoteis_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'titulos_new', // // Add a default or your own section
+      'label' => __( 'Título da Área de Hotéis:' ),
+      'description' => __( 'Digite o título da área de Hotéis.' ),
+      'settings' => 'txtTituloHoteis'
+    ) );
+
+    $wp_customize->add_setting( 'txtTituloOfertas', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtOfertas_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'titulos_new', // // Add a default or your own section
+      'label' => __( 'Título da Área de Ofertas:' ),
+      'description' => __( 'Digite o título da área de Ofertas.' ),
+      'settings' => 'txtTituloOfertas'
+    ) );
+
+     $wp_customize->add_setting( 'txtTituloServicos', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtServicos_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'titulos_new', // // Add a default or your own section
+      'label' => __( 'Título da Área de Serviços:' ),
+      'description' => __( 'Digite o título da área de Serviços.' ),
+      'settings' => 'txtTituloServicos'
+    ) );
+
+    $wp_customize->add_setting( 'txtTituloMembros', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtMembros_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'titulos_new', // // Add a default or your own section
+      'label' => __( 'Título da Área de Membros:' ),
+      'description' => __( 'Digite o título da área de Membros.' ),
+      'settings' => 'txtTituloMembros'
+    ) );
+
+     $wp_customize->add_setting( 'txtTituloDicas', array(
+      'capability' => 'edit_theme_options',
+      'default' => '',
+      'sanitize_callback' => 'sanitize_text_field',
+    ) );
+
+    $wp_customize->add_control( 'txtDicas_textarea_setting', array(
+      'type' => 'textbox',
+      'section' => 'titulos_new', // // Add a default or your own section
+      'label' => __( 'Título da Área de Dicas:' ),
+      'description' => __( 'Digite o título da área de Dicas.' ),
+      'settings' => 'txtTituloDicas'
+    ) );
 
 
 
@@ -236,6 +427,50 @@ function reservas_customize_register( $wp_customize ) {
 		'settings'    => 'superior_background_color',
 	) ) );
 
+    $wp_customize->add_setting( 'titulo_site_back_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'titulo_site_back_color', array(
+		'label'       => __( 'Título do Site Background Color', 'reservas' ),
+		'description' => __( 'Escolha a cor de fundo do Título Apresentação do Site.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'titulo_site_back_color',
+	) ) );
+
+     $wp_customize->add_setting( 'titulo_site_text_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'titulo_site_text_color', array(
+		'label'       => __( 'Título Site Text Color', 'reservas' ),
+		'description' => __( 'Escolha a cor do texto do Título Apresentação do Site.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'titulo_site_text_color',
+	) ) );
+
+     $wp_customize->add_setting( 'titulo_site_txtPequeno_color', array(
+		'default'           => '#fff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'priority'     => '99',
+		'transport'         => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'titulo_site_txtPequeno_color', array(
+		'label'       => __( 'Título do Site texto inferior Text Color', 'reservas' ),
+		'description' => __( 'Escolha a cor do texto inferior do Título Apresentação do Site.', 'reservas' ),
+		'section'     => 'colors',
+		'priority'     => '99',
+		'settings'    => 'titulo_site_txtPequeno_color',
+	) ) );
 
      $wp_customize->add_setting( 'titulos_text_color', array(
 		'default'           => '#fff',
@@ -1110,6 +1345,9 @@ function reservas_header_bg_color_css(){
     #nav-principal.navbar-default .navbar-text { color: <?php echo esc_attr(get_theme_mod( 'nav_bar_text_color')); ?>; }
     #nav-principal.lh-nav-bg-transform .navbar-nav>li>a { color: <?php echo esc_attr(get_theme_mod( 'nav_bar_text_color')); ?>; }
 	.superior { background: <?php echo esc_attr(get_theme_mod( 'superior_background_color')); ?>; }
+    .apresentacao {background: <?php echo esc_attr(get_theme_mod( 'titulo_site_back_color')); ?>;}
+    .tituloSite {  color: <?php echo esc_attr(get_theme_mod( 'titulo_site_text_color')); ?>;}
+    .txtPequeno {color: <?php echo esc_attr(get_theme_mod( 'titulo_site_txtPequeno_color')); ?>;}
     .titulo { color: <?php echo esc_attr(get_theme_mod( 'titulos_text_color')); ?>; }
     .mensagemPrincipal { color: <?php echo esc_attr(get_theme_mod( 'mensagemPrincipal_text_color')); ?>; }
     .textoPrincipal { color: <?php echo esc_attr(get_theme_mod( 'textoPrincipal_text_color')); ?>; }

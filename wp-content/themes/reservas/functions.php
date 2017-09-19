@@ -575,11 +575,36 @@ function add_loginout_link( $items, $args ) {
         $items .= '<li><a href="'. wp_logout_url() .'">Sair</a></li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
-        $items .= '<li><a href="'. site_url('wp-login.php') .'">Administração</a></li>';
+        $items .= '<li><a href="'. site_url('wp-login.php') .'"><span class="fa fa-sign-in" title="Administração" style="font-size:20px;"/></a></li>';
     }
     return $items;
 }
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+
+function mensagemPrincipal_func( $atts ){
+	return esc_html(get_theme_mod(txtMensagemPrincipal,'Padrão'), 'reservas');
+}
+add_shortcode( 'mensagemPrincipal', 'mensagemPrincipal_func' );
+
+function imagensPrincipal_func( $atts ){
+	$ats = shortcode_atts( array(
+        'id' => 1,
+    ), $atts );
+
+    switch ($ats['id']) {
+    case 1:
+        return esc_html(get_theme_mod(imgMelhorPreco,'Padrão'), 'reservas');
+        break;
+    case 2:
+        return esc_html(get_theme_mod(imgDestinosIncriveis,'Padrão'), 'reservas');
+        break;
+    case 3:
+        return esc_html(get_theme_mod(imgMelhoresCondicoes,'Padrão'), 'reservas');
+        break;
+}
+}
+add_shortcode( 'imagensPrincipal', 'imagensPrincipal_func' );
+
 
 
 

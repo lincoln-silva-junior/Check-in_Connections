@@ -214,6 +214,32 @@
 	} );
 
 
+
+     wp.customize( 'titulo_site_text_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.tituloSite' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+     wp.customize( 'titulo_site_back_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.apresentacao' ).css( {
+				'background':to
+			});
+		} );
+	} );
+
+     wp.customize( 'titulo_site_txtPequeno_color', function( value ) {
+		value.bind( function( to ) {
+			$( '.txtPequeno' ).css( {
+				'color':to
+			});
+		} );
+	} );
+
+
      wp.customize( 'titulos_text_color', function( value ) {
 		value.bind( function( to ) {
 			$( '.titulo' ).css( {

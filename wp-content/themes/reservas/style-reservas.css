@@ -1723,7 +1723,7 @@ textarea:focus {
     text-align: center;
     background: #000;
     opacity: 1;
-    max-height: 105px;
+    /*max-height: 150px;*/
     border: 0px solid #fab526;
     margin-top: 0;
     margin-left: 0;
@@ -1737,6 +1737,24 @@ textarea:focus {
     position: relative;
     top: -25px;
     width: 100%
+}
+
+.tituloSite{
+     text-align: center;
+     background: transparent;
+     font-family: Darleston;
+     font-size: 72px;
+     line-height: 1.2;
+     /*font-weight: bold;*/
+}
+
+.txtPequeno{
+     color:#fff;
+     text-align: center;
+     background: transparent;
+     font-family: Darleston;
+     font-size: 48px;
+     /*font-weight: bold;*/
 }
 
 .tituloHotel, .tituloServicos,
@@ -1755,21 +1773,40 @@ textarea:focus {
  .titulo{
     text-align: center;
     background: transparent;
-    /*padding-right: 50px;*/
     font-family: Darleston;
-    /*font-style: italic;*/
     font-size: 72px;
 }
 
 .mensagemPrincipal{
     text-align: center;
     background: transparent;
-    /*padding-right: 50px;*/
     font-family: Darleston;
-    /*font-style: italic;*/
     font-size: 56px;
     line-height: 1.3;
+    word-break: keep-all;
+    max-width: 280px;
+    margin-left: 36%;
 }
+@media (max-width:900px) {
+    .mensagemPrincipal{
+        margin-left: 28%;
+    }
+
+}
+@media (max-width:768px) {
+    .mensagemPrincipal{
+        margin-left: 18%;
+    }
+
+}
+@media (max-width:359px) {
+    .mensagemPrincipal{
+        margin-left: 10%;
+    }
+
+}
+
+
 
 .textoPrincipal{
     text-align: center;
@@ -1790,39 +1827,6 @@ textarea:focus {
     font-family: Darleston;
     src: url("./fonts/Darleston.otf");
 }
-
-/*.tituloServicos{
-    text-align: center;
-    background: #fff;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 35px;
-    padding: 0px;
-    margin-top: 0px;
-    width: 100%
-}
-
-.tituloMembros{
-    text-align: center;
-    background: #fff;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 35px;
-    padding: 0px;
-    margin-top: 0px;
-    width: 100%
-}
-
-.tituloDicas{
-    text-align: center;
-    background: #fff;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 35px;
-    padding: 0px;
-    margin-top: 0px;
-    width: 100%
-}*/
 
 
 .inferior {

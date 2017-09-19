@@ -13,8 +13,8 @@
     <?php if(is_page_template('page_home.php'))
             { ?>
                 <div class="tituloHotel">
-                        <img src="<?php echo (bloginfo("url") . "/img/divisor_amarelo_classico_2_v2.png")?>" id="hoteis" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Hoteis.png")*/?>" alt=""-->
-                        <div class="titulo">Hotéis / Pousadas / Hostels</div>
+                        <img src="<?php echo esc_html(get_theme_mod(imgDivisorSecao,'Padrão')) ?>" id="hoteis" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Hoteis.png")*/?>" alt=""-->
+                        <div class="titulo"><?php echo esc_html(get_theme_mod(txtTituloHoteis,'Padrão'), 'reservas') ?></div>
                 </div>
 
                 <div class="container">
@@ -33,8 +33,8 @@
                 </div>
 
                 <div class="tituloOfertas">
-                        <img src="<?php echo (bloginfo("url") . "/img/divisor_amarelo_classico_2_v2.png")?>" id="ofertas" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Servicos.png")*/?>" alt=""-->
-                        <div class="titulo">Ofertas Especiais <span class="fa fa-money" style="font-size:48px !important;"></span></div>
+                        <img src="<?php echo esc_html(get_theme_mod(imgDivisorSecao,'Padrão')) ?>" id="ofertas" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Servicos.png")*/?>" alt=""-->
+                        <div class="titulo"><?php echo esc_html(get_theme_mod(txtTituloOfertas,'Padrão'), 'reservas') ?></div>
                 </div>
 
                 <div class="container">
@@ -53,8 +53,8 @@
                 </div>
 
                 <div class="tituloServicos">
-                        <img src="<?php echo (bloginfo("url") . "/img/divisor_amarelo_classico_2_v2.png")?>" id="servicos" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Servicos.png")*/?>" alt=""-->
-                        <div class="titulo">Serviços</div>
+                        <img src="<?php echo esc_html(get_theme_mod(imgDivisorSecao,'Padrão')) ?>" id="servicos" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Servicos.png")*/?>" alt=""-->
+                        <div class="titulo"><?php echo esc_html(get_theme_mod(txtTituloServicos,'Padrão'), 'reservas') ?></div>
                 </div>
 
                 <div class="container">
@@ -69,8 +69,8 @@
                 </div>
 
                 <div class="tituloMembros">
-                        <img src="<?php echo (bloginfo("url") . "/img/divisor_amarelo_classico_2_v2.png")?>" id="membros" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Membros.png")*/?>" alt=""-->
-                        <div class="titulo">Membros</div>
+                        <img src="<?php echo esc_html(get_theme_mod(imgDivisorSecao,'Padrão')) ?>" id="membros" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Membros.png")*/?>" alt=""-->
+                        <div class="titulo"><?php echo esc_html(get_theme_mod(txtTituloMembros,'Padrão'), 'reservas') ?></div>
                 </div>
 
                 <div class="container">
@@ -85,8 +85,9 @@
                 </div>
 
                 <div class="tituloDicas">
-                        <img src="<?php echo (bloginfo("url") . "/img/divisor_amarelo_classico_2_v2.png")?>" id="dicas" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Dicas.png")*/?>" alt=""-->
-                        <div class="titulo">Dicas</div>
+                        <img src="<?php echo esc_html(get_theme_mod(imgDivisorSecao,'Padrão')) ?>" id="dicas" alt=""><br><br><!--img src="<?php /*echo (bloginfo("url") . "/img/Dicas.png")*/?>" alt=""-->
+                        <div class="titulo"><?php echo esc_html(get_theme_mod(txtTituloDicas,'Padrão'), 'reservas') ?></div>
+
                 </div>
 
                 <div class="container">

@@ -78,7 +78,9 @@
       <?php } ?>
 
       <div class="apresentacao">
-          <img src="<?php echo (bloginfo("url") . "/img/Check-in_Connections_Inline.png")?>" alt="Check-in Connections">
+          <div class="tituloSite"><?php echo esc_html(get_theme_mod(txtApresentacao,'Padrão'), 'reservas') ?></div>
+          <div class="txtPequeno"><?php echo esc_html(get_theme_mod(txtApresentacaoPequeno,'Padrão'), 'reservas') ?></div>
+          <!--img src="<?php /* echo (bloginfo("url") . "/img/Check-in_Connections_Inline.png")*/?>" alt="Check-in Connections"-->
       </div>
 
       <!--div class="container">
