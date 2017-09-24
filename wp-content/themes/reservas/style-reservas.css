@@ -1224,7 +1224,9 @@ textarea#comment {
 .custom-logo-link {
     margin: 0;
     padding: 10px 0;
-    display: inline-block
+    display: inline-block;
+    position: relative;
+    float: left;
 }
 
 .cat-links,
@@ -1412,7 +1414,7 @@ input.search-field {
     #navigation_menu {
         padding: 0 10px;
         margin: 0;
-        width: 100%
+        width: 100%;
     }
 }
 
@@ -1753,7 +1755,7 @@ textarea:focus {
      text-align: center;
      background: transparent;
      font-family: Darleston;
-     font-size: 48px;
+     font-size: 44px;
      /*font-weight: bold;*/
 }
 
@@ -1828,6 +1830,27 @@ textarea:focus {
     src: url("./fonts/Darleston.otf");
 }
 
+.translator {
+    /*margin: auto;*/
+    position: relative;
+    float:right;
+    margin-right: 30px;
+    /*width: 350px;*/
+}
+
+@media (max-width:768px) {
+    .translator{
+        margin-right:20px;
+    }
+
+}
+
+@media (max-width:768px) {
+    .translator{
+        margin-right:10px;
+    }
+
+}
 
 .inferior {
     font-size: 16px;

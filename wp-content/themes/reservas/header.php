@@ -32,6 +32,7 @@
     <header id="masthead"  role="banner">
       <nav id="nav-principal" class="navbar lh-nav-bg-transform navbar-default navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display --> 
+
         <div class="container" id="navigation_menu">
           <div class="navbar-header">
             <?php if ( has_nav_menu( 'primary' ) ) { ?>
@@ -58,6 +59,17 @@
             ?>
 
           </div><!--#container-->
+          <div class=container>
+              <div class="row">
+                  <!--div class="col-md-4"></div>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-4">
+
+                  </div-->
+                   <div class="translator"><?php echo do_shortcode('[gtranslate]'); ?></div>
+              </div>
+          </div>
+
         </nav>
 
         <div class="site-header">
@@ -78,7 +90,8 @@
       <?php } ?>
 
       <div class="apresentacao">
-          <div class="tituloSite"><?php echo esc_html(get_theme_mod(txtApresentacao,'Padrão'), 'reservas') ?></div>
+          <img src="<?php echo esc_html(get_theme_mod(imgApresentacao,'Padrão')) ?>" alt=""><br>
+          <!--div class="tituloSite"><?php /*echo esc_html(get_theme_mod(imgApresentacao,'Padrão'), 'reservas')*/ ?></div-->
           <div class="txtPequeno"><?php echo esc_html(get_theme_mod(txtApresentacaoPequeno,'Padrão'), 'reservas') ?></div>
           <!--img src="<?php /* echo (bloginfo("url") . "/img/Check-in_Connections_Inline.png")*/?>" alt="Check-in Connections"-->
       </div>

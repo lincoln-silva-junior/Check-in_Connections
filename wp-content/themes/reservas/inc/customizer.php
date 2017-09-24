@@ -47,7 +47,7 @@ function reservas_customize_register( $wp_customize ) {
             ')
 		));
 
-    $wp_customize->add_setting( 'txtApresentacao', array(
+    /*$wp_customize->add_setting( 'txtApresentacao', array(
       'capability' => 'edit_theme_options',
       'default' => '',
       'sanitize_callback' => 'sanitize_text_field',
@@ -59,7 +59,7 @@ function reservas_customize_register( $wp_customize ) {
       'label' => __( 'Texto Apresentação:' ),
       'description' => __( 'Digite o texto de Apresentação do site.' ),
       'settings' => 'txtApresentacao'
-    ) );
+    ) );*/
 
     $wp_customize->add_setting( 'txtApresentacaoPequeno', array(
       'capability' => 'edit_theme_options',
@@ -90,6 +90,20 @@ function reservas_customize_register( $wp_customize ) {
     ) );
 
     $caminhoImg = get_bloginfo("url");
+
+    $wp_customize->add_setting('imgApresentacao', array(
+        //'default-image' => $caminhoImg . "/img/Check-in_Connections_Inline.png",
+        'default-image' => "",
+        'transport'     => 'refresh',
+        'height'        => 80,
+        'width'        => 350,
+    ));
+
+    $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'imgApresentacao_img_setting', array(
+        'label' => __('Imagem de apresentação do site:', 'reservas'),
+        'section' => 'config_new',
+        'settings' => 'imgApresentacao',
+     )));
 
     $wp_customize->add_setting('imgDivisorSecao', array(
         'default-image' => $caminhoImg . "/img/divisor_amarelo_classico_2_v2.png",
